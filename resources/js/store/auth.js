@@ -30,8 +30,10 @@ export default {
     actions: {
         async login ({ commit, dispatch }, form) {
             await axios.get('/sanctum/csrf-cookie')
-            await form.post('/login')
-            
+            await form.post('/login').then(response => {
+                console.log(response)
+            })
+
             return dispatch('authUser')
         },
         async logout ({ dispatch }) {
@@ -47,7 +49,7 @@ export default {
                 localStorage.setItem("auth", true);
 
                 dispatch('rolepermission/loadUserPermissions', null, {root:true});
-                
+
                 if(router.currentRoute.name !== null){
                     router.push({ name: 'home' })
                 };

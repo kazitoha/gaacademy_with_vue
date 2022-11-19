@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{ asset('/css/tabler.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/sms.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     @laravelPWA
 </head>
 
