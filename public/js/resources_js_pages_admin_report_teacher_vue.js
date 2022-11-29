@@ -27,16 +27,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      notFound: '/images/not-found.svg'
+      notFound: "/images/not-found.svg"
     };
   },
   props: {
     word: {
       type: String,
-      "default": 'user',
+      "default": "user",
       required: false
     },
     route: {
@@ -66,9 +73,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! dayjs */ "./node_modules/dayjs/dayjs.min.js");
-/* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(dayjs__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _components_NotFound_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../components/NotFound.vue */ "./resources/js/components/NotFound.vue");
+/* harmony import */ var _components_NotFound_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../components/NotFound.vue */ "./resources/js/components/NotFound.vue");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -135,51 +140,72 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 
-
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    NotFound: _components_NotFound_vue__WEBPACK_IMPORTED_MODULE_2__.default
+    NotFound: _components_NotFound_vue__WEBPACK_IMPORTED_MODULE_1__.default
   },
   data: function data() {
     return {
-      url: '/images/default.png',
+      url: "/images/default.png",
       teachers: []
     };
   },
   created: function created() {
-    this.loadTeacherReport();
+    var _this = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return _this.hasPermisssion("teacher-report");
+
+            case 2:
+              _this.loadTeacherReport();
+
+            case 3:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
   },
   methods: {
     loadTeacherReport: function loadTeacherReport() {
-      var _this = this;
+      var _this2 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
         var response;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
-            switch (_context.prev = _context.next) {
+            switch (_context2.prev = _context2.next) {
               case 0:
-                _context.prev = 0;
-                _context.next = 3;
+                _context2.prev = 0;
+                _context2.next = 3;
                 return axios.post("/api/reports/teachers");
 
               case 3:
-                response = _context.sent;
-                _this.teachers = response.data.data;
-                _context.next = 10;
+                response = _context2.sent;
+                _this2.teachers = response.data.data;
+                _context2.next = 11;
                 break;
 
               case 7:
-                _context.prev = 7;
-                _context.t0 = _context["catch"](0);
-                console.log(_context.t0);
+                _context2.prev = 7;
+                _context2.t0 = _context2["catch"](0);
 
-              case 10:
+                _this2.toastError(_context2.t0.response.data.message);
+
+                console.log(_context2.t0);
+
+              case 11:
               case "end":
-                return _context.stop();
+                return _context2.stop();
             }
           }
-        }, _callee, null, [[0, 7]]);
+        }, _callee2, null, [[0, 7]]);
       }))();
     }
   }
@@ -360,9 +386,13 @@ var render = function() {
     _vm._v(" "),
     _c("p", { staticClass: "empty-subtitle text-muted" }, [
       _vm._v(
-        "\n        There is no " +
+        "\n        " +
+          _vm._s(_vm.$t("there_is_no")) +
+          " " +
           _vm._s(_vm.word) +
-          " found in this page.\n    "
+          " " +
+          _vm._s(_vm.$t("found_in_this_page")) +
+          ".\n    "
       )
     ]),
     _vm._v(" "),
@@ -402,16 +432,20 @@ var render = function() {
                         fill: "none"
                       }
                     }),
+                    _vm._v(" "),
                     _c("line", {
                       attrs: { x1: "12", y1: "5", x2: "12", y2: "19" }
                     }),
+                    _vm._v(" "),
                     _c("line", {
                       attrs: { x1: "5", y1: "12", x2: "19", y2: "12" }
                     })
                   ]
                 ),
                 _vm._v(
-                  "\n            Add your first " +
+                  "\n            " +
+                    _vm._s(_vm.$t("add_your_first")) +
+                    " " +
                     _vm._s(_vm.word) +
                     "\n        "
                 )
@@ -454,7 +488,9 @@ var render = function() {
             _vm._v(_vm._s(_vm.$route.meta.title))
           ]),
           _vm._v(" "),
-          _c("h2", { staticClass: "page-pretitle" }, [_vm._v("Teacher")])
+          _c("h2", { staticClass: "page-pretitle" }, [
+            _vm._v(_vm._s(_vm.$t("teacher")))
+          ])
         ])
       ])
     ]),
@@ -462,117 +498,118 @@ var render = function() {
     _c("div", { staticClass: "row justify-content-center" }, [
       _c("div", { staticClass: "col-12" }, [
         _c("div", { staticClass: "card" }, [
-          _vm._m(0),
-          _vm._v(" "),
           _c("div", { staticClass: "card-body" }, [
-            _c("table", { staticClass: "table table-bordered table-striped" }, [
-              _vm._m(1),
-              _vm._v(" "),
-              _c(
-                "tbody",
-                _vm._l(_vm.teachers, function(teacher) {
-                  return _c("tr", { key: teacher.id }, [
-                    _c("td", [
-                      _c("img", {
-                        staticClass: "img-fluid",
-                        staticStyle: {
-                          "border-radius": "10px",
-                          "max-height": "50px",
-                          "max-width": "50px"
-                        },
-                        attrs: {
-                          src: _vm.url,
-                          alt: "image",
-                          height: "80px",
-                          width: "80px"
-                        }
-                      })
+            _c("h2", { staticClass: "card-title" }, [
+              _vm._v(_vm._s(_vm.$t("teachers_report")))
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body table-responsive" }, [
+            _vm.teachers && _vm.teachers.length
+              ? _c(
+                  "table",
+                  { staticClass: "table table-vcenter text-nowrap" },
+                  [
+                    _c("thead", [
+                      _c("tr", [
+                        _c("th", [_vm._v(_vm._s(_vm.$t("photo")))]),
+                        _vm._v(" "),
+                        _c("th", [_vm._v(_vm._s(_vm.$t("name")))]),
+                        _vm._v(" "),
+                        _c("th", [_vm._v(_vm._s(_vm.$t("email")))]),
+                        _vm._v(" "),
+                        _c("th", [_vm._v(_vm._s(_vm.$t("department")))]),
+                        _vm._v(" "),
+                        _c("th", [_vm._v(_vm._s(_vm.$t("joining_date")))]),
+                        _vm._v(" "),
+                        _c("th", [_vm._v(_vm._s(_vm.$t("gender")))]),
+                        _vm._v(" "),
+                        _c("th", [_vm._v(_vm._s(_vm.$t("religion")))]),
+                        _vm._v(" "),
+                        _c("th", [_vm._v(_vm._s(_vm.$t("phone")))]),
+                        _vm._v(" "),
+                        _c("th", [_vm._v(_vm._s(_vm.$t("action")))])
+                      ])
                     ]),
                     _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(teacher.user.name))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(teacher.user.email))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(teacher.designation))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(teacher.department.name))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(teacher.joining_date))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(teacher.gender))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(teacher.religion))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(teacher.phone))]),
-                    _vm._v(" "),
                     _c(
-                      "td",
-                      [
-                        _c(
-                          "router-link",
-                          {
-                            attrs: {
-                              to: {
-                                name: "user-teacher-view",
-                                params: { id: teacher.id }
-                              },
-                              href: "#"
-                            }
-                          },
-                          [_vm._v("View Details")]
-                        )
-                      ],
-                      1
+                      "tbody",
+                      _vm._l(_vm.teachers, function(teacher) {
+                        return _c("tr", { key: teacher.id }, [
+                          _c("td", [
+                            _c("img", {
+                              staticClass: "img-fluid mx-h-50 mx-w-50 rounded",
+                              attrs: {
+                                src: _vm.url,
+                                alt: "image",
+                                height: "80px",
+                                width: "80px"
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(teacher.user.name))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(teacher.user.email))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(teacher.department.name))]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _vm._v(
+                              _vm._s(_vm.formateDate(teacher.joining_date))
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _vm._v(_vm._s(_vm._f("capitalize")(teacher.gender)))
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _vm._v(
+                              _vm._s(_vm._f("capitalize")(teacher.religion))
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(teacher.phone))]),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            [
+                              _c(
+                                "router-link",
+                                {
+                                  attrs: {
+                                    to: {
+                                      name: "user-teacher-view",
+                                      params: { id: teacher.id }
+                                    },
+                                    href: "#"
+                                  }
+                                },
+                                [_vm._v(_vm._s(_vm.$t("view_details")))]
+                              )
+                            ],
+                            1
+                          )
+                        ])
+                      }),
+                      0
                     )
-                  ])
-                }),
-                0
-              )
-            ])
+                  ]
+                )
+              : _c(
+                  "div",
+                  { staticClass: "d-flex justify-content-center py-3" },
+                  [_c("NotFound", { attrs: { word: "teacher" } })],
+                  1
+                )
           ])
         ])
       ])
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-body" }, [
-      _c("h2", { staticClass: "card-title" }, [_vm._v("Teachers Report")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", [_vm._v("Photo")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Name")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Email")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Designation")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Department")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Joining Date")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Gender")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Religion")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Phone")]),
-        _vm._v(" "),
-        _c("th")
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

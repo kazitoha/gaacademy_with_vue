@@ -91,7 +91,10 @@ class User extends Authenticatable
 
     public function getOriginalRoleAttribute()
     {
-        return $this->load('roles:id,name')->roles[0]->name;
+        $data = $this->load('roles:id,name');
+        if (isset($data->roles[0])) return $data->roles[0]->name;
+
+        return [];
     }
 
     public function student()

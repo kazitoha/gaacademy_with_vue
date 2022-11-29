@@ -53,46 +53,33 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       loading: false,
       data: {},
       languageForm: new Form({
-        code: ''
-      }),
-      languageList: []
+        code: ""
+      })
     };
   },
   methods: {
-    getDefaultLanguage: function getDefaultLanguage() {
+    getLanguageContents: function getLanguageContents() {
       var _this = this;
 
-      var locales = __webpack_require__("./resources/js/locales sync recursive [A-Za-z0-9-_,\\s]+\\.json$/");
-
-      locales.keys().forEach(function (key) {
-        var matched = key.match(/([A-Za-z0-9-_]+)\./i);
-
-        if (matched && matched.length > 1) {
-          var defaultLang = _this.$route.params.slug;
-          _this.languageForm.code = defaultLang;
-
-          if (matched[1] == defaultLang) {
-            _this.data = locales(key);
-          }
-        }
-      });
-    },
-    uppercaseText: function uppercaseText(text) {
-      if (text !== '') {
-        return text.toUpperCase();
-      }
-    },
-    saveLanguage: function saveLanguage() {
-      var _this2 = this;
-
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var _yield$_this2$languag, data;
+        var _yield$axios$get, data;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
@@ -100,21 +87,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context.prev = 0;
                 _context.next = 3;
-                return _this2.languageForm.put('/api/language', {
-                  data: {
-                    code: _this2.languageForm.code,
-                    translations: _this2.data
-                  }
-                });
+                return axios.get("/api/languages/" + _this.$route.params.slug);
 
               case 3:
-                _yield$_this2$languag = _context.sent;
-                data = _yield$_this2$languag.data;
-
-                _this2.$router.push({
-                  name: 'setting-admin-language'
-                });
-
+                _yield$axios$get = _context.sent;
+                data = _yield$axios$get.data;
+                _this.data = data;
                 _context.next = 11;
                 break;
 
@@ -122,11 +100,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context.prev = 8;
                 _context.t0 = _context["catch"](0);
 
-                // error message
-                _this2.$toast.error({
-                  title: 'Sorry',
-                  message: 'Something went wrong!'
-                });
+                _this.toastError();
 
               case 11:
               case "end":
@@ -135,10 +109,57 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee, null, [[0, 8]]);
       }))();
+    },
+    saveLanguage: function saveLanguage() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var _yield$_this2$languag, data;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                _context2.next = 3;
+                return _this2.languageForm.put("/api/language", {
+                  data: {
+                    code: _this2.$route.params.slug,
+                    translations: _this2.data
+                  }
+                });
+
+              case 3:
+                _yield$_this2$languag = _context2.sent;
+                data = _yield$_this2$languag.data;
+                setTimeout(function () {
+                  location.reload();
+                }, 2000);
+
+                _this2.toastSuccess("Language updated successfully!");
+
+                _this2.redirect("setting-admin-language");
+
+                _context2.next = 13;
+                break;
+
+              case 10:
+                _context2.prev = 10;
+                _context2.t0 = _context2["catch"](0);
+
+                _this2.toastError();
+
+              case 13:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[0, 10]]);
+      }))();
     }
   },
   mounted: function mounted() {
-    this.getDefaultLanguage();
+    this.getLanguageContents();
   }
 });
 
@@ -161,7 +182,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.lang-btn[data-v-48916189] {\n    position: fixed;\n    left: 50%;\n    bottom: 50px;\n    width: 200px;\n    padding: 15px;\n    text-align: center;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.lang-btn[data-v-48916189] {\n    position: fixed;\n    left: 50%;\n    bottom: 50px;\n    width: 200px;\n    padding: 15px;\n    text-align: center;\n}\n@media (max-width: 420px) {\n.btn-custom[data-v-48916189] {\n        font-size: 10px;\n        padding: 2px 5px;\n}\n.card-title[data-v-48916189] {\n        font-size: 15px;\n}\n.lang-btn[data-v-48916189] {\n        left: 33%;\n        width: 100px;\n        padding: 5px;\n}\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -319,10 +340,10 @@ var render = function() {
             _c(
               "router-link",
               {
-                staticClass: "btn btn-primary",
+                staticClass: "btn btn-primary btn-custom",
                 attrs: { to: { name: "setting-admin-language" } }
               },
-              [_vm._v(_vm._s(_vm.$t("back")))]
+              [_vm._v(_vm._s(_vm.$t("back")) + "\n            ")]
             )
           ],
           1
@@ -332,7 +353,10 @@ var render = function() {
     _vm._v(" "),
     _c(
       "div",
-      { staticClass: "card-body border-bottom py-3" },
+      {
+        staticClass: "card-body border-bottom py-3",
+        staticStyle: { "padding-bottom": "100px !important" }
+      },
       [
         _vm.loading
           ? _c("loader")
@@ -349,101 +373,111 @@ var render = function() {
               },
               [
                 _c(
-                  "div",
-                  { staticClass: "row justify-content-center" },
-                  _vm._l(_vm.data, function(value, key) {
-                    return _c(
-                      "div",
-                      {
-                        key: key,
-                        staticClass: "col-12 col-md-6 col-lg-4 col-xl-3"
-                      },
-                      [
-                        _c("div", { staticClass: "mb-3" }, [
-                          _c(
-                            "label",
-                            {
-                              staticClass: "form-label",
-                              attrs: { for: "name" }
-                            },
-                            [_vm._v(" " + _vm._s(key))]
-                          ),
-                          _vm._v(" "),
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.data[key],
-                                expression: "data[key]"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: {
-                              name: _vm.data[key],
-                              type: "text",
-                              placeholder: key,
-                              id: "name"
-                            },
-                            domProps: { value: _vm.data[key] },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(_vm.data, key, $event.target.value)
-                              }
-                            }
-                          })
-                        ])
-                      ]
-                    )
-                  }),
-                  0
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
+                  "table",
                   {
-                    staticClass: "lang-btn btn btn-primary mt-5",
-                    attrs: { type: "submit" }
+                    staticClass: "table table-striped table-bordered mt-0 pt-0",
+                    attrs: {
+                      id: "tranlation-table",
+                      cellspacing: "0",
+                      width: "100%"
+                    }
                   },
                   [
-                    _c(
-                      "svg",
-                      {
-                        staticClass: "icon icon-tabler icon-tabler-check",
-                        attrs: {
-                          xmlns: "http://www.w3.org/2000/svg",
-                          width: "24",
-                          height: "24",
-                          viewBox: "0 0 24 24",
-                          "stroke-width": "2",
-                          stroke: "currentColor",
-                          fill: "none",
-                          "stroke-linecap": "round",
-                          "stroke-linejoin": "round"
-                        }
-                      },
-                      [
-                        _c("path", {
-                          attrs: {
-                            stroke: "none",
-                            d: "M0 0h24v24H0z",
-                            fill: "none"
-                          }
-                        }),
+                    _c("thead", [
+                      _c("tr", [
+                        _c("th", { attrs: { width: "50%" } }, [
+                          _vm._v("English Text")
+                        ]),
                         _vm._v(" "),
-                        _c("path", { attrs: { d: "M5 12l5 5l10 -10" } })
-                      ]
-                    ),
-                    _vm._v(
-                      "\n                " +
-                        _vm._s(_vm.$t("save")) +
-                        "\n            "
+                        _c("th", { attrs: { width: "50%" } }, [
+                          _vm._v("Translation Text")
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "tbody",
+                      _vm._l(_vm.data, function(value, key) {
+                        return _c("tr", { key: key }, [
+                          _c("td", { staticClass: "key text-capitalize" }, [
+                            _vm._v(_vm._s(_vm._f("replace")(key, "_", " ")))
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.data[key],
+                                  expression: "data[key]"
+                                }
+                              ],
+                              staticClass: "form-control value",
+                              staticStyle: { width: "100%" },
+                              attrs: { type: "text", name: _vm.data[key] },
+                              domProps: { value: _vm.data[key] },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(_vm.data, key, $event.target.value)
+                                }
+                              }
+                            })
+                          ])
+                        ])
+                      }),
+                      0
                     )
                   ]
-                )
+                ),
+                _vm._v(" "),
+                _vm.checkPermission("setting-edit")
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "lang-btn btn btn-primary mt-5",
+                        attrs: { type: "submit" }
+                      },
+                      [
+                        _c(
+                          "svg",
+                          {
+                            staticClass: "icon icon-tabler icon-tabler-check",
+                            attrs: {
+                              xmlns: "http://www.w3.org/2000/svg",
+                              width: "24",
+                              height: "24",
+                              viewBox: "0 0 24 24",
+                              "stroke-width": "2",
+                              stroke: "currentColor",
+                              fill: "none",
+                              "stroke-linecap": "round",
+                              "stroke-linejoin": "round"
+                            }
+                          },
+                          [
+                            _c("path", {
+                              attrs: {
+                                stroke: "none",
+                                d: "M0 0h24v24H0z",
+                                fill: "none"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("path", { attrs: { d: "M5 12l5 5l10 -10" } })
+                          ]
+                        ),
+                        _vm._v(
+                          "\n                " +
+                            _vm._s(_vm.$t("save")) +
+                            "\n            "
+                        )
+                      ]
+                    )
+                  : _vm._e()
               ]
             )
       ],

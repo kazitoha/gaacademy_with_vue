@@ -13,6 +13,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* provided dependency */ var process = __webpack_require__(/*! process/browser */ "./node_modules/process/browser.js");
 
 
@@ -20,6 +21,12 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -60,53 +67,80 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       loading: false,
       data: {},
       languageForm: new Form({
-        code: ''
-      }),
-      languageList: []
+        code: ""
+      })
     };
   },
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)({
+    languageList: "getAllLocales"
+  })),
   methods: {
-    getDefaultLanguage: function getDefaultLanguage() {
+    getDefaultLanguageContents: function getDefaultLanguageContents() {
       var _this = this;
 
-      var locales = __webpack_require__("./resources/js/locales sync recursive [A-Za-z0-9-_,\\s]+\\.json$/");
-
-      locales.keys().forEach(function (key) {
-        var matched = key.match(/([A-Za-z0-9-_]+)\./i);
-
-        if (matched && matched.length > 1) {
-          var defaultLang = process.env.VUE_APP_I18N_FALLBACK_LOCALE || 'en';
-
-          if (matched[1] == defaultLang) {
-            _this.data = locales(key);
-          }
-        }
-      });
-    },
-    uppercaseText: function uppercaseText(text) {
-      if (text !== '') {
-        return text.toUpperCase();
-      }
-    },
-    saveLanguage: function saveLanguage() {
-      var _this2 = this;
-
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var _yield$_this2$languag, data;
+        var defaultLang, _yield$axios$get, data;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.prev = 0;
-                _context.next = 3;
-                return _this2.languageForm.post('/api/language', {
+                defaultLang = process.env.VUE_APP_I18N_FALLBACK_LOCALE || "en";
+                _context.next = 4;
+                return axios.get("/api/languages/" + defaultLang);
+
+              case 4:
+                _yield$axios$get = _context.sent;
+                data = _yield$axios$get.data;
+                _this.data = data;
+                _context.next = 12;
+                break;
+
+              case 9:
+                _context.prev = 9;
+                _context.t0 = _context["catch"](0);
+
+                _this.toastError();
+
+              case 12:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[0, 9]]);
+      }))();
+    },
+    saveLanguage: function saveLanguage() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var _yield$_this2$languag, data;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                _context2.next = 3;
+                return _this2.languageForm.post("/api/language", {
                   data: {
                     code: _this2.languageForm.code,
                     translations: _this2.data,
@@ -115,51 +149,36 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 });
 
               case 3:
-                _yield$_this2$languag = _context.sent;
+                _yield$_this2$languag = _context2.sent;
                 data = _yield$_this2$languag.data;
+                setTimeout(function () {
+                  location.reload();
+                }, 2000);
 
-                _this2.$router.push({
-                  name: 'setting-admin-language'
-                });
+                _this2.toastSuccess("Language created successfully!");
 
-                _context.next = 11;
+                _this2.redirect("setting-admin-language");
+
+                _context2.next = 13;
                 break;
 
-              case 8:
-                _context.prev = 8;
-                _context.t0 = _context["catch"](0);
+              case 10:
+                _context2.prev = 10;
+                _context2.t0 = _context2["catch"](0);
 
-                // error message
-                _this2.$toast.error({
-                  title: 'Sorry',
-                  message: 'Something went wrong!'
-                });
+                _this2.toastError();
 
-              case 11:
+              case 13:
               case "end":
-                return _context.stop();
+                return _context2.stop();
             }
           }
-        }, _callee, null, [[0, 8]]);
+        }, _callee2, null, [[0, 10]]);
       }))();
-    },
-    loadLocaleMessages: function loadLocaleMessages() {
-      var _this3 = this;
-
-      var locales = __webpack_require__("./resources/js/locales sync recursive [A-Za-z0-9-_,\\s]+\\.json$/");
-
-      locales.keys().forEach(function (key) {
-        var matched = key.match(/([A-Za-z0-9-_]+)\./i);
-
-        if (matched && matched.length > 1) {
-          _this3.languageList.push(matched[1]);
-        }
-      });
     }
   },
   mounted: function mounted() {
-    this.loadLocaleMessages();
-    this.getDefaultLanguage();
+    this.getDefaultLanguageContents();
   }
 });
 
@@ -182,7 +201,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.lang-btn[data-v-fe24781c] {\n    position: fixed;\n    left: 50%;\n    bottom: 50px;\n    width: 200px;\n    padding: 15px;\n    text-align: center;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.lang-btn[data-v-fe24781c] {\n    position: fixed;\n    left: 50%;\n    bottom: 50px;\n    width: 200px;\n    padding: 15px;\n    text-align: center;\n}\n@media (max-width: 420px) {\n.btn-custom[data-v-fe24781c] {\n        font-size: 10px;\n        padding: 2px 5px;\n}\n.card-title[data-v-fe24781c] {\n        font-size: 15px;\n}\n.btn-custom[data-v-fe24781c] {\n        font-size: 10px;\n        padding: 2px 5px;\n}\n.card-title[data-v-fe24781c] {\n        font-size: 15px;\n}\n.lang-btn[data-v-fe24781c] {\n        left: 33%;\n        width: 100px;\n        padding: 5px;\n}\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -340,10 +359,10 @@ var render = function() {
             _c(
               "router-link",
               {
-                staticClass: "btn btn-primary",
+                staticClass: "btn btn-primary btn-custom",
                 attrs: { to: { name: "setting-admin-language" } }
               },
-              [_vm._v(_vm._s(_vm.$t("back")))]
+              [_vm._v(_vm._s(_vm.$t("back")) + "\n            ")]
             )
           ],
           1
@@ -353,7 +372,10 @@ var render = function() {
     _vm._v(" "),
     _c(
       "div",
-      { staticClass: "card-body border-bottom py-3 pb-5" },
+      {
+        staticClass: "card-body border-bottom py-3 pb-5",
+        staticStyle: { "padding-bottom": "250px !important" }
+      },
       [
         _vm.loading
           ? _c("loader")
@@ -399,7 +421,7 @@ var render = function() {
                       },
                       attrs: {
                         type: "text",
-                        placeholder: "language code",
+                        placeholder: _vm.$t("language_code"),
                         id: "code"
                       },
                       domProps: { value: _vm.languageForm.code },
@@ -425,101 +447,111 @@ var render = function() {
                 ),
                 _vm._v(" "),
                 _c(
-                  "div",
-                  { staticClass: "row justify-content-center" },
-                  _vm._l(_vm.data, function(value, key) {
-                    return _c(
-                      "div",
-                      {
-                        key: key,
-                        staticClass: "col-12 col-md-6 col-lg-4 col-xl-3"
-                      },
-                      [
-                        _c("div", { staticClass: "mb-3" }, [
-                          _c(
-                            "label",
-                            {
-                              staticClass: "form-label",
-                              attrs: { for: "name" }
-                            },
-                            [_vm._v(" " + _vm._s(key))]
-                          ),
-                          _vm._v(" "),
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.data[key],
-                                expression: "data[key]"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: {
-                              name: _vm.data[key],
-                              type: "text",
-                              placeholder: key,
-                              id: "name"
-                            },
-                            domProps: { value: _vm.data[key] },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(_vm.data, key, $event.target.value)
-                              }
-                            }
-                          })
-                        ])
-                      ]
-                    )
-                  }),
-                  0
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
+                  "table",
                   {
-                    staticClass: "lang-btn btn btn-primary mt-5",
-                    attrs: { type: "submit" }
+                    staticClass: "table table-striped table-bordered mt-0 pt-0",
+                    attrs: {
+                      id: "tranlation-table",
+                      cellspacing: "0",
+                      width: "100%"
+                    }
                   },
                   [
-                    _c(
-                      "svg",
-                      {
-                        staticClass: "icon icon-tabler icon-tabler-check",
-                        attrs: {
-                          xmlns: "http://www.w3.org/2000/svg",
-                          width: "24",
-                          height: "24",
-                          viewBox: "0 0 24 24",
-                          "stroke-width": "2",
-                          stroke: "currentColor",
-                          fill: "none",
-                          "stroke-linecap": "round",
-                          "stroke-linejoin": "round"
-                        }
-                      },
-                      [
-                        _c("path", {
-                          attrs: {
-                            stroke: "none",
-                            d: "M0 0h24v24H0z",
-                            fill: "none"
-                          }
-                        }),
+                    _c("thead", [
+                      _c("tr", [
+                        _c("th", { attrs: { width: "50%" } }, [
+                          _vm._v("English Text")
+                        ]),
                         _vm._v(" "),
-                        _c("path", { attrs: { d: "M5 12l5 5l10 -10" } })
-                      ]
-                    ),
-                    _vm._v(
-                      "\n                " +
-                        _vm._s(_vm.$t("save")) +
-                        "\n            "
+                        _c("th", { attrs: { width: "50%" } }, [
+                          _vm._v("Translation Text")
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "tbody",
+                      _vm._l(_vm.data, function(value, key) {
+                        return _c("tr", { key: key }, [
+                          _c("td", { staticClass: "key text-capitalize" }, [
+                            _vm._v(_vm._s(_vm._f("replace")(key, "_", " ")))
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.data[key],
+                                  expression: "data[key]"
+                                }
+                              ],
+                              staticClass: "form-control value",
+                              staticStyle: { width: "100%" },
+                              attrs: { type: "text", name: _vm.data[key] },
+                              domProps: { value: _vm.data[key] },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(_vm.data, key, $event.target.value)
+                                }
+                              }
+                            })
+                          ])
+                        ])
+                      }),
+                      0
                     )
                   ]
-                )
+                ),
+                _vm._v(" "),
+                _vm.checkPermission("setting-edit")
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "lang-btn btn btn-primary mt-5",
+                        attrs: { type: "submit" }
+                      },
+                      [
+                        _c(
+                          "svg",
+                          {
+                            staticClass: "icon icon-tabler icon-tabler-check",
+                            attrs: {
+                              xmlns: "http://www.w3.org/2000/svg",
+                              width: "24",
+                              height: "24",
+                              viewBox: "0 0 24 24",
+                              "stroke-width": "2",
+                              stroke: "currentColor",
+                              fill: "none",
+                              "stroke-linecap": "round",
+                              "stroke-linejoin": "round"
+                            }
+                          },
+                          [
+                            _c("path", {
+                              attrs: {
+                                stroke: "none",
+                                d: "M0 0h24v24H0z",
+                                fill: "none"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("path", { attrs: { d: "M5 12l5 5l10 -10" } })
+                          ]
+                        ),
+                        _vm._v(
+                          "\n                " +
+                            _vm._s(_vm.$t("save")) +
+                            "\n            "
+                        )
+                      ]
+                    )
+                  : _vm._e()
               ]
             )
       ],

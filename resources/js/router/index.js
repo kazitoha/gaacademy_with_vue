@@ -673,6 +673,15 @@ const router = new VueRouter({
                         },
                     ]
                 },
+                // crud
+                {
+                    path: "crud/list",
+                    name:"List",
+                    component: () => import("../pages/admin/crud/List.vue"),
+                    meta : {
+                        title: "Crud List"
+                    }
+                },
                 {
                     path: "website/setting/",
                     component: () => import("../pages/admin/setting/websiteLayout.vue"),

@@ -27,16 +27,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      notFound: '/images/not-found.svg'
+      notFound: "/images/not-found.svg"
     };
   },
   props: {
     word: {
       type: String,
-      "default": 'user',
+      "default": "user",
       required: false
     },
     route: {
@@ -66,11 +73,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! dayjs */ "./node_modules/dayjs/dayjs.min.js");
-/* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(dayjs__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _components_NotFound_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../components/NotFound.vue */ "./resources/js/components/NotFound.vue");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+/* harmony import */ var _components_NotFound_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../components/NotFound.vue */ "./resources/js/components/NotFound.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
@@ -201,15 +206,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    NotFound: _components_NotFound_vue__WEBPACK_IMPORTED_MODULE_2__.default
+    NotFound: _components_NotFound_vue__WEBPACK_IMPORTED_MODULE_1__.default
   },
   data: function data() {
     return {
@@ -218,25 +219,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       },
       // search form
       searchForm: new Form({
-        session_id: '',
-        class_id: '',
-        section_id: ''
+        class_id: "",
+        section_id: ""
       }),
-      sectionInput: false,
-      searchBtn: false,
-      classes: [],
       sections: [],
       students: [],
-      url: '/images/default.png'
+      url: "/images/default.png"
     };
-  },
-  watch: {
-    'searchForm.class_id': function searchFormClass_id(value) {
-      this.sectionInput = true;
-    },
-    'searchForm.section_id': function searchFormSection_id(value) {
-      this.searchBtn = true;
-    }
   },
   methods: {
     getStudents: function getStudents() {
@@ -286,42 +275,42 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee2);
       }))();
-    },
-    loadClasses: function loadClasses() {
-      var _this3 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
-        var response;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                _this3.classes = [];
-                _context3.next = 3;
-                return axios.get('/api/subjects/allclasses');
-
-              case 3:
-                response = _context3.sent;
-                _this3.classes = response.data.classes;
-
-              case 5:
-              case "end":
-                return _context3.stop();
-            }
-          }
-        }, _callee3);
-      }))();
     }
   },
-  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapGetters)({
-    sessions: 'session/sessions'
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)({
+    sessions: "session/sessions",
+    classes: "classs/classes"
   })), {}, {
     emptyData: function emptyData() {
       return this.students.length;
+    },
+    searchButtonDisabled: function searchButtonDisabled() {
+      return this.searchForm.class_id == "" || this.searchForm.section_id == "";
     }
   }),
   created: function created() {
-    this.$store.dispatch('session/fetchSessions');
+    var _this3 = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.next = 2;
+              return _this3.hasPermisssion("student-report");
+
+            case 2:
+              _this3.$store.dispatch("session/fetchSessions");
+
+              _this3.$store.dispatch("classs/fetchClasses");
+
+            case 4:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
+    }))();
   }
 });
 
@@ -500,9 +489,13 @@ var render = function() {
     _vm._v(" "),
     _c("p", { staticClass: "empty-subtitle text-muted" }, [
       _vm._v(
-        "\n        There is no " +
+        "\n        " +
+          _vm._s(_vm.$t("there_is_no")) +
+          " " +
           _vm._s(_vm.word) +
-          " found in this page.\n    "
+          " " +
+          _vm._s(_vm.$t("found_in_this_page")) +
+          ".\n    "
       )
     ]),
     _vm._v(" "),
@@ -542,16 +535,20 @@ var render = function() {
                         fill: "none"
                       }
                     }),
+                    _vm._v(" "),
                     _c("line", {
                       attrs: { x1: "12", y1: "5", x2: "12", y2: "19" }
                     }),
+                    _vm._v(" "),
                     _c("line", {
                       attrs: { x1: "5", y1: "12", x2: "19", y2: "12" }
                     })
                   ]
                 ),
                 _vm._v(
-                  "\n            Add your first " +
+                  "\n            " +
+                    _vm._s(_vm.$t("add_your_first")) +
+                    " " +
                     _vm._s(_vm.word) +
                     "\n        "
                 )
@@ -594,7 +591,9 @@ var render = function() {
             _vm._v(_vm._s(_vm.$route.meta.title))
           ]),
           _vm._v(" "),
-          _c("h2", { staticClass: "page-pretitle" }, [_vm._v("Student")])
+          _c("h2", { staticClass: "page-pretitle" }, [
+            _vm._v(_vm._s(_vm.$t("student")))
+          ])
         ])
       ])
     ]),
@@ -604,76 +603,7 @@ var render = function() {
         _c("div", { staticClass: "row justify-content-center" }, [
           _c(
             "div",
-            { staticClass: "col-3" },
-            [
-              _c(
-                "select",
-                {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.searchForm.session_id,
-                      expression: "searchForm.session_id"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  class: {
-                    "is-invalid": _vm.searchForm.errors.has("session_id")
-                  },
-                  on: {
-                    change: [
-                      function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.$set(
-                          _vm.searchForm,
-                          "session_id",
-                          $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
-                        )
-                      },
-                      _vm.loadClasses
-                    ]
-                  }
-                },
-                [
-                  _c("option", { attrs: { value: "" } }, [
-                    _vm._v("Select Session")
-                  ]),
-                  _vm._v(" "),
-                  _vm._l(_vm.sessions, function(session) {
-                    return _c(
-                      "option",
-                      { key: session.id, domProps: { value: session.id } },
-                      [
-                        _vm._v(
-                          _vm._s(session.name) + "\n                        "
-                        )
-                      ]
-                    )
-                  })
-                ],
-                2
-              ),
-              _vm._v(" "),
-              _c("has-error", {
-                attrs: { form: _vm.searchForm, field: "session" }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "col-3" },
+            { staticClass: "col-md-3 col-xl-2" },
             [
               _c(
                 "select",
@@ -714,9 +644,11 @@ var render = function() {
                   }
                 },
                 [
-                  _c("option", { attrs: { value: "" } }, [
-                    _vm._v("Select Class")
-                  ]),
+                  _c(
+                    "option",
+                    { staticClass: "d-none", attrs: { value: "" } },
+                    [_vm._v(_vm._s(_vm.$t("select_class")))]
+                  ),
                   _vm._v(" "),
                   _vm._l(_vm.classes, function(classs) {
                     return _c(
@@ -724,7 +656,9 @@ var render = function() {
                       { key: classs.id, domProps: { value: classs.id } },
                       [
                         _vm._v(
-                          _vm._s(classs.name) + "\n                        "
+                          "\n                            " +
+                            _vm._s(classs.name) +
+                            "\n                        "
                         )
                       ]
                     )
@@ -740,105 +674,126 @@ var render = function() {
             1
           ),
           _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "col-3" },
-            [
-              _c(
-                "select",
-                {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.searchForm.section_id,
-                      expression: "searchForm.section_id"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  class: {
-                    "is-invalid": _vm.searchForm.errors.has("section_id")
-                  },
-                  attrs: { disabled: !_vm.sectionInput },
-                  on: {
-                    change: function($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function(o) {
-                          return o.selected
-                        })
-                        .map(function(o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.$set(
-                        _vm.searchForm,
-                        "section_id",
-                        $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      )
-                    }
-                  }
-                },
+          _vm.searchForm.class_id
+            ? _c(
+                "div",
+                { staticClass: "col-md-3 col-xl-2" },
                 [
-                  _vm.sections && _vm.sections.length
-                    ? _c(
-                        "option",
+                  _c(
+                    "select",
+                    {
+                      directives: [
                         {
-                          staticClass: "d-none",
-                          attrs: { selected: "", value: "" }
-                        },
-                        [_vm._v("Select Section\n                        ")]
-                      )
-                    : _c(
-                        "option",
-                        {
-                          staticClass: "d-none",
-                          attrs: { selected: "", value: "" }
-                        },
-                        [_vm._v("No Section Found")]
-                      ),
-                  _vm._v(" "),
-                  _vm.sections && _vm.sections.length
-                    ? _vm._l(_vm.sections, function(section) {
-                        return _c(
-                          "option",
-                          { key: section.id, domProps: { value: section.id } },
-                          [
-                            _vm._v(
-                              "\n                                " +
-                                _vm._s(section.name)
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.searchForm.section_id,
+                          expression: "searchForm.section_id"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      class: {
+                        "is-invalid": _vm.searchForm.errors.has("section_id")
+                      },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.searchForm,
+                            "section_id",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        }
+                      }
+                    },
+                    [
+                      _vm.sections && _vm.sections.length
+                        ? _c(
+                            "option",
+                            {
+                              staticClass: "d-none",
+                              attrs: { selected: "", value: "" }
+                            },
+                            [
+                              _vm._v(
+                                "\n                            " +
+                                  _vm._s(_vm.$t("select_section")) +
+                                  "\n                        "
+                              )
+                            ]
+                          )
+                        : _c(
+                            "option",
+                            {
+                              staticClass: "d-none",
+                              attrs: { selected: "", value: "" }
+                            },
+                            [
+                              _vm._v(
+                                "\n                            " +
+                                  _vm._s(_vm.$t("no_section_found")) +
+                                  "\n                        "
+                              )
+                            ]
+                          ),
+                      _vm._v(" "),
+                      _vm.sections && _vm.sections.length
+                        ? _vm._l(_vm.sections, function(section) {
+                            return _c(
+                              "option",
+                              {
+                                key: section.id,
+                                domProps: { value: section.id }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                " +
+                                    _vm._s(section.name) +
+                                    "\n                            "
+                                )
+                              ]
                             )
-                          ]
-                        )
-                      })
-                    : _vm._e()
+                          })
+                        : _vm._e()
+                    ],
+                    2
+                  ),
+                  _vm._v(" "),
+                  _c("has-error", {
+                    attrs: { form: _vm.searchForm, field: "section_id" }
+                  })
                 ],
-                2
-              ),
-              _vm._v(" "),
-              _c("has-error", {
-                attrs: { form: _vm.searchForm, field: "section_id" }
-              })
-            ],
-            1
-          ),
+                1
+              )
+            : _vm._e(),
           _vm._v(" "),
-          _c("div", { staticClass: "col-3" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-primary btn-outline",
-                attrs: { disabled: !_vm.searchBtn },
-                on: { click: _vm.getStudents }
-              },
-              [
-                _vm._v(
-                  "\n                        Get Student List\n                    "
+          _vm.searchForm.class_id && _vm.searchForm.section_id
+            ? _c("div", { staticClass: "col-md-3 col-xl-2" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary btn-outline",
+                    attrs: { disabled: _vm.searchButtonDisabled },
+                    on: { click: _vm.getStudents }
+                  },
+                  [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(_vm.$t("get_student_list")) +
+                        "\n                    "
+                    )
+                  ]
                 )
-              ]
-            )
-          ])
+              ])
+            : _vm._e()
         ])
       ]),
       _vm._v(" "),
@@ -856,16 +811,44 @@ var render = function() {
               },
               [
                 _c("div", { staticClass: "card" }, [
-                  _vm._m(0),
+                  _c("div", { staticClass: "card-header" }, [
+                    _c("div", { staticClass: "card-title" }, [
+                      _vm._v(_vm._s(_vm.$t("students")))
+                    ])
+                  ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "card-body" }, [
+                  _c("div", { staticClass: "card-body table-responsive" }, [
                     _c(
                       "table",
                       {
                         staticClass: "table table-vcenter text-nowrap datatable"
                       },
                       [
-                        _vm._m(1),
+                        _c("thead", [
+                          _c("tr", [
+                            _c("th", [_vm._v(_vm._s(_vm.$t("image")))]),
+                            _vm._v(" "),
+                            _c("th", [_vm._v(_vm._s(_vm.$t("name")))]),
+                            _vm._v(" "),
+                            _c("th", [_vm._v(_vm._s(_vm.$t("roll_number")))]),
+                            _vm._v(" "),
+                            _c("th", [_vm._v(_vm._s(_vm.$t("gender")))]),
+                            _vm._v(" "),
+                            _c("th", [_vm._v(_vm._s(_vm.$t("date_of_birth")))]),
+                            _vm._v(" "),
+                            _c("th", [_vm._v(_vm._s(_vm.$t("blood_group")))]),
+                            _vm._v(" "),
+                            _c("th", [
+                              _vm._v(_vm._s(_vm.$t("admission_date")))
+                            ]),
+                            _vm._v(" "),
+                            _c("th", [_vm._v(_vm._s(_vm.$t("parent_name")))]),
+                            _vm._v(" "),
+                            _c("th", [_vm._v(_vm._s(_vm.$t("parent_phone")))]),
+                            _vm._v(" "),
+                            _c("th", [_vm._v(_vm._s(_vm.$t("action")))])
+                          ])
+                        ]),
                         _vm._v(" "),
                         _c(
                           "tbody",
@@ -873,12 +856,8 @@ var render = function() {
                             return _c("tr", { key: student.id }, [
                               _c("td", [
                                 _c("img", {
-                                  staticClass: "img-fluid",
-                                  staticStyle: {
-                                    "border-radius": "10px",
-                                    "max-height": "50px",
-                                    "max-width": "50px"
-                                  },
+                                  staticClass:
+                                    "img-fluid mx-h-50 mx-w-50 rounded",
                                   attrs: {
                                     src: _vm.url,
                                     alt: "image",
@@ -888,13 +867,30 @@ var render = function() {
                                 })
                               ]),
                               _vm._v(" "),
-                              _c("td", [
-                                _vm._v(
-                                  "\n                                        " +
-                                    _vm._s(student.user.name) +
-                                    "\n                                    "
-                                )
-                              ]),
+                              _c(
+                                "td",
+                                [
+                                  _c(
+                                    "router-link",
+                                    {
+                                      attrs: {
+                                        to: {
+                                          name: "user-student-view",
+                                          params: { id: student.id }
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                            " +
+                                          _vm._s(student.user.name) +
+                                          "\n                                        "
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              ),
                               _vm._v(" "),
                               _c("td", [
                                 _vm._v(
@@ -907,7 +903,9 @@ var render = function() {
                               _c("td", [
                                 _vm._v(
                                   "\n                                        " +
-                                    _vm._s(student.gender) +
+                                    _vm._s(
+                                      _vm._f("capitalize")(student.gender)
+                                    ) +
                                     "\n                                    "
                                 )
                               ]),
@@ -966,7 +964,7 @@ var render = function() {
                                         href: "#"
                                       }
                                     },
-                                    [_vm._v("View Details")]
+                                    [_vm._v(_vm._s(_vm.$t("view_details")))]
                                   )
                                 ],
                                 1
@@ -991,48 +989,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("div", { staticClass: "card-title" }, [
-        _vm._v(
-          "\n                            Students\n                       "
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", [_vm._v("Image")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Name")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Roll Number")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Gender")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Date Of Birth")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Blood Group")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Admission Date")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Guardian Name")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Guardian Phone")]),
-        _vm._v(" "),
-        _c("th")
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

@@ -154,44 +154,30 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       typeForm: new Form({
-        sidebar_bg: '',
-        navbar_bg: '',
-        sidebar_text_color: '',
-        navbar_text_color: '',
-        nav_position: '',
-        layout: ''
+        sidebar_bg: "",
+        navbar_bg: "",
+        sidebar_text_color: "",
+        navbar_text_color: "",
+        nav_position: "",
+        layout: ""
       })
     };
   },
   watch: {
-    'typeForm.sidebar_bg': function typeFormSidebar_bg(value) {
-      console.log(1);
+    "typeForm.sidebar_bg": function typeFormSidebar_bg(value) {
       this.typeForm.sidebar_bg = value;
     },
-    'typeForm.navbar_bg': function typeFormNavbar_bg(value) {
-      console.log(2);
+    "typeForm.navbar_bg": function typeFormNavbar_bg(value) {
       this.typeForm.navbar_bg = value;
     },
-    'typeForm.sidebar_text_color': function typeFormSidebar_text_color(value) {
-      console.log(3);
+    "typeForm.sidebar_text_color": function typeFormSidebar_text_color(value) {
       this.typeForm.sidebar_text_color = value;
     },
-    'typeForm.navbar_text_color': function typeFormNavbar_text_color(value) {
-      console.log(4);
+    "typeForm.navbar_text_color": function typeFormNavbar_text_color(value) {
       this.typeForm.navbar_text_color = value;
     }
   },
@@ -208,12 +194,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context.prev = 0;
                 _context.next = 3;
-                return axios.get('/api/setting/layout');
+                return axios.get("/api/setting/layout");
 
               case 3:
                 _yield$axios$get = _context.sent;
                 data = _yield$axios$get.data;
-                setting = data['setting'];
+                setting = data["setting"];
                 _this.typeForm.sidebar_bg = setting.sidebar_bg;
                 _this.typeForm.sidebar_text_color = setting.sidebar_text_color;
                 _this.typeForm.navbar_bg = setting.navbar_bg;
@@ -227,10 +213,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context.prev = 14;
                 _context.t0 = _context["catch"](0);
 
-                _this.$toast.error({
-                  title: 'Sorry',
-                  message: 'Something went wrong, please try again!'
-                });
+                _this.toastError();
 
               case 17:
               case "end":
@@ -252,20 +235,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context2.prev = 0;
                 _context2.next = 3;
-                return _this2.typeForm.put('/api/setting/layout');
+                return _this2.typeForm.put("/api/setting/layout");
 
               case 3:
                 _yield$_this2$typeFor = _context2.sent;
                 data = _yield$_this2$typeFor.data;
 
-                // success message
-                _this2.$toast.success({
-                  title: 'Success',
-                  message: data.message
-                });
+                _this2.toastSuccess(data.message);
 
                 setTimeout(function () {
-                  _this2.$store.commit("setting/SET_ADMIN_SETTING", data['setting']);
+                  _this2.$store.commit("setting/SET_ADMIN_SETTING", data["setting"]);
 
                   location.reload();
                 }, 500);
@@ -276,11 +255,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context2.prev = 9;
                 _context2.t0 = _context2["catch"](0);
 
-                // error message
-                _this2.$toast.error({
-                  title: 'Sorry!',
-                  message: 'Something went wrong!'
-                });
+                _this2.toastError();
 
               case 12:
               case "end":
@@ -293,7 +268,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   computed: {
     setting: function setting() {
-      return this.$store.getters['setting/setting'];
+      return this.$store.getters["setting/setting"];
     }
   },
   created: function created() {
@@ -417,7 +392,7 @@ var render = function() {
                           _c(
                             "label",
                             { staticClass: "form-label col-form-label" },
-                            [_vm._v("Sidebar Background Color")]
+                            [_vm._v(_vm._s(_vm.$t("sidebar_background_color")))]
                           ),
                           _vm._v(" "),
                           _c("input", {
@@ -432,7 +407,7 @@ var render = function() {
                             staticClass: "form-control form-control-color",
                             attrs: {
                               type: "color",
-                              title: "Choose your color"
+                              title: _vm.$t("choose_your_color")
                             },
                             domProps: { value: _vm.typeForm.sidebar_bg },
                             on: {
@@ -454,7 +429,11 @@ var render = function() {
                           _c(
                             "label",
                             { staticClass: "form-label col-form-label" },
-                            [_vm._v("Navigation Background Color")]
+                            [
+                              _vm._v(
+                                _vm._s(_vm.$t("navigation_background_color"))
+                              )
+                            ]
                           ),
                           _vm._v(" "),
                           _c("input", {
@@ -469,7 +448,7 @@ var render = function() {
                             staticClass: "form-control form-control-color",
                             attrs: {
                               type: "color",
-                              title: "Choose your color"
+                              title: _vm.$t("choose_your_color")
                             },
                             domProps: { value: _vm.typeForm.navbar_bg },
                             on: {
@@ -493,7 +472,7 @@ var render = function() {
                           _c(
                             "label",
                             { staticClass: "form-label col-form-label" },
-                            [_vm._v("Sidebar Text Color")]
+                            [_vm._v(_vm._s(_vm.$t("sidebar_text_color")))]
                           ),
                           _vm._v(" "),
                           _c("input", {
@@ -508,7 +487,7 @@ var render = function() {
                             staticClass: "form-control form-control-color",
                             attrs: {
                               type: "color",
-                              title: "Choose your color",
+                              title: _vm.$t("choose_your_color"),
                               name: "sidebar_bg"
                             },
                             domProps: {
@@ -533,7 +512,7 @@ var render = function() {
                           _c(
                             "label",
                             { staticClass: "form-label col-form-label" },
-                            [_vm._v("Navigation Text Color")]
+                            [_vm._v(_vm._s(_vm.$t("navigation_text_color")))]
                           ),
                           _vm._v(" "),
                           _c("input", {
@@ -548,7 +527,7 @@ var render = function() {
                             staticClass: "form-control form-control-color",
                             attrs: {
                               type: "color",
-                              title: "Choose your color"
+                              title: _vm.$t("choose_your_color")
                             },
                             domProps: { value: _vm.typeForm.navbar_text_color },
                             on: {
@@ -915,53 +894,57 @@ var render = function() {
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "row justify-content-center" }, [
-                    _c("div", { staticClass: "col-4 text-center" }, [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-primary mt-3",
-                          staticStyle: { width: "200px", height: "50px" },
-                          attrs: { type: "submit" }
-                        },
-                        [
+                  _vm.checkPermission("setting-edit")
+                    ? _c("div", { staticClass: "row justify-content-center" }, [
+                        _c("div", { staticClass: "col-4 text-center" }, [
                           _c(
-                            "svg",
+                            "button",
                             {
-                              staticClass: "icon icon-tabler icon-tabler-check",
-                              attrs: {
-                                xmlns: "http://www.w3.org/2000/svg",
-                                width: "24",
-                                height: "24",
-                                viewBox: "0 0 24 24",
-                                "stroke-width": "2",
-                                stroke: "currentColor",
-                                fill: "none",
-                                "stroke-linecap": "round",
-                                "stroke-linejoin": "round"
-                              }
+                              staticClass: "btn btn-primary mt-3 w-200 h-50",
+                              attrs: { type: "submit" }
                             },
                             [
-                              _c("path", {
-                                attrs: {
-                                  stroke: "none",
-                                  d: "M0 0h24v24H0z",
-                                  fill: "none"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("path", { attrs: { d: "M5 12l5 5l10 -10" } })
+                              _c(
+                                "svg",
+                                {
+                                  staticClass:
+                                    "icon icon-tabler icon-tabler-check",
+                                  attrs: {
+                                    xmlns: "http://www.w3.org/2000/svg",
+                                    width: "24",
+                                    height: "24",
+                                    viewBox: "0 0 24 24",
+                                    "stroke-width": "2",
+                                    stroke: "currentColor",
+                                    fill: "none",
+                                    "stroke-linecap": "round",
+                                    "stroke-linejoin": "round"
+                                  }
+                                },
+                                [
+                                  _c("path", {
+                                    attrs: {
+                                      stroke: "none",
+                                      d: "M0 0h24v24H0z",
+                                      fill: "none"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("path", {
+                                    attrs: { d: "M5 12l5 5l10 -10" }
+                                  })
+                                ]
+                              ),
+                              _vm._v(
+                                "\n                                    " +
+                                  _vm._s(_vm.$t("save")) +
+                                  "\n                                "
+                              )
                             ]
-                          ),
-                          _vm._v(
-                            "\n                                    " +
-                              _vm._s(_vm.$t("save")) +
-                              "\n                                "
                           )
-                        ]
-                      )
-                    ])
-                  ])
+                        ])
+                      ])
+                    : _vm._e()
                 ]
               )
             ])

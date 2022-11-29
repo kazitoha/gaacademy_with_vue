@@ -141,24 +141,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       form: new Form({
-        type: '',
-        host: '',
-        port: '',
-        username: '',
-        password: '',
-        encryption: '',
-        from_name: '',
-        from_address: ''
+        type: "",
+        host: "",
+        port: "",
+        password: "",
+        username: "",
+        encryption: "",
+        from_name: "",
+        from_address: ""
       }),
       testMailForm: new Form({
-        email: ''
+        email: ""
       })
     };
   },
@@ -193,19 +190,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context2.prev = 0;
                 _context2.next = 3;
-                return _this2.form.put('/api/setting/mail');
+                return _this2.form.put("/api/setting/mail");
 
               case 3:
                 _yield$_this2$form$pu = _context2.sent;
                 data = _yield$_this2$form$pu.data;
 
-                // success message
-                _this2.$toast.success({
-                  title: 'Success',
-                  message: data.message
-                });
+                _this2.toastSuccess(data.message);
 
-                location.reload();
+                setTimeout(function () {
+                  window.location.reload();
+                }, 1500);
                 _context2.next = 12;
                 break;
 
@@ -213,11 +208,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context2.prev = 9;
                 _context2.t0 = _context2["catch"](0);
 
-                // error message
-                _this2.$toast.error({
-                  title: 'Sorry!',
-                  message: 'Something went wrong!'
-                });
+                _this2.toastError();
 
               case 12:
               case "end":
@@ -239,19 +230,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context3.prev = 0;
                 _context3.next = 3;
-                return _this3.testMailForm.post('/api/setting/send-test-mail');
+                return _this3.testMailForm.post("/api/setting/send-test-mail");
 
               case 3:
                 _yield$_this3$testMai = _context3.sent;
                 data = _yield$_this3$testMai.data;
 
-                _this3.testMailForm.reset(); // success message
+                _this3.testMailForm.reset();
 
-
-                _this3.$toast.success({
-                  title: 'Success',
-                  message: data.message
-                });
+                _this3.toastSuccess(data.message);
 
                 _context3.next = 12;
                 break;
@@ -260,11 +247,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context3.prev = 9;
                 _context3.t0 = _context3["catch"](0);
 
-                // error message
-                _this3.$toast.error({
-                  title: 'Sorry!',
-                  message: 'Something went wrong!'
-                });
+                _this3.toastError();
 
               case 12:
               case "end":
@@ -286,7 +269,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context4.prev = 0;
                 _context4.next = 3;
-                return axios.get('/api/setting/mail');
+                return axios.get("/api/setting/mail");
 
               case 3:
                 _yield$axios$get = _context4.sent;
@@ -301,11 +284,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context4.prev = 8;
                 _context4.t0 = _context4["catch"](0);
 
-                // error message
-                _this4.$toast.error({
-                  title: 'Sorry!',
-                  message: 'Something went wrong!'
-                });
+                _this4.toastError();
 
               case 11:
               case "end":
@@ -482,7 +461,7 @@ var render = function() {
                           attrs: {
                             type: "text",
                             autocomplete: "off",
-                            placeholder: "Host"
+                            placeholder: _vm.$t("host")
                           },
                           domProps: { value: _vm.form.host },
                           on: {
@@ -524,7 +503,7 @@ var render = function() {
                           attrs: {
                             type: "number",
                             autocomplete: "off",
-                            placeholder: "Port"
+                            placeholder: _vm.$t("port")
                           },
                           domProps: { value: _vm.form.port },
                           on: {
@@ -568,7 +547,7 @@ var render = function() {
                           attrs: {
                             type: "text",
                             autocomplete: "off",
-                            placeholder: "Encryption"
+                            placeholder: _vm.$t("encryption")
                           },
                           domProps: { value: _vm.form.encryption },
                           on: {
@@ -586,7 +565,10 @@ var render = function() {
                         }),
                         _vm._v(" "),
                         _c("label", { attrs: { for: "floating-input" } }, [
-                          _vm._v(" " + _vm._s(_vm.$t("mail_encryption")))
+                          _vm._v(
+                            "\n                                    " +
+                              _vm._s(_vm.$t("mail_encryption"))
+                          )
                         ]),
                         _vm._v(" "),
                         _c("has-error", {
@@ -599,69 +581,93 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-12 col-md-6 col-xxl-5" }, [
-                  _c("div", { staticClass: "form-floating mb-3" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.form.username,
-                          expression: "form.username"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: {
-                        type: "text",
-                        autocomplete: "off",
-                        placeholder: "Username"
-                      },
-                      domProps: { value: _vm.form.username },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
+                  _c(
+                    "div",
+                    { staticClass: "form-floating mb-3" },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.username,
+                            expression: "form.username"
                           }
-                          _vm.$set(_vm.form, "username", $event.target.value)
+                        ],
+                        staticClass: "form-control",
+                        class: {
+                          "is-invalid": _vm.form.errors.has("username")
+                        },
+                        attrs: {
+                          type: "text",
+                          autocomplete: "off",
+                          placeholder: _vm.$t("username")
+                        },
+                        domProps: { value: _vm.form.username },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.form, "username", $event.target.value)
+                          }
                         }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("label", { attrs: { for: "floating-input" } }, [
-                      _vm._v(_vm._s(_vm.$t("mail_username")))
-                    ])
-                  ]),
+                      }),
+                      _vm._v(" "),
+                      _c("label", { attrs: { for: "floating-input" } }, [
+                        _vm._v(_vm._s(_vm.$t("mail_username")))
+                      ]),
+                      _vm._v(" "),
+                      _c("has-error", {
+                        attrs: { form: _vm.form, field: "username" }
+                      })
+                    ],
+                    1
+                  ),
                   _vm._v(" "),
-                  _c("div", { staticClass: "form-floating mb-3" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.form.password,
-                          expression: "form.password"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: {
-                        type: "text",
-                        autocomplete: "off",
-                        placeholder: "Password"
-                      },
-                      domProps: { value: _vm.form.password },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
+                  _c(
+                    "div",
+                    { staticClass: "form-floating mb-3" },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.password,
+                            expression: "form.password"
                           }
-                          _vm.$set(_vm.form, "password", $event.target.value)
+                        ],
+                        staticClass: "form-control",
+                        class: {
+                          "is-invalid": _vm.form.errors.has("password")
+                        },
+                        attrs: {
+                          type: "password",
+                          autocomplete: "off",
+                          placeholder: _vm.$t("password")
+                        },
+                        domProps: { value: _vm.form.password },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.form, "password", $event.target.value)
+                          }
                         }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("label", { attrs: { for: "floating-input" } }, [
-                      _vm._v(_vm._s(_vm.$t("mail_password")))
-                    ])
-                  ]),
+                      }),
+                      _vm._v(" "),
+                      _c("label", { attrs: { for: "floating-input" } }, [
+                        _vm._v(_vm._s(_vm.$t("mail_password")))
+                      ]),
+                      _vm._v(" "),
+                      _c("has-error", {
+                        attrs: { form: _vm.form, field: "password" }
+                      })
+                    ],
+                    1
+                  ),
                   _vm._v(" "),
                   _c(
                     "div",
@@ -681,9 +687,10 @@ var render = function() {
                           "is-invalid": _vm.form.errors.has("from_name")
                         },
                         attrs: {
+                          disabled: "",
                           type: "text",
                           autocomplete: "off",
-                          placeholder: "From name"
+                          placeholder: _vm.$t("from_name")
                         },
                         domProps: { value: _vm.form.from_name },
                         on: {
@@ -727,7 +734,7 @@ var render = function() {
                         attrs: {
                           type: "email",
                           autocomplete: "off",
-                          placeholder: "From address"
+                          placeholder: _vm.$t("from_address")
                         },
                         domProps: { value: _vm.form.from_address },
                         on: {
@@ -756,109 +763,110 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "col-12 col-md-8 col-xxl-6 text-center" },
-                  [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-primary mt-3",
-                        staticStyle: { width: "200px", height: "50px" }
-                      },
+                _vm.checkPermission("setting-edit")
+                  ? _c(
+                      "div",
+                      { staticClass: "col-12 col-md-8 col-xxl-6 text-center" },
                       [
                         _c(
-                          "svg",
-                          {
-                            staticClass: "icon icon-tabler icon-tabler-check",
-                            attrs: {
-                              xmlns: "http://www.w3.org/2000/svg",
-                              width: "24",
-                              height: "24",
-                              viewBox: "0 0 24 24",
-                              "stroke-width": "2",
-                              stroke: "currentColor",
-                              fill: "none",
-                              "stroke-linecap": "round",
-                              "stroke-linejoin": "round"
-                            }
-                          },
+                          "button",
+                          { staticClass: "btn btn-primary mt-3 w-200 h-50" },
                           [
-                            _c("path", {
-                              attrs: {
-                                stroke: "none",
-                                d: "M0 0h24v24H0z",
-                                fill: "none"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c("path", { attrs: { d: "M5 12l5 5l10 -10" } })
+                            _c(
+                              "svg",
+                              {
+                                staticClass:
+                                  "icon icon-tabler icon-tabler-check",
+                                attrs: {
+                                  xmlns: "http://www.w3.org/2000/svg",
+                                  width: "24",
+                                  height: "24",
+                                  viewBox: "0 0 24 24",
+                                  "stroke-width": "2",
+                                  stroke: "currentColor",
+                                  fill: "none",
+                                  "stroke-linecap": "round",
+                                  "stroke-linejoin": "round"
+                                }
+                              },
+                              [
+                                _c("path", {
+                                  attrs: {
+                                    stroke: "none",
+                                    d: "M0 0h24v24H0z",
+                                    fill: "none"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("path", { attrs: { d: "M5 12l5 5l10 -10" } })
+                              ]
+                            ),
+                            _vm._v(
+                              "\n                            " +
+                                _vm._s(_vm.$t("save")) +
+                                "\n                        "
+                            )
                           ]
                         ),
-                        _vm._v(
-                          "\n                            " +
-                            _vm._s(_vm.$t("save")) +
-                            "\n                        "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-secondary mt-3",
-                        staticStyle: { width: "200px", height: "50px" },
-                        attrs: { type: "button" },
-                        on: { click: _vm.reset }
-                      },
-                      [
+                        _vm._v(" "),
                         _c(
-                          "svg",
+                          "button",
                           {
-                            staticClass: "icon icon-tabler icon-tabler-refresh",
-                            attrs: {
-                              xmlns: "http://www.w3.org/2000/svg",
-                              width: "24",
-                              height: "24",
-                              viewBox: "0 0 24 24",
-                              "stroke-width": "2",
-                              stroke: "currentColor",
-                              fill: "none",
-                              "stroke-linecap": "round",
-                              "stroke-linejoin": "round"
-                            }
+                            staticClass: "btn btn-secondary mt-3 w-200 h-50",
+                            attrs: { type: "button" },
+                            on: { click: _vm.reset }
                           },
                           [
-                            _c("path", {
-                              attrs: {
-                                stroke: "none",
-                                d: "M0 0h24v24H0z",
-                                fill: "none"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c("path", {
-                              attrs: {
-                                d: "M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c("path", {
-                              attrs: {
-                                d: "M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4"
-                              }
-                            })
+                            _c(
+                              "svg",
+                              {
+                                staticClass:
+                                  "icon icon-tabler icon-tabler-refresh",
+                                attrs: {
+                                  xmlns: "http://www.w3.org/2000/svg",
+                                  width: "24",
+                                  height: "24",
+                                  viewBox: "0 0 24 24",
+                                  "stroke-width": "2",
+                                  stroke: "currentColor",
+                                  fill: "none",
+                                  "stroke-linecap": "round",
+                                  "stroke-linejoin": "round"
+                                }
+                              },
+                              [
+                                _c("path", {
+                                  attrs: {
+                                    stroke: "none",
+                                    d: "M0 0h24v24H0z",
+                                    fill: "none"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("path", {
+                                  attrs: {
+                                    d:
+                                      "M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("path", {
+                                  attrs: {
+                                    d: "M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4"
+                                  }
+                                })
+                              ]
+                            ),
+                            _vm._v(
+                              "\n                            " +
+                                _vm._s(_vm.$t("reset")) +
+                                "\n                        "
+                            )
                           ]
-                        ),
-                        _vm._v(
-                          "\n                            " +
-                            _vm._s(_vm.$t("reset")) +
-                            "\n                        "
                         )
                       ]
                     )
-                  ]
-                )
+                  : _vm._e()
               ])
             ]
           )
@@ -868,7 +876,7 @@ var render = function() {
       _c("div", { staticClass: "card mt-3" }, [
         _c("div", { staticClass: "card-header" }, [
           _c("h3", { staticClass: "card-title" }, [
-            _vm._v(" " + _vm._s(_vm.$t("send_test_mail")))
+            _vm._v(_vm._s(_vm.$t("send_test_mail")))
           ])
         ]),
         _vm._v(" "),
@@ -908,7 +916,7 @@ var render = function() {
                             "is-invalid": _vm.testMailForm.errors.has("email")
                           },
                           attrs: {
-                            placeholder: "Test email",
+                            placeholder: _vm.$t("test_email"),
                             type: "email",
                             autocomplete: "off"
                           },
@@ -948,13 +956,12 @@ var render = function() {
                       ? _c(
                           "button",
                           {
-                            staticClass: "btn btn-primary",
-                            staticStyle: { width: "200px", height: "58px" },
+                            staticClass: "btn btn-primary w-200 h-58",
                             attrs: { type: "button" }
                           },
                           [
                             _vm._v(
-                              "\n                             " +
+                              "\n                            " +
                                 _vm._s(_vm.$t("sending")) +
                                 "...\n                        "
                             )
@@ -963,60 +970,18 @@ var render = function() {
                       : _c(
                           "button",
                           {
-                            staticClass: "btn btn-primary",
-                            staticStyle: { width: "200px", height: "58px" },
+                            staticClass: "btn btn-primary w-200 h-58",
                             attrs: { type: "submit" }
                           },
                           [
-                            _c(
-                              "svg",
-                              {
-                                staticClass:
-                                  "icon icon-tabler icon-tabler-send",
-                                attrs: {
-                                  xmlns: "http://www.w3.org/2000/svg",
-                                  width: "24",
-                                  height: "24",
-                                  viewBox: "0 0 24 24",
-                                  "stroke-width": "2",
-                                  stroke: "currentColor",
-                                  fill: "none",
-                                  "stroke-linecap": "round",
-                                  "stroke-linejoin": "round"
-                                }
-                              },
-                              [
-                                _c("path", {
-                                  attrs: {
-                                    stroke: "none",
-                                    d: "M0 0h24v24H0z",
-                                    fill: "none"
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c("line", {
-                                  attrs: {
-                                    x1: "10",
-                                    y1: "14",
-                                    x2: "21",
-                                    y2: "3"
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c("path", {
-                                  attrs: {
-                                    d:
-                                      "M21 3l-6.5 18a0.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a0.55 .55 0 0 1 0 -1l18 -6.5"
-                                  }
-                                })
-                              ]
-                            ),
+                            _c("icon-send"),
                             _vm._v(
                               "\n                            " +
                                 _vm._s(_vm.$t("send")) +
                                 "\n                        "
                             )
-                          ]
+                          ],
+                          1
                         )
                   ]
                 )

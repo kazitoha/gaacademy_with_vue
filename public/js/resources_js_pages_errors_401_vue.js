@@ -12,7 +12,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
@@ -305,19 +305,27 @@ var render = function() {
   return _c(
     "div",
     {
-      staticClass: "flex-fill d-flex align-items-center justify-content-center",
-      staticStyle: { "min-height": "100vh" }
+      staticClass:
+        "flex-fill d-flex align-items-center justify-content-center mh-100vh"
     },
     [
       _c("div", { staticClass: "container-tight py-6" }, [
         _c("div", { staticClass: "empty" }, [
           _c("div", { staticClass: "empty-header" }, [_vm._v("401")]),
           _vm._v(" "),
-          _c("p", { staticClass: "empty-title" }, [_vm._v("Not Unauthorized")]),
+          _c("p", { staticClass: "empty-title" }, [
+            _vm._v(_vm._s(_vm.$t("not_authorized")))
+          ]),
           _vm._v(" "),
           _c("p", { staticClass: "empty-subtitle text-muted" }, [
             _vm._v(
-              "\n                We are sorry but the page you are looking for was not authorized\n            "
+              "\n                " +
+                _vm._s(
+                  _vm.$t(
+                    "we_are_sorry_but_the_page_you_are_looking_for_was_not_authorized"
+                  )
+                ) +
+                "\n            "
             )
           ]),
           _vm._v(" "),
@@ -370,7 +378,11 @@ var render = function() {
                       })
                     ]
                   ),
-                  _vm._v("\n                    Take me home\n                ")
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(_vm.$t("take_me_home")) +
+                      "\n                "
+                  )
                 ]
               ),
               _vm._v(" "),

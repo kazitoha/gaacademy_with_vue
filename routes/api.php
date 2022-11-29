@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Crud\CrudController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\MessageController;
@@ -246,6 +247,9 @@ Route::middleware('auth:sanctum')->group(function () {
     // Promotions
     Route::post('promotions/student-list', [PromotionController::class, 'getPromotionStudents']);
     Route::put('promotions/{student}', [PromotionController::class, 'promoteStudents']);
+
+    /*crud practice*/
+    Route::get('crud/list', [CrudController::class, 'list']);
 });
 
 // Route::post('student/{user}/get-class-routines',[StudentController::class, 'getClassRoutine']);

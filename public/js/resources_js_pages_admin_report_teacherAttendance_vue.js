@@ -27,16 +27,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      notFound: '/images/not-found.svg'
+      notFound: "/images/not-found.svg"
     };
   },
   props: {
     word: {
       type: String,
-      "default": 'user',
+      "default": "user",
       required: false
     },
     route: {
@@ -190,6 +197,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -203,39 +222,39 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       },
       // search form
       searchForm: new Form({
-        type: '',
-        date: '',
-        month: '',
-        year: ''
+        type: "",
+        date: "",
+        month: "",
+        year: ""
       }),
       sectionInput: false,
       searchBtn: false,
       attendances: [],
-      attendence_type: 'date',
-      url: '/images/default.png'
+      attendence_type: "date",
+      url: "/images/default.png"
     };
   },
   watch: {
-    'searchForm.class_id': function searchFormClass_id(value) {
+    "searchForm.class_id": function searchFormClass_id(value) {
       this.sectionInput = true;
     },
-    'searchForm.section_id': function searchFormSection_id(value) {
+    "searchForm.section_id": function searchFormSection_id(value) {
       this.searchBtn = true;
     },
-    'searchForm.type': function searchFormType(value) {
-      this.searchForm.date = '';
-      this.searchForm.month = '';
-      this.searchForm.year = '';
+    "searchForm.type": function searchFormType(value) {
+      this.searchForm.date = "";
+      this.searchForm.month = "";
+      this.searchForm.year = "";
     }
   },
   methods: {
     setDate: function setDate(event) {
-      var date = dayjs__WEBPACK_IMPORTED_MODULE_1___default()(event).format('YYYY-MM-DD');
+      var date = dayjs__WEBPACK_IMPORTED_MODULE_1___default()(event).format("YYYY-MM-DD");
       this.searchForm.date = date;
     },
     setMonth: function setMonth(event) {
-      var month = dayjs__WEBPACK_IMPORTED_MODULE_1___default()(event).format('MM');
-      var year = dayjs__WEBPACK_IMPORTED_MODULE_1___default()(event).format('YYYY');
+      var month = dayjs__WEBPACK_IMPORTED_MODULE_1___default()(event).format("MM");
+      var year = dayjs__WEBPACK_IMPORTED_MODULE_1___default()(event).format("YYYY");
       this.searchForm.month = month;
       this.searchForm.year = year;
     },
@@ -244,7 +263,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var fullDay = "".concat(this.searchForm.year, "-").concat(this.searchForm.month, "-").concat(dayStr);
 
       if (attendance.attendances.hasOwnProperty(fullDay)) {
-        return attendance.attendances[fullDay][0]['status'] == 1 ? true : false;
+        return attendance.attendances[fullDay][0]["status"] == 1 ? true : false;
       }
 
       return false;
@@ -267,15 +286,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 response = _context.sent;
                 _this.attendence_type = _this.searchForm.type;
                 _this.attendances = response.data.attendences;
-                _context.next = 12;
+                _context.next = 13;
                 break;
 
               case 9:
                 _context.prev = 9;
                 _context.t0 = _context["catch"](1);
+
+                _this.toastError(_context.t0.response.data.message);
+
                 console.log(_context.t0);
 
-              case 12:
+              case 13:
               case "end":
                 return _context.stop();
             }
@@ -286,12 +308,31 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   computed: {
     daysInMonth: function daysInMonth() {
-      if (this.searchForm.year == '' || this.searchForm.month == '') {
+      if (this.searchForm.year == "" || this.searchForm.month == "") {
         return false;
       }
 
       return dayjs__WEBPACK_IMPORTED_MODULE_1___default()("".concat(this.searchForm.year, "-").concat(this.searchForm.month)).daysInMonth();
     }
+  },
+  created: function created() {
+    var _this2 = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return _this2.hasPermisssion("teacher-attendance-report");
+
+            case 2:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }))();
   }
 });
 
@@ -539,9 +580,13 @@ var render = function() {
     _vm._v(" "),
     _c("p", { staticClass: "empty-subtitle text-muted" }, [
       _vm._v(
-        "\n        There is no " +
+        "\n        " +
+          _vm._s(_vm.$t("there_is_no")) +
+          " " +
           _vm._s(_vm.word) +
-          " found in this page.\n    "
+          " " +
+          _vm._s(_vm.$t("found_in_this_page")) +
+          ".\n    "
       )
     ]),
     _vm._v(" "),
@@ -581,16 +626,20 @@ var render = function() {
                         fill: "none"
                       }
                     }),
+                    _vm._v(" "),
                     _c("line", {
                       attrs: { x1: "12", y1: "5", x2: "12", y2: "19" }
                     }),
+                    _vm._v(" "),
                     _c("line", {
                       attrs: { x1: "5", y1: "12", x2: "19", y2: "12" }
                     })
                   ]
                 ),
                 _vm._v(
-                  "\n            Add your first " +
+                  "\n            " +
+                    _vm._s(_vm.$t("add_your_first")) +
+                    " " +
                     _vm._s(_vm.word) +
                     "\n        "
                 )
@@ -633,7 +682,9 @@ var render = function() {
             _vm._v(_vm._s(_vm.$route.meta.title))
           ]),
           _vm._v(" "),
-          _c("h2", { staticClass: "page-pretitle" }, [_vm._v("Teacher")])
+          _c("h2", { staticClass: "page-pretitle" }, [
+            _vm._v(_vm._s(_vm.$t("teacher")))
+          ])
         ])
       ])
     ]),
@@ -643,7 +694,7 @@ var render = function() {
         _c("div", { staticClass: "row justify-content-center" }, [
           _c(
             "div",
-            { staticClass: "col-2" },
+            { staticClass: "col-md-3 col-xl-2" },
             [
               _c(
                 "select",
@@ -679,14 +730,24 @@ var render = function() {
                   }
                 },
                 [
-                  _c("option", { attrs: { value: "" } }, [
-                    _vm._v("Select Type")
+                  _c(
+                    "option",
+                    { staticClass: "d-none", attrs: { value: "" } },
+                    [
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(_vm.$t("select_type")) +
+                          "\n                        "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "date" } }, [
+                    _vm._v(_vm._s(_vm.$t("date")))
                   ]),
                   _vm._v(" "),
-                  _c("option", { attrs: { value: "date" } }, [_vm._v("Date")]),
-                  _vm._v(" "),
                   _c("option", { attrs: { value: "month" } }, [
-                    _vm._v("Monthly")
+                    _vm._v(_vm._s(_vm.$t("monthly")))
                   ])
                 ]
               ),
@@ -701,13 +762,13 @@ var render = function() {
           _vm.searchForm.type == "date"
             ? _c(
                 "div",
-                { staticClass: "col-2" },
+                { staticClass: "col-md-3 col-xl-2 mb-3" },
                 [
                   _c("date-picker", {
                     attrs: {
                       format: "dd MMMM, yyyy",
                       "input-class": "form-control",
-                      placeholder: "Select Date"
+                      placeholder: _vm.$t("select_date")
                     },
                     on: {
                       input: function($event) {
@@ -728,13 +789,14 @@ var render = function() {
           _vm.searchForm.type == "month"
             ? _c(
                 "div",
-                { staticClass: "col-2" },
+                { staticClass: "col-md-3 col-xl-2 mb-3" },
                 [
                   _c("date-picker", {
                     attrs: {
                       format: "MMMM, yyyy",
                       "input-class": "form-control",
-                      placeholder: "Select Month"
+                      placeholder: _vm.$t("select_month"),
+                      "minimum-view": "month"
                     },
                     on: {
                       input: function($event) {
@@ -752,26 +814,30 @@ var render = function() {
               )
             : _vm._e(),
           _vm._v(" "),
-          _c("div", { staticClass: "col-2" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-primary btn-outline",
-                attrs: { disabled: _vm.searchForm.type == "" },
-                on: {
-                  click: function($event) {
-                    $event.preventDefault()
-                    return _vm.getAttendanceReport($event)
-                  }
-                }
-              },
-              [
-                _vm._v(
-                  "\n                        Get Attendacne Report\n                    "
+          _vm.searchForm.type
+            ? _c("div", { staticClass: "col-md-3 col-xl-2 mb-3" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary btn-outline",
+                    attrs: { disabled: _vm.searchForm.type == "" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.getAttendanceReport($event)
+                      }
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(_vm.$t("get_attendacne_report")) +
+                        "\n                    "
+                    )
+                  ]
                 )
-              ]
-            )
-          ])
+              ])
+            : _vm._e()
         ])
       ]),
       _vm._v(" "),
@@ -788,24 +854,41 @@ var render = function() {
           },
           [
             _c("div", { staticClass: "card" }, [
-              _vm._m(0),
+              _c("div", { staticClass: "card-header" }, [
+                _c("div", { staticClass: "card-title" }, [
+                  _vm._v(_vm._s(_vm.$t("attendance")))
+                ])
+              ]),
               _vm._v(" "),
               _c(
                 "div",
-                { staticClass: "card-body" },
+                { staticClass: "card-body table-responsive" },
                 [
                   _vm.attendances.length && _vm.attendence_type == "date"
                     ? [
-                        _c("h3", [_vm._v("Day wise attendance")]),
+                        _c("h3", [
+                          _vm._v(_vm._s(_vm.$t("day_wise_attendance")))
+                        ]),
                         _vm._v(" "),
                         _c(
                           "table",
-                          {
-                            staticClass:
-                              "table table-hover table-bordered table-striped"
-                          },
+                          { staticClass: "table table-vcenter text-nowrap" },
                           [
-                            _vm._m(1),
+                            _c("thead", [
+                              _c("tr", [
+                                _c("th", [_vm._v(_vm._s(_vm.$t("photo")))]),
+                                _vm._v(" "),
+                                _c("th", [_vm._v(_vm._s(_vm.$t("name")))]),
+                                _vm._v(" "),
+                                _c("th", [_vm._v(_vm._s(_vm.$t("phone")))]),
+                                _vm._v(" "),
+                                _c("th", [
+                                  _vm._v(_vm._s(_vm.$t("department")))
+                                ]),
+                                _vm._v(" "),
+                                _c("th", [_vm._v(_vm._s(_vm.$t("status")))])
+                              ])
+                            ]),
                             _vm._v(" "),
                             _c(
                               "tbody",
@@ -813,12 +896,8 @@ var render = function() {
                                 return _c("tr", { key: attendance.id }, [
                                   _c("td", [
                                     _c("img", {
-                                      staticClass: "img-fluid",
-                                      staticStyle: {
-                                        "border-radius": "10px",
-                                        "max-height": "50px",
-                                        "max-width": "50px"
-                                      },
+                                      staticClass:
+                                        "img-fluid mx-h-50 mx-w-50 rounded",
                                       attrs: {
                                         src: attendance.teacher.user.image_url,
                                         alt: "image",
@@ -833,18 +912,12 @@ var render = function() {
                                   ]),
                                   _vm._v(" "),
                                   _c("td", [
-                                    _vm._v(
-                                      _vm._s(attendance.teacher.designation)
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("td", [
                                     _vm._v(_vm._s(attendance.teacher.phone))
                                   ]),
                                   _vm._v(" "),
                                   _c("td", [
                                     _vm._v(
-                                      _vm._s(attendance.teacher.department)
+                                      _vm._s(attendance.teacher.department.name)
                                     )
                                   ]),
                                   _vm._v(" "),
@@ -856,7 +929,11 @@ var render = function() {
                                             staticClass:
                                               "text-align-center text-white bg-green"
                                           },
-                                          [_vm._v("P")]
+                                          [
+                                            _vm._v(
+                                              "\n                                                P\n                                            "
+                                            )
+                                          ]
                                         )
                                       : _c(
                                           "div",
@@ -864,7 +941,11 @@ var render = function() {
                                             staticClass:
                                               "text-align-center text-white bg-red"
                                           },
-                                          [_vm._v("A")]
+                                          [
+                                            _vm._v(
+                                              "\n                                                A\n                                            "
+                                            )
+                                          ]
                                         )
                                   ])
                                 ])
@@ -876,7 +957,9 @@ var render = function() {
                       ]
                     : _vm.attendances.length && _vm.attendence_type == "month"
                     ? [
-                        _c("h3", [_vm._v("Month wise attendance")]),
+                        _c("h3", [
+                          _vm._v(_vm._s(_vm.$t("month_wise_attendance")))
+                        ]),
                         _vm._v(" "),
                         _c(
                           "table",
@@ -889,9 +972,9 @@ var render = function() {
                               _c(
                                 "tr",
                                 [
-                                  _c("th", [_vm._v("Photo")]),
+                                  _c("th", [_vm._v(_vm._s(_vm.$t("photo")))]),
                                   _vm._v(" "),
-                                  _c("th", [_vm._v("Name")]),
+                                  _c("th", [_vm._v(_vm._s(_vm.$t("name")))]),
                                   _vm._v(" "),
                                   _vm._l(_vm.daysInMonth, function(day) {
                                     return _c(
@@ -900,7 +983,13 @@ var render = function() {
                                         key: day,
                                         staticClass: "text-align-center"
                                       },
-                                      [_vm._v(_vm._s(day))]
+                                      [
+                                        _vm._v(
+                                          "\n                                            " +
+                                            _vm._s(day) +
+                                            "\n                                        "
+                                        )
+                                      ]
                                     )
                                   })
                                 ],
@@ -917,12 +1006,8 @@ var render = function() {
                                   [
                                     _c("td", [
                                       _c("img", {
-                                        staticClass: "img-fluid",
-                                        staticStyle: {
-                                          "border-radius": "10px",
-                                          "max-height": "50px",
-                                          "max-width": "50px"
-                                        },
+                                        staticClass:
+                                          "img-fluid mx-h-50 mx-w-50 rounded",
                                         attrs: {
                                           src: attendance.user.image_url,
                                           alt: "image",
@@ -945,7 +1030,11 @@ var render = function() {
                                                 staticClass:
                                                   "text-align-center text-white bg-green"
                                               },
-                                              [_vm._v("P")]
+                                              [
+                                                _vm._v(
+                                                  "\n                                                P\n                                            "
+                                                )
+                                              ]
                                             )
                                           : _c(
                                               "div",
@@ -953,7 +1042,11 @@ var render = function() {
                                                 staticClass:
                                                   "text-align-center text-white bg-red"
                                               },
-                                              [_vm._v("A")]
+                                              [
+                                                _vm._v(
+                                                  "\n                                                A\n                                            "
+                                                )
+                                              ]
                                             )
                                       ])
                                     })
@@ -982,40 +1075,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("div", { staticClass: "card-title" }, [
-        _vm._v(
-          "\n                            Attendance\n                       "
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", [_vm._v("Photo")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Name")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Designation")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Phone")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Department")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Status")])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

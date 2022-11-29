@@ -27,16 +27,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      notFound: '/images/not-found.svg'
+      notFound: "/images/not-found.svg"
     };
   },
   props: {
     word: {
       type: String,
-      "default": 'user',
+      "default": "user",
       required: false
     },
     route: {
@@ -65,6 +72,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue_clickaway__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-clickaway */ "./node_modules/vue-clickaway/dist/vue-clickaway.common.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -137,7 +153,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _components_NotFound_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../components/NotFound.vue */ "./resources/js/components/NotFound.vue");
 /* harmony import */ var _components_modal_DeleteModal_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../components/modal/DeleteModal.vue */ "./resources/js/components/modal/DeleteModal.vue");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
@@ -208,43 +224,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -253,89 +232,81 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     NotFound: _components_NotFound_vue__WEBPACK_IMPORTED_MODULE_1__.default,
     DeleteModal: _components_modal_DeleteModal_vue__WEBPACK_IMPORTED_MODULE_2__.default
   },
-  created: function created() {
-    var hasPermission = this.$store.getters['rolepermission/userHasPermission']('user-list');
-
-    if (!hasPermission) {
-      this.$router.push({
-        name: '401'
-      });
-    }
-  },
   data: function data() {
     return {
-      deleteModal: false,
-      selectedId: '',
-      url: '/images/default.png'
+      selectedId: "",
+      showMenu: false,
+      isModalShow: false
     };
   },
   methods: {
-    toggleDeleteModal: function toggleDeleteModal(selectedId) {
-      this.deleteModal = !this.deleteModal;
-      this.selectedId = selectedId;
-    },
-    deleteModalShow: function deleteModalShow(selectedId) {
-      this.deleteModal = true;
-      this.selectedId = selectedId;
+    deleteConfirmation: function deleteConfirmation(id) {
+      this.isModalShow = !this.isModalShow;
+      this.selectedId = id;
     },
     deleteUser: function deleteUser() {
       var _this = this;
 
-      axios["delete"]("/api/users/".concat(this.selectedId)).then(function (response) {
-        if (response.data.success) {
-          _this.deleteModal = false;
-
-          _this.$store.dispatch('user/fetchUsers');
-
-          _this.$toast.success({
-            title: 'Success',
-            message: response.data.message
-          });
-        }
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
-    checkPermisssion: function checkPermisssion(name) {
-      var permission = this.$store.getters['rolepermission/userHasPermission'](name);
-      return permission;
-    },
-    // Our method to GET results from a Laravel endpoint
-    getResults: function getResults() {
-      var _arguments = arguments,
-          _this2 = this;
-
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var page;
+        var response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                page = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : 1;
-                _context.next = 3;
-                return axios.get('/api/users?page=' + page).then(function (response) {
-                  _this2.$store.commit('user/FETCH_USERS', response.data.users);
-                });
+                _context.next = 2;
+                return axios["delete"]("/api/users/".concat(_this.selectedId));
 
-              case 3:
-                window.scroll({
-                  top: 60,
-                  left: 0,
-                  behavior: 'smooth'
-                });
+              case 2:
+                response = _context.sent;
+                _this.isModalShow = false;
 
-              case 4:
+                _this.$store.dispatch("user/fetchUsers");
+
+                _this.toastSuccess(response.data.message);
+
+              case 6:
               case "end":
                 return _context.stop();
             }
           }
         }, _callee);
       }))();
+    },
+    getResults: function getResults() {
+      var _arguments = arguments,
+          _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var page;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                page = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : 1;
+                _context2.next = 3;
+                return axios.get("/api/users?page=" + page).then(function (response) {
+                  _this2.$store.commit("user/FETCH_USERS", response.data.users);
+                });
+
+              case 3:
+                window.scroll({
+                  top: 60,
+                  left: 0,
+                  behavior: "smooth"
+                });
+
+              case 4:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
     }
   },
   computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapGetters)({
-    userPermissions: 'getUserPermissions',
-    users: 'user/users'
+    userPermissions: "getUserPermissions",
+    users: "user/users"
   })), {}, {
     emptyData: function emptyData() {
       var users = this.users && this.users.data && this.users.data.length;
@@ -347,8 +318,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
     }
   }),
-  mounted: function mounted() {
-    this.$store.dispatch('user/fetchUsers');
+  created: function created() {
+    var _this3 = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.next = 2;
+              return _this3.hasPermisssion("user-list");
+
+            case 2:
+              _context3.next = 4;
+              return _this3.$store.dispatch("user/fetchUsers");
+
+            case 4:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
+    }))();
   }
 });
 
@@ -371,7 +362,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.fade-enter-active,\n.fade-leave-active {\n  transition: opacity .3s\n}\n.fade-enter,\n.fade-leave-active {\n  opacity: 0\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.fade-enter-active,\n.fade-leave-active {\n    transition: opacity .3s\n}\n.fade-enter,\n.fade-leave-active {\n    opacity: 0\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -395,7 +386,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.fade-enter-active,\n.fade-leave-active {\n    transition: opacity 1s\n}\n.fade-enter,\n.fade-leave-active {\n    opacity: 0\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.user-card {\n    position: relative;\n}\n.dots {\n    position: absolute;\n    top: 5px;\n    right: 10px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -830,9 +821,13 @@ var render = function() {
     _vm._v(" "),
     _c("p", { staticClass: "empty-subtitle text-muted" }, [
       _vm._v(
-        "\n        There is no " +
+        "\n        " +
+          _vm._s(_vm.$t("there_is_no")) +
+          " " +
           _vm._s(_vm.word) +
-          " found in this page.\n    "
+          " " +
+          _vm._s(_vm.$t("found_in_this_page")) +
+          ".\n    "
       )
     ]),
     _vm._v(" "),
@@ -872,16 +867,20 @@ var render = function() {
                         fill: "none"
                       }
                     }),
+                    _vm._v(" "),
                     _c("line", {
                       attrs: { x1: "12", y1: "5", x2: "12", y2: "19" }
                     }),
+                    _vm._v(" "),
                     _c("line", {
                       attrs: { x1: "5", y1: "12", x2: "19", y2: "12" }
                     })
                   ]
                 ),
                 _vm._v(
-                  "\n            Add your first " +
+                  "\n            " +
+                    _vm._s(_vm.$t("add_your_first")) +
+                    " " +
                     _vm._s(_vm.word) +
                     "\n        "
                 )
@@ -921,8 +920,7 @@ var render = function() {
       ? _c(
           "div",
           {
-            staticClass: "modal modal-blur fade show",
-            staticStyle: { display: "block", background: "rgb(0 0 0 / 40%)" },
+            staticClass: "modal modal-blur fade show modal-hidee",
             attrs: {
               id: "modal-danger",
               tabindex: "-1",
@@ -989,7 +987,9 @@ var render = function() {
                               fill: "none"
                             }
                           }),
+                          _vm._v(" "),
                           _c("path", { attrs: { d: "M12 9v2m0 4v.01" } }),
+                          _vm._v(" "),
                           _c("path", {
                             attrs: {
                               d:
@@ -1019,9 +1019,9 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n                            " +
+                                  "\n                                    " +
                                     _vm._s(_vm.$t("cancel")) +
-                                    "\n                        "
+                                    "\n                                "
                                 )
                               ]
                             )
@@ -1037,9 +1037,9 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n                            " +
+                                  "\n                                    " +
                                     _vm._s(_vm.$t("delete")) +
-                                    "\n                        "
+                                    "\n                                "
                                 )
                               ]
                             )
@@ -1082,344 +1082,170 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("div", { staticClass: "row row-deck row-cards" }, [
-        _c("div", { staticClass: "col-12" }, [
-          _c("div", { staticClass: "card" }, [
-            _c(
-              "div",
-              {
-                staticClass:
-                  "card-header d-flex justify-content-between align-items-center"
-              },
-              [
-                _c("h4", { staticClass: "card-title" }, [
-                  _vm._v(_vm._s(_vm.$t("user_list")))
-                ]),
-                _vm._v(" "),
-                _vm.checkPermisssion("user-create")
-                  ? _c(
+      _c("div", { staticClass: "page-header d-print-none" }, [
+        _c("div", { staticClass: "row align-items-center" }, [
+          _c("div", { staticClass: "col" }, [
+            _c("h2", { staticClass: "page-title" }, [
+              _vm._v(_vm._s(_vm.$route.meta.title))
+            ]),
+            _vm._v(" "),
+            _c("h2", { staticClass: "page-pretitle" }, [
+              _vm._v(_vm._s(_vm.$t("admin_setting")))
+            ])
+          ]),
+          _vm._v(" "),
+          _vm.checkPermission("user-create")
+            ? _c("div", { staticClass: "col-auto ms-auto d-print-none" }, [
+                _c(
+                  "div",
+                  { staticClass: "d-flex" },
+                  [
+                    _c(
                       "router-link",
                       {
                         staticClass: "btn btn-primary",
                         attrs: { to: { name: "user-add" } }
                       },
-                      [_vm._v(_vm._s(_vm.$t("add")))]
+                      [
+                        _c("icon-plus"),
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(_vm.$t("create")) +
+                            "\n                    "
+                        )
+                      ],
+                      1
                     )
-                  : _vm._e()
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "card-body border-bottom py-3" },
-              [
-                _c("div", { staticClass: "table-responsive" }, [
-                  !_vm.emptyData
-                    ? _c(
-                        "table",
-                        {
-                          staticClass:
-                            "table card-table table-vcenter text-nowrap datatable"
-                        },
-                        [
-                          _c("thead", { staticClass: "text-center" }, [
-                            _vm.checkPermisssion("user-edit") ||
-                            _vm.checkPermisssion("user-delete")
-                              ? _c("tr", [
-                                  _c("th", { attrs: { width: "10%" } }, [
-                                    _vm._v(_vm._s(_vm.$t("image")))
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("th", { attrs: { width: "25%" } }, [
-                                    _vm._v(_vm._s(_vm.$t("name")))
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("th", { attrs: { width: "25%" } }, [
-                                    _vm._v(_vm._s(_vm.$t("email")))
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("th", { attrs: { width: "20%" } }, [
-                                    _vm._v(_vm._s(_vm.$t("role")))
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("th", { attrs: { width: "20%" } }, [
-                                    _vm._v(_vm._s(_vm.$t("action")))
-                                  ])
-                                ])
-                              : _c("tr", [
-                                  _c("th", { attrs: { width: "15%" } }, [
-                                    _vm._v(_vm._s(_vm.$t("image")))
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("th", { attrs: { width: "30%" } }, [
-                                    _vm._v(_vm._s(_vm.$t("name")))
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("th", { attrs: { width: "30%" } }, [
-                                    _vm._v(_vm._s(_vm.$t("email")))
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("th", { attrs: { width: "25%" } }, [
-                                    _vm._v(_vm._s(_vm.$t("role")))
-                                  ])
-                                ])
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "tbody",
-                            _vm._l(_vm.users.data, function(user, index) {
-                              return _c("tr", { key: index }, [
-                                _c("td", { staticClass: "text-center" }, [
-                                  _c("div", [
-                                    user.image
-                                      ? _c("img", {
-                                          staticClass: "img-fluid",
-                                          staticStyle: {
-                                            "border-radius": "10px",
-                                            "max-height": "50px",
-                                            "max-width": "50px"
-                                          },
-                                          attrs: {
-                                            src: user.image,
-                                            alt: "",
-                                            height: "50px",
-                                            width: "50px"
-                                          }
-                                        })
-                                      : _c("img", {
-                                          staticClass: "img-fluid",
-                                          staticStyle: {
-                                            "border-radius": "10px",
-                                            "max-height": "50px",
-                                            "max-width": "50px"
-                                          },
-                                          attrs: {
-                                            src: _vm.url,
-                                            alt: "image",
-                                            height: "80px",
-                                            width: "80px"
-                                          }
-                                        })
-                                  ])
-                                ]),
-                                _vm._v(" "),
-                                _c("td", { staticClass: "text-center" }, [
-                                  _vm._v(_vm._s(user.name))
-                                ]),
-                                _vm._v(" "),
-                                _c("td", { staticClass: "text-center" }, [
-                                  _vm._v(_vm._s(user.email))
-                                ]),
-                                _vm._v(" "),
-                                _c("td", { staticClass: "text-center" }, [
-                                  _vm._v(_vm._s(user.roles[0].name))
-                                ]),
-                                _vm._v(" "),
-                                _vm.checkPermisssion("user-edit") ||
-                                _vm.checkPermisssion("user-delete")
-                                  ? _c(
-                                      "td",
-                                      { staticClass: "text-center" },
-                                      [
-                                        _vm.checkPermisssion("user-edit")
-                                          ? _c(
-                                              "router-link",
-                                              {
-                                                staticClass: "btn btn-primary",
-                                                attrs: {
-                                                  to: {
-                                                    name: "user-edit",
-                                                    params: { userId: user.id }
-                                                  }
-                                                }
-                                              },
-                                              [
-                                                _c(
-                                                  "svg",
-                                                  {
-                                                    staticClass:
-                                                      "icon icon-tabler icon-tabler-edit m-0",
-                                                    attrs: {
-                                                      xmlns:
-                                                        "http://www.w3.org/2000/svg",
-                                                      width: "24",
-                                                      height: "24",
-                                                      viewBox: "0 0 24 24",
-                                                      "stroke-width": "2",
-                                                      stroke: "currentColor",
-                                                      fill: "none",
-                                                      "stroke-linecap": "round",
-                                                      "stroke-linejoin": "round"
-                                                    }
-                                                  },
-                                                  [
-                                                    _c("path", {
-                                                      attrs: {
-                                                        stroke: "none",
-                                                        d: "M0 0h24v24H0z",
-                                                        fill: "none"
-                                                      }
-                                                    }),
-                                                    _vm._v(" "),
-                                                    _c("path", {
-                                                      attrs: {
-                                                        d:
-                                                          "M9 7h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3"
-                                                      }
-                                                    }),
-                                                    _vm._v(" "),
-                                                    _c("path", {
-                                                      attrs: {
-                                                        d:
-                                                          "M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3"
-                                                      }
-                                                    }),
-                                                    _vm._v(" "),
-                                                    _c("line", {
-                                                      attrs: {
-                                                        x1: "16",
-                                                        y1: "5",
-                                                        x2: "19",
-                                                        y2: "8"
-                                                      }
-                                                    })
-                                                  ]
-                                                )
-                                              ]
-                                            )
-                                          : _vm._e(),
-                                        _vm._v(" "),
-                                        _vm.checkPermisssion("user-delete")
-                                          ? _c(
-                                              "button",
-                                              {
-                                                staticClass:
-                                                  "btn btn-danger text-center",
-                                                on: {
-                                                  click: function($event) {
-                                                    $event.preventDefault()
-                                                    return _vm.toggleDeleteModal(
-                                                      user.id
-                                                    )
-                                                  }
-                                                }
-                                              },
-                                              [
-                                                _c(
-                                                  "svg",
-                                                  {
-                                                    staticClass:
-                                                      "icon icon-tabler icon-tabler-trash m-0",
-                                                    attrs: {
-                                                      xmlns:
-                                                        "http://www.w3.org/2000/svg",
-                                                      width: "24",
-                                                      height: "24",
-                                                      viewBox: "0 0 24 24",
-                                                      "stroke-width": "2",
-                                                      stroke: "currentColor",
-                                                      fill: "none",
-                                                      "stroke-linecap": "round",
-                                                      "stroke-linejoin": "round"
-                                                    }
-                                                  },
-                                                  [
-                                                    _c("path", {
-                                                      attrs: {
-                                                        stroke: "none",
-                                                        d: "M0 0h24v24H0z",
-                                                        fill: "none"
-                                                      }
-                                                    }),
-                                                    _vm._v(" "),
-                                                    _c("line", {
-                                                      attrs: {
-                                                        x1: "4",
-                                                        y1: "7",
-                                                        x2: "20",
-                                                        y2: "7"
-                                                      }
-                                                    }),
-                                                    _vm._v(" "),
-                                                    _c("line", {
-                                                      attrs: {
-                                                        x1: "10",
-                                                        y1: "11",
-                                                        x2: "10",
-                                                        y2: "17"
-                                                      }
-                                                    }),
-                                                    _vm._v(" "),
-                                                    _c("line", {
-                                                      attrs: {
-                                                        x1: "14",
-                                                        y1: "11",
-                                                        x2: "14",
-                                                        y2: "17"
-                                                      }
-                                                    }),
-                                                    _vm._v(" "),
-                                                    _c("path", {
-                                                      attrs: {
-                                                        d:
-                                                          "M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"
-                                                      }
-                                                    }),
-                                                    _vm._v(" "),
-                                                    _c("path", {
-                                                      attrs: {
-                                                        d:
-                                                          "M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"
-                                                      }
-                                                    })
-                                                  ]
-                                                )
-                                              ]
-                                            )
-                                          : _vm._e()
-                                      ],
-                                      1
-                                    )
-                                  : _vm._e()
-                              ])
-                            }),
-                            0
-                          )
-                        ]
-                      )
-                    : _c(
-                        "div",
-                        { staticClass: "d-flex justify-content-center py-3" },
-                        [
-                          _c("NotFound", {
-                            attrs: { word: "user", route: "user-add" }
-                          })
-                        ],
-                        1
-                      )
-                ]),
-                _vm._v(" "),
-                _c("pagination", {
-                  attrs: {
-                    data: _vm.users,
-                    align: "center",
-                    limit: 1,
-                    "show-disabled": true
-                  },
-                  on: { "pagination-change-page": _vm.getResults }
-                })
-              ],
-              1
-            )
-          ])
+                  ],
+                  1
+                )
+              ])
+            : _vm._e()
         ])
       ]),
       _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "row row-cards mt-2" },
+        [
+          _vm.users.data && _vm.users.data.length
+            ? _vm._l(_vm.users.data, function(user, index) {
+                return _c(
+                  "div",
+                  { key: index, staticClass: "col-md-6 col-xl-3" },
+                  [
+                    _c("div", { staticClass: "card user-card" }, [
+                      _c("div", { staticClass: "card-body text-center" }, [
+                        _c("div", { staticClass: "mb-3" }, [
+                          _c("img", {
+                            staticClass:
+                              "avatar avatar-lg avatar-rounded rounded",
+                            attrs: { src: user.image_url, alt: "image" }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "card-title mb-1" }, [
+                          _vm._v(
+                            "\n                            " +
+                              _vm._s(user.name) +
+                              "\n                        "
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "d-flex" },
+                        [
+                          _vm.checkPermission("user-edit")
+                            ? _c(
+                                "router-link",
+                                {
+                                  staticClass: "card-btn d-inline-block",
+                                  attrs: {
+                                    to: {
+                                      name: "user-edit",
+                                      params: { userId: user.id }
+                                    }
+                                  }
+                                },
+                                [_c("icon-edit")],
+                                1
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _c(
+                            "router-link",
+                            {
+                              staticClass: "card-btn",
+                              attrs: {
+                                to: {
+                                  name: "user-view",
+                                  params: { id: user.id }
+                                },
+                                href: "#"
+                              }
+                            },
+                            [_c("icon-eye")],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _vm.checkPermission("user-delete")
+                            ? _c(
+                                "a",
+                                {
+                                  staticClass: "card-btn d-inline-block",
+                                  attrs: { href: "javascript:void(0)" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.deleteConfirmation(user.id)
+                                    }
+                                  }
+                                },
+                                [_c("icon-trash")],
+                                1
+                              )
+                            : _vm._e()
+                        ],
+                        1
+                      )
+                    ])
+                  ]
+                )
+              })
+            : _c(
+                "div",
+                { staticClass: "d-flex justify-content-center py-3" },
+                [_c("NotFound", { attrs: { word: "user" } })],
+                1
+              ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "mt-5" },
+            [
+              _c("pagination", {
+                attrs: {
+                  data: _vm.users,
+                  align: "center",
+                  limit: 1,
+                  "show-disabled": true
+                },
+                on: { "pagination-change-page": _vm.getResults }
+              })
+            ],
+            1
+          )
+        ],
+        2
+      ),
+      _vm._v(" "),
       _c("DeleteModal", {
-        attrs: { isShow: _vm.deleteModal },
+        attrs: { isShow: _vm.isModalShow },
         on: {
-          "close-modal": _vm.toggleDeleteModal,
+          "close-modal": function($event) {
+            _vm.isModalShow = false
+          },
           "delete-data": _vm.deleteUser
         }
       })

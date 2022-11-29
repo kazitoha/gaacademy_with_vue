@@ -27,16 +27,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      notFound: '/images/not-found.svg'
+      notFound: "/images/not-found.svg"
     };
   },
   props: {
     word: {
       type: String,
-      "default": 'user',
+      "default": "user",
       required: false
     },
     route: {
@@ -70,7 +77,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(dayjs__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components_NotFound_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../components/NotFound.vue */ "./resources/js/components/NotFound.vue");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
@@ -82,6 +89,24 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -219,18 +244,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       },
       // search form
       searchForm: new Form({
-        date: '',
-        session_id: '',
-        class_id: '',
-        section_id: ''
+        date: "",
+        class_id: "",
+        section_id: ""
       }),
       sections: [],
       students: [],
       attendance_form: [],
-      notes_form: [],
+      last_days_attendaces: [],
       attendance_errors: [],
       attendences_load: false,
-      url: '/images/default.png'
+      url: "/images/default.png"
     };
   },
   methods: {
@@ -245,37 +269,40 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _this.students = [];
                 _this.attendance_form = [];
-                _this.notes_form = {};
                 _this.attendance_errors = [];
                 _this.attendences_load = false;
-                _context.prev = 5;
-                _context.next = 8;
+                _context.prev = 4;
+                _context.next = 7;
                 return _this.searchForm.post("/api/attendance/get-students");
 
-              case 8:
+              case 7:
                 response = _context.sent;
-                _this.students = response.data;
+                _this.students = response.data.students;
+                _this.last_days_attendaces = response.data.lastdays_attendace;
 
                 _this.generateAttendance();
 
-                _context.next = 16;
+                _context.next = 17;
                 break;
 
               case 13:
                 _context.prev = 13;
-                _context.t0 = _context["catch"](5);
+                _context.t0 = _context["catch"](4);
+
+                _this.toastError(_context.t0.response.data.message);
+
                 console.log(_context.t0);
 
-              case 16:
+              case 17:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[5, 13]]);
+        }, _callee, null, [[4, 13]]);
       }))();
     },
     setDate: function setDate(event) {
-      var formatTime = dayjs__WEBPACK_IMPORTED_MODULE_1___default()(event).format('YYYY-MM-DD');
+      var formatTime = dayjs__WEBPACK_IMPORTED_MODULE_1___default()(event).format("YYYY-MM-DD");
       this.searchForm.date = formatTime;
     },
     saveAttendance: function saveAttendance() {
@@ -292,11 +319,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   return {
                     student_id: student.id,
                     status: _this2.attendance_form[index],
-                    session_id: _this2.searchForm.session_id,
                     class_id: _this2.searchForm.class_id,
                     section_id: _this2.searchForm.section_id,
-                    date: _this2.searchForm.date,
-                    note: _this2.notes_form[index]
+                    date: _this2.searchForm.date
                   };
                 });
                 _context2.next = 4;
@@ -306,16 +331,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 4:
                 response = _context2.sent;
-                console.log(response);
 
                 _this2.toastSuccess(response.data.message);
 
                 _context2.next = 13;
                 break;
 
-              case 9:
-                _context2.prev = 9;
+              case 8:
+                _context2.prev = 8;
                 _context2.t0 = _context2["catch"](0);
+
+                _this2.toastError(_context2.t0.response.data.message);
 
                 if (_context2.t0.response.status == 422) {
                   _this2.attendance_errors = _context2.t0.response.data.errors;
@@ -328,7 +354,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _context2.stop();
             }
           }
-        }, _callee2, null, [[0, 9]]);
+        }, _callee2, null, [[0, 8]]);
       }))();
     },
     getClass: function getClass() {
@@ -339,7 +365,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                _this3.$store.dispatch('classs/fetchClasses');
+                _this3.$store.dispatch("classs/fetchClasses");
 
               case 1:
               case "end":
@@ -378,22 +404,38 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       this.students.forEach(function (student, index) {
         _this5.attendance_form[index] = student.attendances.status;
-        _this5.notes_form[index] = student.attendances.note;
       });
       this.attendences_load = true;
     }
   },
   computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapGetters)({
-    sessions: 'session/sessions',
-    classes: 'classs/classes'
+    classes: "classs/classes"
   })), {}, {
     disableSearchButton: function disableSearchButton() {
-      return this.searchForm.date == '' || this.searchForm.session_id == '' || this.searchForm.class_id == '' || this.searchForm.student_id == '';
+      return this.searchForm.date == "" || this.searchForm.class_id == "" || this.searchForm.section_id == "";
     }
   }),
-  created: function created() {
-    // this.loadClasses()
-    this.$store.dispatch('session/fetchSessions');
+  mounted: function mounted() {
+    var _this6 = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+        while (1) {
+          switch (_context5.prev = _context5.next) {
+            case 0:
+              _this6.hasPermisssion("student-attendance-list");
+
+              _this6.$store.dispatch("classs/fetchClasses");
+
+              _this6.searchForm.date = dayjs__WEBPACK_IMPORTED_MODULE_1___default()().format("YYYY-MM-DD");
+
+            case 3:
+            case "end":
+              return _context5.stop();
+          }
+        }
+      }, _callee5);
+    }))();
   }
 });
 
@@ -572,9 +614,13 @@ var render = function() {
     _vm._v(" "),
     _c("p", { staticClass: "empty-subtitle text-muted" }, [
       _vm._v(
-        "\n        There is no " +
+        "\n        " +
+          _vm._s(_vm.$t("there_is_no")) +
+          " " +
           _vm._s(_vm.word) +
-          " found in this page.\n    "
+          " " +
+          _vm._s(_vm.$t("found_in_this_page")) +
+          ".\n    "
       )
     ]),
     _vm._v(" "),
@@ -614,16 +660,20 @@ var render = function() {
                         fill: "none"
                       }
                     }),
+                    _vm._v(" "),
                     _c("line", {
                       attrs: { x1: "12", y1: "5", x2: "12", y2: "19" }
                     }),
+                    _vm._v(" "),
                     _c("line", {
                       attrs: { x1: "5", y1: "12", x2: "19", y2: "12" }
                     })
                   ]
                 ),
                 _vm._v(
-                  "\n            Add your first " +
+                  "\n            " +
+                    _vm._s(_vm.$t("add_your_first")) +
+                    " " +
                     _vm._s(_vm.word) +
                     "\n        "
                 )
@@ -666,7 +716,9 @@ var render = function() {
             _vm._v(_vm._s(_vm.$route.meta.title))
           ]),
           _vm._v(" "),
-          _c("h2", { staticClass: "page-pretitle" }, [_vm._v("Attendance")])
+          _c("h2", { staticClass: "page-pretitle" }, [
+            _vm._v(_vm._s(_vm.$t("attendance")))
+          ])
         ])
       ])
     ]),
@@ -676,14 +728,15 @@ var render = function() {
         _c("div", { staticClass: "row justify-content-center" }, [
           _c(
             "div",
-            { staticClass: "col-2" },
+            { staticClass: "col-sm-12 col-md-3 col-lg-2 mb-3" },
             [
               _c("date-picker", {
                 attrs: {
                   disabledDates: _vm.disabledDates,
                   format: "dd MMMM, yyyy",
                   "input-class": "form-control",
-                  placeholder: "Select Date"
+                  placeholder: _vm.$t("select_date"),
+                  value: _vm.searchForm.date
                 },
                 on: {
                   input: function($event) {
@@ -700,247 +753,208 @@ var render = function() {
             1
           ),
           _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "col-2" },
-            [
-              _c(
-                "select",
-                {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.searchForm.session_id,
-                      expression: "searchForm.session_id"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  class: {
-                    "is-invalid": _vm.searchForm.errors.has("session_id")
-                  },
-                  on: {
-                    change: [
-                      function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.$set(
-                          _vm.searchForm,
-                          "session_id",
-                          $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
-                        )
-                      },
-                      _vm.getClass
-                    ]
-                  }
-                },
+          _vm.searchForm.date
+            ? _c(
+                "div",
+                { staticClass: "col-sm-12 col-md-3 col-lg-2 mb-3" },
                 [
-                  _c("option", { attrs: { value: "" } }, [
-                    _vm._v("Select Session")
-                  ]),
-                  _vm._v(" "),
-                  _vm._l(_vm.sessions, function(session) {
-                    return _c(
-                      "option",
-                      { key: session.id, domProps: { value: session.id } },
-                      [
-                        _vm._v(
-                          _vm._s(session.name) + "\n                        "
-                        )
-                      ]
-                    )
-                  })
-                ],
-                2
-              ),
-              _vm._v(" "),
-              _c("has-error", {
-                attrs: { form: _vm.searchForm, field: "session_id" }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "col-2" },
-            [
-              _c(
-                "select",
-                {
-                  directives: [
+                  _c(
+                    "select",
                     {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.searchForm.class_id,
-                      expression: "searchForm.class_id"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  class: {
-                    "is-invalid": _vm.searchForm.errors.has("class_id")
-                  },
-                  on: {
-                    change: [
-                      function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.$set(
-                          _vm.searchForm,
-                          "class_id",
-                          $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
-                        )
-                      },
-                      _vm.getSections
-                    ]
-                  }
-                },
-                [
-                  _c("option", { attrs: { value: "" } }, [
-                    _vm._v("Select Class")
-                  ]),
-                  _vm._v(" "),
-                  _vm._l(_vm.classes, function(classs) {
-                    return _c(
-                      "option",
-                      { key: classs.id, domProps: { value: classs.id } },
-                      [
-                        _vm._v(
-                          _vm._s(classs.name) + "\n                        "
-                        )
-                      ]
-                    )
-                  })
-                ],
-                2
-              ),
-              _vm._v(" "),
-              _c("has-error", {
-                attrs: { form: _vm.searchForm, field: "class_id" }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "col-2" },
-            [
-              _c(
-                "select",
-                {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.searchForm.section_id,
-                      expression: "searchForm.section_id"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  class: {
-                    "is-invalid": _vm.searchForm.errors.has("section_id")
-                  },
-                  on: {
-                    change: function($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function(o) {
-                          return o.selected
-                        })
-                        .map(function(o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.$set(
-                        _vm.searchForm,
-                        "section_id",
-                        $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      )
-                    }
-                  }
-                },
-                [
-                  _vm.sections && _vm.sections.length
-                    ? _c(
-                        "option",
+                      directives: [
                         {
-                          staticClass: "d-none",
-                          attrs: { selected: "", value: "" }
-                        },
-                        [_vm._v("Select Section\n                        ")]
-                      )
-                    : _c(
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.searchForm.class_id,
+                          expression: "searchForm.class_id"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      class: {
+                        "is-invalid": _vm.searchForm.errors.has("class_id")
+                      },
+                      on: {
+                        change: [
+                          function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.searchForm,
+                              "class_id",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          },
+                          _vm.getSections
+                        ]
+                      }
+                    },
+                    [
+                      _c(
                         "option",
-                        {
-                          staticClass: "d-none",
-                          attrs: { selected: "", value: "" }
-                        },
-                        [_vm._v("No Section Found")]
+                        { staticClass: "d-none", attrs: { value: "" } },
+                        [_vm._v(_vm._s(_vm.$t("select_class")))]
                       ),
-                  _vm._v(" "),
-                  _vm.sections && _vm.sections.length
-                    ? _vm._l(_vm.sections, function(section) {
+                      _vm._v(" "),
+                      _vm._l(_vm.classes, function(classs) {
                         return _c(
                           "option",
-                          { key: section.id, domProps: { value: section.id } },
+                          { key: classs.id, domProps: { value: classs.id } },
                           [
                             _vm._v(
-                              "\n                                " +
-                                _vm._s(section.name)
+                              "\n                            " +
+                                _vm._s(classs.name) +
+                                "\n                        "
                             )
                           ]
                         )
                       })
-                    : _vm._e()
+                    ],
+                    2
+                  ),
+                  _vm._v(" "),
+                  _c("has-error", {
+                    attrs: { form: _vm.searchForm, field: "class_id" }
+                  })
                 ],
-                2
-              ),
-              _vm._v(" "),
-              _c("has-error", {
-                attrs: { form: _vm.searchForm, field: "section_id" }
-              })
-            ],
-            1
-          ),
+                1
+              )
+            : _vm._e(),
           _vm._v(" "),
-          _c("div", { staticClass: "col-2" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-primary btn-outline",
-                attrs: { disabled: _vm.disableSearchButton },
-                on: { click: _vm.getStudents }
-              },
-              [
-                _vm._v(
-                  "\n                        Get Student List\n                    "
+          _vm.searchForm.date && _vm.searchForm.class_id
+            ? _c(
+                "div",
+                { staticClass: "col-sm-12 col-md-3 col-lg-2 mb-3" },
+                [
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.searchForm.section_id,
+                          expression: "searchForm.section_id"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      class: {
+                        "is-invalid": _vm.searchForm.errors.has("section_id")
+                      },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.searchForm,
+                            "section_id",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        }
+                      }
+                    },
+                    [
+                      _vm.sections && _vm.sections.length
+                        ? _c(
+                            "option",
+                            {
+                              staticClass: "d-none",
+                              attrs: { selected: "", value: "", disabled: "" }
+                            },
+                            [
+                              _vm._v(
+                                "\n                            " +
+                                  _vm._s(_vm.$t("select_section")) +
+                                  "\n                        "
+                              )
+                            ]
+                          )
+                        : _c(
+                            "option",
+                            {
+                              staticClass: "d-none",
+                              attrs: { selected: "", value: "" }
+                            },
+                            [
+                              _vm._v(
+                                "\n                            " +
+                                  _vm._s(_vm.$t("no_section_found")) +
+                                  "\n                        "
+                              )
+                            ]
+                          ),
+                      _vm._v(" "),
+                      _vm.sections && _vm.sections.length
+                        ? _vm._l(_vm.sections, function(section) {
+                            return _c(
+                              "option",
+                              {
+                                key: section.id,
+                                domProps: { value: section.id }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                " +
+                                    _vm._s(section.name) +
+                                    "\n                            "
+                                )
+                              ]
+                            )
+                          })
+                        : _vm._e()
+                    ],
+                    2
+                  ),
+                  _vm._v(" "),
+                  _c("has-error", {
+                    attrs: { form: _vm.searchForm, field: "section_id" }
+                  })
+                ],
+                1
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.searchForm.date &&
+          _vm.searchForm.class_id &&
+          _vm.searchForm.section_id
+            ? _c("div", { staticClass: "col-sm-12 col-md-3 col-lg-2 mb-3" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary btn-outline",
+                    attrs: { disabled: _vm.disableSearchButton },
+                    on: { click: _vm.getStudents }
+                  },
+                  [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(_vm.$t("get_student_list")) +
+                        "\n                    "
+                    )
+                  ]
                 )
-              ]
-            )
-          ])
+              ])
+            : _vm._e()
         ])
       ]),
       _vm._v(" "),
       _vm.students.length && _vm.attendences_load
-        ? _c("div", { staticClass: "col-12" }, [
+        ? _c("div", { staticClass: "col-12 mt-3" }, [
             _c(
               "form",
               {
@@ -953,186 +967,227 @@ var render = function() {
               },
               [
                 _c("div", { staticClass: "card" }, [
-                  _vm._m(0),
+                  _c("div", { staticClass: "card-header" }, [
+                    _c("div", { staticClass: "card-title" }, [
+                      _vm._v(_vm._s(_vm.$t("attendance")))
+                    ])
+                  ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "card-body" }, [
-                    _c(
-                      "table",
-                      {
-                        staticClass: "table table-vcenter text-nowrap datatable"
-                      },
-                      [
-                        _vm._m(1),
-                        _vm._v(" "),
-                        _c(
-                          "tbody",
-                          _vm._l(_vm.students, function(student, index) {
-                            return _c("tr", { key: student.id }, [
-                              _c("td", [
-                                _c("img", {
-                                  staticClass: "img-fluid",
-                                  staticStyle: {
-                                    "border-radius": "10px",
-                                    "max-height": "50px",
-                                    "max-width": "50px"
-                                  },
-                                  attrs: {
-                                    src: student.user.image_url,
-                                    alt: "",
-                                    height: "50px",
-                                    width: "50px"
-                                  }
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c("td", [
-                                _vm._v(
-                                  "\n                                        " +
-                                    _vm._s(student.name) +
-                                    "\n                                    "
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("td", [
-                                _vm._v(
-                                  "\n                                        " +
-                                    _vm._s(student.roll_no) +
-                                    "\n                                    "
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("td", [
-                                _c("div", { staticClass: "mb-3" }, [
-                                  _c("div", [
-                                    _c(
-                                      "label",
-                                      {
-                                        staticClass:
-                                          "form-check form-check-inline"
-                                      },
-                                      [
-                                        _c("input", {
-                                          directives: [
-                                            {
-                                              name: "model",
-                                              rawName: "v-model",
-                                              value: _vm.attendance_form[index],
-                                              expression:
-                                                "attendance_form[index]"
-                                            }
-                                          ],
-                                          staticClass: "form-check-input",
-                                          attrs: { type: "radio" },
-                                          domProps: {
-                                            value: true,
-                                            checked: _vm._q(
-                                              _vm.attendance_form[index],
+                  _c("div", { staticClass: "card-body p-0 table-responsive" }, [
+                    _c("table", { staticClass: "table table-vcenter" }, [
+                      _c("thead", [
+                        _c("tr", [
+                          _c("th", [_vm._v(_vm._s(_vm.$t("image")))]),
+                          _vm._v(" "),
+                          _c("th", [_vm._v(_vm._s(_vm.$t("name")))]),
+                          _vm._v(" "),
+                          _c("th", [_vm._v(_vm._s(_vm.$t("roll_number")))]),
+                          _vm._v(" "),
+                          _c("th", [_vm._v(_vm._s(_vm.$t("status")))]),
+                          _vm._v(" "),
+                          _c("th", [
+                            _vm._v(_vm._s(_vm.$t("previous_7_days_status")))
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "tbody",
+                        _vm._l(_vm.students, function(student, index) {
+                          return _c("tr", { key: student.id }, [
+                            _c("td", [
+                              _c("img", {
+                                staticClass:
+                                  "img-fluid mx-h-50 mx-w-50 rounded",
+                                attrs: {
+                                  src: student.user.image_url,
+                                  alt: "",
+                                  height: "50px",
+                                  width: "50px"
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(
+                                "\n                                        " +
+                                  _vm._s(student.user.name) +
+                                  "\n                                    "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(
+                                "\n                                        " +
+                                  _vm._s(student.roll_no) +
+                                  "\n                                    "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _c("div", { staticClass: "mb-3" }, [
+                                _c("div", [
+                                  _c(
+                                    "label",
+                                    {
+                                      staticClass:
+                                        "form-check form-check-inline"
+                                    },
+                                    [
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.attendance_form[index],
+                                            expression: "attendance_form[index]"
+                                          }
+                                        ],
+                                        staticClass: "form-check-input",
+                                        attrs: { type: "radio" },
+                                        domProps: {
+                                          value: true,
+                                          checked: _vm._q(
+                                            _vm.attendance_form[index],
+                                            true
+                                          )
+                                        },
+                                        on: {
+                                          change: function($event) {
+                                            return _vm.$set(
+                                              _vm.attendance_form,
+                                              index,
                                               true
                                             )
-                                          },
-                                          on: {
-                                            change: function($event) {
-                                              return _vm.$set(
-                                                _vm.attendance_form,
-                                                index,
-                                                true
-                                              )
-                                            }
                                           }
-                                        }),
-                                        _vm._v(" "),
-                                        _c(
-                                          "span",
-                                          { staticClass: "form-check-label" },
-                                          [_vm._v("Present")]
-                                        )
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "label",
-                                      {
-                                        staticClass:
-                                          "form-check form-check-inline"
-                                      },
-                                      [
-                                        _c("input", {
-                                          directives: [
-                                            {
-                                              name: "model",
-                                              rawName: "v-model",
-                                              value: _vm.attendance_form[index],
-                                              expression:
-                                                "attendance_form[index]"
-                                            }
-                                          ],
-                                          staticClass: "form-check-input",
-                                          attrs: { type: "radio" },
-                                          domProps: {
-                                            value: false,
-                                            checked: _vm._q(
-                                              _vm.attendance_form[index],
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "span",
+                                        { staticClass: "form-check-label" },
+                                        [_vm._v(_vm._s(_vm.$t("present")))]
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "label",
+                                    {
+                                      staticClass:
+                                        "form-check form-check-inline"
+                                    },
+                                    [
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.attendance_form[index],
+                                            expression: "attendance_form[index]"
+                                          }
+                                        ],
+                                        staticClass: "form-check-input",
+                                        attrs: { type: "radio" },
+                                        domProps: {
+                                          value: false,
+                                          checked: _vm._q(
+                                            _vm.attendance_form[index],
+                                            false
+                                          )
+                                        },
+                                        on: {
+                                          change: function($event) {
+                                            return _vm.$set(
+                                              _vm.attendance_form,
+                                              index,
                                               false
                                             )
-                                          },
-                                          on: {
-                                            change: function($event) {
-                                              return _vm.$set(
-                                                _vm.attendance_form,
-                                                index,
-                                                false
-                                              )
-                                            }
                                           }
-                                        }),
-                                        _vm._v(" "),
-                                        _c(
-                                          "span",
-                                          { staticClass: "form-check-label" },
-                                          [_vm._v("Absent")]
-                                        )
-                                      ]
-                                    )
-                                  ])
-                                ])
-                              ]),
-                              _vm._v(" "),
-                              _c("td", [
-                                _c("input", {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.notes_form[index],
-                                      expression: "notes_form[index]"
-                                    }
-                                  ],
-                                  staticClass: "form-control",
-                                  attrs: { type: "text" },
-                                  domProps: { value: _vm.notes_form[index] },
-                                  on: {
-                                    input: function($event) {
-                                      if ($event.target.composing) {
-                                        return
-                                      }
-                                      _vm.$set(
-                                        _vm.notes_form,
-                                        index,
-                                        $event.target.value
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "span",
+                                        { staticClass: "form-check-label" },
+                                        [_vm._v(_vm._s(_vm.$t("absent")))]
                                       )
-                                    }
-                                  }
-                                })
+                                    ]
+                                  )
+                                ])
                               ])
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _c(
+                                "div",
+                                { staticClass: "d-flex items-center" },
+                                _vm._l(_vm.last_days_attendaces[0], function(
+                                  attendance,
+                                  index
+                                ) {
+                                  return _c(
+                                    "div",
+                                    {
+                                      key: index,
+                                      staticClass:
+                                        "\n                        d-flex\n                        flex-column\n                        align-items-center\n                        justify-content-center\n                        mx-2\n                      "
+                                    },
+                                    [
+                                      _c("span", [
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm.formateDate(
+                                              attendance.date,
+                                              "DD"
+                                            )
+                                          )
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c(
+                                        "span",
+                                        { staticClass: "d-inline-block" },
+                                        [
+                                          attendance.status
+                                            ? _c("icon-check", {
+                                                attrs: { stroke: "#2A8737" }
+                                              })
+                                            : _c("icon-cross", {
+                                                attrs: { stroke: "#F23D4E" }
+                                              })
+                                        ],
+                                        1
+                                      )
+                                    ]
+                                  )
+                                }),
+                                0
+                              )
                             ])
-                          }),
-                          0
+                          ])
+                        }),
+                        0
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "card-footer" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary text-center",
+                        attrs: { type: "submit" }
+                      },
+                      [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(_vm.$t("save_all")) +
+                            "\n                        "
                         )
                       ]
                     )
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(2)
+                  ])
                 ])
               ]
             )
@@ -1146,53 +1201,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("div", { staticClass: "card-title" }, [
-        _vm._v(
-          "\n                            Attendance\n                       "
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", [_vm._v("Image")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Name")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Roll Number")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Attendance")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Notes")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-footer" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-primary text-center",
-          attrs: { type: "submit" }
-        },
-        [_vm._v("Save All")]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

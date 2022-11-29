@@ -27,16 +27,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      notFound: '/images/not-found.svg'
+      notFound: "/images/not-found.svg"
     };
   },
   props: {
     word: {
       type: String,
-      "default": 'user',
+      "default": "user",
       required: false
     },
     route: {
@@ -68,7 +75,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _components_NotFound_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../components/NotFound.vue */ "./resources/js/components/NotFound.vue");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
@@ -165,6 +172,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -174,16 +184,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       searchForm: new Form({
-        class_id: ''
+        class_id: ""
       }),
       sectionInput: false,
       searchBtn: false,
-      url: '/images/default.png',
+      url: "/images/default.png",
       classReport: {}
     };
   },
   watch: {
-    'searchForm.class_id': function searchFormClass_id(value) {
+    "searchForm.class_id": function searchFormClass_id(value) {
       this.sectionInput = true;
     }
   },
@@ -214,7 +224,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)({
-    classs: 'classs/classes'
+    classs: "classs/classes"
   })), {}, {
     sections: function sections() {
       if (this.classReport.sections) {
@@ -232,8 +242,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   }),
   created: function created() {
-    this.$store.dispatch('classs/fetchClasses');
-    this.searchBtn = true;
+    var _this2 = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return _this2.hasPermisssion("class-report");
+
+            case 2:
+              _this2.$store.dispatch("classs/fetchClasses");
+
+              _this2.searchBtn = true;
+
+            case 4:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }))();
   }
 });
 
@@ -412,9 +442,13 @@ var render = function() {
     _vm._v(" "),
     _c("p", { staticClass: "empty-subtitle text-muted" }, [
       _vm._v(
-        "\n        There is no " +
+        "\n        " +
+          _vm._s(_vm.$t("there_is_no")) +
+          " " +
           _vm._s(_vm.word) +
-          " found in this page.\n    "
+          " " +
+          _vm._s(_vm.$t("found_in_this_page")) +
+          ".\n    "
       )
     ]),
     _vm._v(" "),
@@ -454,16 +488,20 @@ var render = function() {
                         fill: "none"
                       }
                     }),
+                    _vm._v(" "),
                     _c("line", {
                       attrs: { x1: "12", y1: "5", x2: "12", y2: "19" }
                     }),
+                    _vm._v(" "),
                     _c("line", {
                       attrs: { x1: "5", y1: "12", x2: "19", y2: "12" }
                     })
                   ]
                 ),
                 _vm._v(
-                  "\n            Add your first " +
+                  "\n            " +
+                    _vm._s(_vm.$t("add_your_first")) +
+                    " " +
                     _vm._s(_vm.word) +
                     "\n        "
                 )
@@ -506,7 +544,9 @@ var render = function() {
             _vm._v(_vm._s(_vm.$route.meta.title))
           ]),
           _vm._v(" "),
-          _c("h2", { staticClass: "page-pretitle" }, [_vm._v("Class")])
+          _c("h2", { staticClass: "page-pretitle" }, [
+            _vm._v(_vm._s(_vm.$t("class")))
+          ])
         ])
       ])
     ]),
@@ -555,7 +595,7 @@ var render = function() {
                 },
                 [
                   _c("option", { attrs: { value: "" } }, [
-                    _vm._v("Select Session")
+                    _vm._v(_vm._s(_vm.$t("select_session")))
                   ]),
                   _vm._v(" "),
                   _vm._l(_vm.classs, function(singleClass) {
@@ -567,7 +607,8 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          _vm._s(singleClass.name) +
+                          "\n                            " +
+                            _vm._s(singleClass.name) +
                             "\n                        "
                         )
                       ]
@@ -599,7 +640,9 @@ var render = function() {
               },
               [
                 _vm._v(
-                  "\n                        Get Class Report\n                    "
+                  "\n                        " +
+                    _vm._s(_vm.$t("get_class_report")) +
+                    "\n                    "
                 )
               ]
             )
@@ -610,7 +653,11 @@ var render = function() {
       _vm.sections.length
         ? _c("div", { staticClass: "col-12 mt-3" }, [
             _c("div", { staticClass: "card" }, [
-              _vm._m(0),
+              _c("div", { staticClass: "card-body" }, [
+                _c("h2", { staticClass: "card-title" }, [
+                  _vm._v(_vm._s(_vm.$t("class_sections")))
+                ])
+              ]),
               _vm._v(" "),
               _c("div", { staticClass: "card-body" }, [
                 _c(
@@ -643,7 +690,9 @@ var render = function() {
                                       "div",
                                       { staticClass: "card-title mb-1" },
                                       [
-                                        _vm._v("Capacity: "),
+                                        _vm._v(
+                                          _vm._s(_vm.$t("capacity")) + ": "
+                                        ),
                                         _c("b", [
                                           _vm._v(_vm._s(section.capacity))
                                         ])
@@ -672,7 +721,11 @@ var render = function() {
       _vm.subjects.length
         ? _c("div", { staticClass: "col-12 mt-3" }, [
             _c("div", { staticClass: "card" }, [
-              _vm._m(1),
+              _c("div", { staticClass: "card-body" }, [
+                _c("h2", { staticClass: "card-title" }, [
+                  _vm._v(_vm._s(_vm.$t("class_subjects")))
+                ])
+              ]),
               _vm._v(" "),
               _c("div", { staticClass: "card-body" }, [
                 _c(
@@ -705,7 +758,7 @@ var render = function() {
                                       "div",
                                       { staticClass: "card-title mb-1" },
                                       [
-                                        _vm._v("Name : "),
+                                        _vm._v(_vm._s(_vm.$t("name")) + " : "),
                                         _c("b", [_vm._v(_vm._s(subject.name))])
                                       ]
                                     )
@@ -731,24 +784,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-body" }, [
-      _c("h2", { staticClass: "card-title" }, [_vm._v("Class Sections")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-body" }, [
-      _c("h2", { staticClass: "card-title" }, [_vm._v("Class Subjects")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

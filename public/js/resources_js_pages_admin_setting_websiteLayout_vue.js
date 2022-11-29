@@ -217,7 +217,19 @@ var render = function() {
               ]
             ),
             _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [_c("router-view")], 1)
+            _c(
+              "div",
+              { staticClass: "card-body" },
+              [
+                _c(
+                  "vue-page-transition",
+                  { attrs: { name: "fade" } },
+                  [_c("router-view")],
+                  1
+                )
+              ],
+              1
+            )
           ])
         ])
       ]

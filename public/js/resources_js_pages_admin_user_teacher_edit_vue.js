@@ -13,7 +13,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var object_to_formdata__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! object-to-formdata */ "./node_modules/object-to-formdata/dist/index.module.js");
+/* harmony import */ var object_to_formdata__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! object-to-formdata */ "./node_modules/object-to-formdata/src/index.js");
 /* harmony import */ var object_to_formdata__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(object_to_formdata__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 
@@ -22,72 +22,12 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -216,25 +156,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       teacherForm: new Form({
         name: "",
         email: "",
-        username: "",
+        password: "",
         department_id: "",
-        designation: "",
         joining_date: "",
         phone: "",
-        gender: "",
-        religion: "",
-        bio: "",
-        present_address: "",
-        permanent_address: "",
-        joining_letter: "",
+        gender: "male",
         resume: "",
-        other_document: ""
+        joining_letter: ""
       }),
       teacher: null
     };
   },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)({
-    departments: 'department/departments'
+    departments: "department/departments"
   })),
   methods: {
     handleJoiningLetterUpload: function handleJoiningLetterUpload() {
@@ -242,9 +176,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     handleResumeUpload: function handleResumeUpload() {
       this.teacherForm.resume = this.$refs.resume.files[0];
-    },
-    handleOtherDocumentUpload: function handleOtherDocumentUpload() {
-      this.teacherForm.other_document = this.$refs.other_document.files[0];
     },
     updateTeacher: function updateTeacher() {
       var _this = this;
@@ -260,17 +191,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 return _this.teacherForm.post("/api/teachers/".concat(_this.teacher.id), {
                   transformRequest: [function (data, headers) {
                     return (0,object_to_formdata__WEBPACK_IMPORTED_MODULE_1__.serialize)(data);
-                  }],
-                  onUploadProgress: function onUploadProgress(e) {// Do whatever you want with the progress event
-                    // console.log(e)
-                  }
+                  }]
                 });
 
               case 3:
                 response = _context.sent;
-                _this.$refs.joining_letter.value = '';
-                _this.$refs.resume.value = '';
-                _this.$refs.image.other_document = '';
+
+                _this.redirect("user-teacher");
+
+                _this.$refs.joining_letter.value = "";
+                _this.$refs.resume.value = "";
 
                 _this.toastSuccess(response.data.message);
 
@@ -316,21 +246,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                     _this2.teacherForm[k] = _this2.teacher.user[k];
                   }
                 });
-                _context2.next = 13;
+                _context2.next = 12;
                 break;
 
               case 9:
                 _context2.prev = 9;
                 _context2.t0 = _context2["catch"](0);
-                console.log(_context2.t0);
 
                 if (_context2.t0.response.status === 404) {
-                  _this2.$router.push({
-                    name: "404"
-                  });
+                  _this2.redirect("404");
+                } else {
+                  _this2.toastError("Something went wrong while saving data");
                 }
 
-              case 13:
+              case 12:
               case "end":
                 return _context2.stop();
             }
@@ -340,67 +269,100 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   mounted: function mounted() {
-    if (!this.$route.params.id) {
-      this.$router.push({
-        name: "404"
-      });
-    }
+    var _this3 = this;
 
-    this.getTeacher();
-    this.$store.dispatch('department/fetchDepartments');
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              if (!_this3.$route.params.id) {
+                _this3.redirect("404");
+              }
+
+              _context3.next = 3;
+              return _this3.hasPermisssion("teacher-list");
+
+            case 3:
+              _this3.getTeacher();
+
+              _this3.$store.dispatch("department/fetchDepartments");
+
+            case 5:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
+    }))();
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/object-to-formdata/dist/index.module.js":
-/*!**************************************************************!*\
-  !*** ./node_modules/object-to-formdata/dist/index.module.js ***!
-  \**************************************************************/
+/***/ "./node_modules/object-to-formdata/src/index.js":
+/*!******************************************************!*\
+  !*** ./node_modules/object-to-formdata/src/index.js ***!
+  \******************************************************/
 /***/ ((module) => {
 
-const isUndefined = (value) => value === undefined;
+function isUndefined(value) {
+  return value === undefined;
+}
 
-const isNull = (value) => value === null;
+function isNull(value) {
+  return value === null;
+}
 
-const isBoolean = (value) => typeof value === 'boolean';
+function isBoolean(value) {
+  return typeof value === 'boolean';
+}
 
-const isObject = (value) => value === Object(value);
+function isObject(value) {
+  return value === Object(value);
+}
 
-const isArray = (value) => Array.isArray(value);
+function isArray(value) {
+  return Array.isArray(value);
+}
 
-const isDate = (value) => value instanceof Date;
+function isDate(value) {
+  return value instanceof Date;
+}
 
-const isBlob = (value) =>
-  value &&
-  typeof value.size === 'number' &&
-  typeof value.type === 'string' &&
-  typeof value.slice === 'function';
+function isBlob(value, isReactNative) {
+  return isReactNative
+    ? isObject(value) && !isUndefined(value.uri)
+    : isObject(value) &&
+        typeof value.size === 'number' &&
+        typeof value.type === 'string' &&
+        typeof value.slice === 'function';
+}
 
-const isFile = (value) =>
-  isBlob(value) &&
-  typeof value.name === 'string' &&
-  (typeof value.lastModifiedDate === 'object' ||
-    typeof value.lastModified === 'number');
+function isFile(value, isReactNative) {
+  return (
+    isBlob(value, isReactNative) &&
+    typeof value.name === 'string' &&
+    (isObject(value.lastModifiedDate) || typeof value.lastModified === 'number')
+  );
+}
 
-const serialize = (obj, cfg, fd, pre) => {
+function initCfg(value) {
+  return isUndefined(value) ? false : value;
+}
+
+function serialize(obj, cfg, fd, pre) {
   cfg = cfg || {};
-
-  cfg.indices = isUndefined(cfg.indices) ? false : cfg.indices;
-
-  cfg.nullsAsUndefineds = isUndefined(cfg.nullsAsUndefineds)
-    ? false
-    : cfg.nullsAsUndefineds;
-
-  cfg.booleansAsIntegers = isUndefined(cfg.booleansAsIntegers)
-    ? false
-    : cfg.booleansAsIntegers;
-
-  cfg.allowEmptyArrays = isUndefined(cfg.allowEmptyArrays)
-    ? false
-    : cfg.allowEmptyArrays;
-
   fd = fd || new FormData();
+
+  cfg.indices = initCfg(cfg.indices);
+  cfg.nullsAsUndefineds = initCfg(cfg.nullsAsUndefineds);
+  cfg.booleansAsIntegers = initCfg(cfg.booleansAsIntegers);
+  cfg.allowEmptyArrays = initCfg(cfg.allowEmptyArrays);
+  cfg.noFilesWithArrayNotation = initCfg(cfg.noFilesWithArrayNotation);
+  cfg.dotsForObjectNotation = initCfg(cfg.dotsForObjectNotation);
+
+  const isReactNative = typeof fd.getParts === 'function';
 
   if (isUndefined(obj)) {
     return fd;
@@ -417,7 +379,11 @@ const serialize = (obj, cfg, fd, pre) => {
   } else if (isArray(obj)) {
     if (obj.length) {
       obj.forEach((value, index) => {
-        const key = pre + '[' + (cfg.indices ? index : '') + ']';
+        let key = pre + '[' + (cfg.indices ? index : '') + ']';
+
+        if (cfg.noFilesWithArrayNotation && isFile(value, isReactNative)) {
+          key = pre;
+        }
 
         serialize(value, cfg, fd, key);
       });
@@ -426,7 +392,7 @@ const serialize = (obj, cfg, fd, pre) => {
     }
   } else if (isDate(obj)) {
     fd.append(pre, obj.toISOString());
-  } else if (isObject(obj) && !isFile(obj) && !isBlob(obj)) {
+  } else if (isObject(obj) && !isBlob(obj, isReactNative)) {
     Object.keys(obj).forEach((prop) => {
       const value = obj[prop];
 
@@ -436,7 +402,11 @@ const serialize = (obj, cfg, fd, pre) => {
         }
       }
 
-      const key = pre ? pre + '[' + prop + ']' : prop;
+      const key = pre
+        ? cfg.dotsForObjectNotation
+          ? pre + '.' + prop
+          : pre + '[' + prop + ']'
+        : prop;
 
       serialize(value, cfg, fd, key);
     });
@@ -445,7 +415,7 @@ const serialize = (obj, cfg, fd, pre) => {
   }
 
   return fd;
-};
+}
 
 module.exports = {
   serialize,
@@ -545,36 +515,33 @@ var render = function() {
   return _c("div", [
     _c("div", { staticClass: "page-header d-print-none" }, [
       _c("div", { staticClass: "row align-items-center" }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-auto ms-auto d-print-none" }, [
-          _c(
-            "div",
-            { staticClass: "d-flex" },
-            [
-              _c(
-                "router-link",
-                {
-                  staticClass: "btn btn-danger btn-outline",
-                  attrs: { to: { name: "user-teacher" } }
-                },
-                [
-                  _c("icon-left-arrow"),
-                  _vm._v(
-                    "\n            " + _vm._s(_vm.$t("Back")) + "\n          "
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          )
+        _c("div", { staticClass: "col" }, [
+          _c("h2", { staticClass: "page-title" }, [
+            _vm._v(_vm._s(_vm.$route.meta.title))
+          ]),
+          _vm._v(" "),
+          _c("h2", { staticClass: "page-pretitle" }, [
+            _vm._v(_vm._s(_vm.$t("teacher")))
+          ])
         ])
       ])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "card" }, [
       _c("div", { staticClass: "card" }, [
+        _c(
+          "div",
+          { staticClass: "card-header d-flex justify-content-between" },
+          [
+            _c("h3", { staticClass: "card-title" }, [
+              _vm._v(_vm._s(_vm.$t("edit_teacher")))
+            ]),
+            _vm._v(" "),
+            _c("Back", { attrs: { routeName: "user-teacher" } })
+          ],
+          1
+        ),
+        _vm._v(" "),
         _c("div", { staticClass: "card-body border-bottom py-3" }, [
           _c(
             "form",
@@ -589,21 +556,23 @@ var render = function() {
             },
             [
               _c("div", { staticClass: "row justify-content-center" }, [
-                _c("div", { staticClass: "col-6" }, [
-                  _c("div", { staticClass: "form-group mb-3 row" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "form-label col-3 col-form-label",
-                        attrs: { for: "name" }
-                      },
-                      [_vm._v(_vm._s(_vm.$t("name")) + "\n                ")]
-                    ),
-                    _vm._v(" "),
+                _c("div", { staticClass: "col-md-6" }, [
+                  _c("div", { staticClass: "form-group row" }, [
                     _c(
                       "div",
-                      { staticClass: "col" },
+                      { staticClass: "col-md-6 mb-3" },
                       [
+                        _c(
+                          "label",
+                          { staticClass: "form-label", attrs: { for: "name" } },
+                          [
+                            _vm._v(
+                              _vm._s(_vm.$t("name")) +
+                                "\n                                    "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
                         _c("base-input", {
                           attrs: { form: _vm.teacherForm, field: "name" },
                           model: {
@@ -616,23 +585,21 @@ var render = function() {
                         })
                       ],
                       1
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group mb-3 row" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "form-label col-3 col-form-label",
-                        attrs: { for: "email" }
-                      },
-                      [_vm._v(_vm._s(_vm.$t("Email")))]
                     ),
                     _vm._v(" "),
                     _c(
                       "div",
-                      { staticClass: "col" },
+                      { staticClass: "col-md-6 mb-3" },
                       [
+                        _c(
+                          "label",
+                          {
+                            staticClass: "form-label",
+                            attrs: { for: "email" }
+                          },
+                          [_vm._v(_vm._s(_vm.$t("email")))]
+                        ),
+                        _vm._v(" "),
                         _c("base-input", {
                           attrs: { form: _vm.teacherForm, field: "email" },
                           model: {
@@ -648,53 +615,56 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "form-group mb-3 row" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "form-label col-3 col-form-label",
-                        attrs: { for: "username" }
-                      },
-                      [
-                        _vm._v(
-                          _vm._s(_vm.$t("Username")) + "\n                "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
+                  _c("div", { staticClass: "form-group row" }, [
                     _c(
                       "div",
-                      { staticClass: "col" },
+                      { staticClass: "col-md-6 mb-3" },
                       [
+                        _c(
+                          "label",
+                          {
+                            staticClass: "form-label",
+                            attrs: { for: "email" }
+                          },
+                          [_vm._v(_vm._s(_vm.$t("change_password")))]
+                        ),
+                        _vm._v(" "),
                         _c("base-input", {
-                          attrs: { form: _vm.teacherForm, field: "username" },
+                          attrs: {
+                            form: _vm.teacherForm,
+                            field: "password",
+                            inputType: "password"
+                          },
                           model: {
-                            value: _vm.teacherForm.username,
+                            value: _vm.teacherForm.password,
                             callback: function($$v) {
-                              _vm.$set(_vm.teacherForm, "username", $$v)
+                              _vm.$set(_vm.teacherForm, "password", $$v)
                             },
-                            expression: "teacherForm.username"
+                            expression: "teacherForm.password"
                           }
                         })
                       ],
                       1
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group mb-3 row" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "form-label col-3 col-form-label",
-                        attrs: { for: "phone" }
-                      },
-                      [_vm._v(_vm._s(_vm.$t("Phone")) + "\n                ")]
                     ),
                     _vm._v(" "),
                     _c(
                       "div",
-                      { staticClass: "col" },
+                      { staticClass: "col-md-6 mb-3" },
                       [
+                        _c(
+                          "label",
+                          {
+                            staticClass: "form-label",
+                            attrs: { for: "phone" }
+                          },
+                          [
+                            _vm._v(
+                              _vm._s(_vm.$t("phone")) +
+                                "\n                                    "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
                         _c("base-input", {
                           attrs: { form: _vm.teacherForm, field: "phone" },
                           model: {
@@ -710,116 +680,26 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "form-group mb-3 row" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "form-label col-3 col-form-label",
-                        attrs: { for: "gender" }
-                      },
-                      [
-                        _vm._v(
-                          "\n                  " +
-                            _vm._s(_vm.$t("Gender")) +
-                            "\n                "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
+                  _c("div", { staticClass: "form-group row" }, [
                     _c(
                       "div",
-                      { staticClass: "col" },
+                      { staticClass: "col-md-6 mb-3" },
                       [
                         _c(
-                          "base-select",
+                          "label",
                           {
-                            attrs: { form: _vm.teacherForm, field: "gender" },
-                            model: {
-                              value: _vm.teacherForm.gender,
-                              callback: function($$v) {
-                                _vm.$set(_vm.teacherForm, "gender", $$v)
-                              },
-                              expression: "teacherForm.gender"
-                            }
+                            staticClass: "form-label",
+                            attrs: { for: "gender" }
                           },
                           [
-                            _c("option", { attrs: { value: "male" } }, [
-                              _vm._v("Male")
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "option",
-                              {
-                                attrs: { value: "female" },
-                                domProps: {
-                                  selected: _vm.teacherForm.gender == "female"
-                                }
-                              },
-                              [_vm._v("Female")]
+                            _vm._v(
+                              "\n                                        " +
+                                _vm._s(_vm.$t("department")) +
+                                "\n                                    "
                             )
                           ]
-                        )
-                      ],
-                      1
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group mb-3 row" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "form-label col-3 col-form-label",
-                        attrs: { for: "designation" }
-                      },
-                      [
-                        _vm._v(
-                          _vm._s(_vm.$t("Designation")) + "\n                "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "col" },
-                      [
-                        _c("base-input", {
-                          attrs: {
-                            form: _vm.teacherForm,
-                            field: "designation"
-                          },
-                          model: {
-                            value: _vm.teacherForm.designation,
-                            callback: function($$v) {
-                              _vm.$set(_vm.teacherForm, "designation", $$v)
-                            },
-                            expression: "teacherForm.designation"
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group mb-3 row" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "form-label col-3 col-form-label",
-                        attrs: { for: "gender" }
-                      },
-                      [
-                        _vm._v(
-                          "\n                  " +
-                            _vm._s(_vm.$t("Department")) +
-                            "\n                "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "col" },
-                      [
+                        ),
+                        _vm._v(" "),
                         _c(
                           "base-select",
                           {
@@ -838,10 +718,14 @@ var render = function() {
                           [
                             _c(
                               "option",
-                              {
-                                attrs: { value: "", disabled: "", selected: "" }
-                              },
-                              [_vm._v("Select Department")]
+                              { staticClass: "d-none", attrs: { value: "" } },
+                              [
+                                _vm._v(
+                                  "\n                                            " +
+                                    _vm._s(_vm.$t("select_department")) +
+                                    "\n                                        "
+                                )
+                              ]
                             ),
                             _vm._v(" "),
                             _vm._l(_vm.departments, function(department) {
@@ -856,7 +740,13 @@ var render = function() {
                                       _vm.teacherForm.department_id
                                   }
                                 },
-                                [_vm._v(_vm._s(department.name))]
+                                [
+                                  _vm._v(
+                                    "\n                                            " +
+                                      _vm._s(department.name) +
+                                      "\n                                        "
+                                  )
+                                ]
                               )
                             })
                           ],
@@ -864,196 +754,45 @@ var render = function() {
                         )
                       ],
                       1
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group mb-3 row" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "form-label col-3 col-form-label",
-                        attrs: { for: "joining_date" }
-                      },
-                      [
-                        _vm._v(
-                          _vm._s(_vm.$t("Joining Date")) + "\n                "
-                        )
-                      ]
                     ),
                     _vm._v(" "),
                     _c(
                       "div",
-                      { staticClass: "col" },
-                      [
-                        _c("base-input", {
-                          attrs: {
-                            form: _vm.teacherForm,
-                            field: "joining_date",
-                            inputType: "date"
-                          },
-                          model: {
-                            value: _vm.teacherForm.joining_date,
-                            callback: function($$v) {
-                              _vm.$set(_vm.teacherForm, "joining_date", $$v)
-                            },
-                            expression: "teacherForm.joining_date"
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group mb-3 row" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "form-label col-3 col-form-label",
-                        attrs: { for: "religion" }
-                      },
-                      [
-                        _vm._v(
-                          "\n                  " +
-                            _vm._s(_vm.$t("Religion")) +
-                            "\n                "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "col" },
+                      { staticClass: "col-md-6 mb-3" },
                       [
                         _c(
-                          "base-select",
+                          "label",
                           {
-                            attrs: { form: _vm.teacherForm, field: "religion" },
-                            model: {
-                              value: _vm.teacherForm.religion,
-                              callback: function($$v) {
-                                _vm.$set(_vm.teacherForm, "religion", $$v)
-                              },
-                              expression: "teacherForm.religion"
-                            }
+                            staticClass: "form-label",
+                            attrs: { for: "resume" }
                           },
                           [
-                            _c(
-                              "option",
-                              {
-                                attrs: { value: "muslim" },
-                                domProps: {
-                                  selected: _vm.teacherForm.gender == "muslim"
-                                }
-                              },
-                              [_vm._v("Muslim")]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "option",
-                              {
-                                attrs: { value: "hindu" },
-                                domProps: {
-                                  selected: _vm.teacherForm.gender == "hindu"
-                                }
-                              },
-                              [_vm._v("Hindu")]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "option",
-                              {
-                                attrs: { value: "christian" },
-                                domProps: {
-                                  selected:
-                                    _vm.teacherForm.gender == "christian"
-                                }
-                              },
-                              [_vm._v("Christian")]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "option",
-                              {
-                                attrs: { value: "buddha" },
-                                domProps: {
-                                  selected: _vm.teacherForm.gender == "buddha"
-                                }
-                              },
-                              [_vm._v("Buddha")]
+                            _vm._v(
+                              "\n                                        " +
+                                _vm._s(_vm.$t("joining_date")) +
+                                "\n                                    "
                             )
                           ]
-                        )
-                      ],
-                      1
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group mb-3 row" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "form-label col-3 col-form-label",
-                        attrs: { for: "bio" }
-                      },
-                      [
-                        _vm._v(
-                          "\n                  " +
-                            _vm._s(_vm.$t("Bio")) +
-                            "\n                "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "col" },
-                      [
-                        _c("base-textarea", {
-                          attrs: { form: _vm.teacherForm, field: "bio" },
-                          model: {
-                            value: _vm.teacherForm.bio,
-                            callback: function($$v) {
-                              _vm.$set(_vm.teacherForm, "bio", $$v)
-                            },
-                            expression: "teacherForm.bio"
+                        ),
+                        _vm._v(" "),
+                        _c("date-picker", {
+                          attrs: {
+                            format: "dd MMMM, yyyy",
+                            "input-class": "form-control",
+                            placeholder: _vm.$t("select_date"),
+                            value: _vm.teacherForm.joining_date
+                          },
+                          on: {
+                            input: function($event) {
+                              return _vm.setDate($event)
+                            }
                           }
-                        })
-                      ],
-                      1
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group mb-3 row" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "form-label col-3 col-form-label",
-                        attrs: { for: "present_address" }
-                      },
-                      [
-                        _vm._v(
-                          "\n                  " +
-                            _vm._s(_vm.$t("Present Address")) +
-                            "\n                "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "col" },
-                      [
-                        _c("base-textarea", {
+                        }),
+                        _vm._v(" "),
+                        _c("has-error", {
                           attrs: {
                             form: _vm.teacherForm,
-                            field: "present_address"
-                          },
-                          model: {
-                            value: _vm.teacherForm.present_address,
-                            callback: function($$v) {
-                              _vm.$set(_vm.teacherForm, "present_address", $$v)
-                            },
-                            expression: "teacherForm.present_address"
+                            field: "joining_date"
                           }
                         })
                       ],
@@ -1061,68 +800,26 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "form-group mb-3 row" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "form-label col-3 col-form-label",
-                        attrs: { for: "permanent_address" }
-                      },
-                      [
-                        _vm._v(
-                          "\n                  " +
-                            _vm._s(_vm.$t("Permanent Address")) +
-                            "\n                "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
+                  _c("div", { staticClass: "form-group row" }, [
                     _c(
                       "div",
-                      { staticClass: "col" },
+                      { staticClass: "col-md-6 mb-3" },
                       [
-                        _c("base-textarea", {
-                          attrs: {
-                            form: _vm.teacherForm,
-                            field: "permanent_address"
+                        _c(
+                          "label",
+                          {
+                            staticClass: "form-label",
+                            attrs: { for: "joining_letter" }
                           },
-                          model: {
-                            value: _vm.teacherForm.permanent_address,
-                            callback: function($$v) {
-                              _vm.$set(
-                                _vm.teacherForm,
-                                "permanent_address",
-                                $$v
-                              )
-                            },
-                            expression: "teacherForm.permanent_address"
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group mb-3 row" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "form-label col-3 col-form-label",
-                        attrs: { for: "joining_letter" }
-                      },
-                      [
-                        _vm._v(
-                          "\n                  " +
-                            _vm._s(_vm.$t("Joining Letter")) +
-                            "\n                "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "col" },
-                      [
+                          [
+                            _vm._v(
+                              "\n                                        " +
+                                _vm._s(_vm.$t("joining_letter")) +
+                                "\n                                    "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
                         _c("input", {
                           ref: "joining_letter",
                           staticClass: "form-control",
@@ -1143,29 +840,27 @@ var render = function() {
                         })
                       ],
                       1
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group mb-3 row" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "form-label col-3 col-form-label",
-                        attrs: { for: "resume" }
-                      },
-                      [
-                        _vm._v(
-                          "\n                  " +
-                            _vm._s(_vm.$t("Resume")) +
-                            "\n                "
-                        )
-                      ]
                     ),
                     _vm._v(" "),
                     _c(
                       "div",
-                      { staticClass: "col" },
+                      { staticClass: "col-md-6 mb-3" },
                       [
+                        _c(
+                          "label",
+                          {
+                            staticClass: "form-label",
+                            attrs: { for: "resume" }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                        " +
+                                _vm._s(_vm.$t("resume")) +
+                                "\n                                    "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
                         _c("input", {
                           ref: "resume",
                           staticClass: "form-control",
@@ -1184,63 +879,114 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "form-group mb-3 row" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "form-label col-3 col-form-label",
-                        attrs: { for: "other_document" }
-                      },
-                      [
-                        _vm._v(
-                          "\n                  " +
-                            _vm._s(_vm.$t("Other Document")) +
-                            "\n                "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "col" },
-                      [
-                        _c("input", {
-                          ref: "other_document",
-                          staticClass: "form-control",
-                          class: {
-                            "is-invalid": _vm.teacherForm.errors.has(
-                              "other_document"
-                            )
-                          },
-                          attrs: { type: "file" },
-                          on: { change: _vm.handleOtherDocumentUpload }
-                        }),
-                        _vm._v(" "),
-                        _c("has-error", {
-                          attrs: {
-                            form: _vm.teacherForm,
-                            field: "other_document"
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group mb-3 row" }, [
-                    _c(
-                      "div",
-                      { staticClass: "col-9 offset-3" },
-                      [
+                  _c(
+                    "div",
+                    { staticClass: "form-group mb-3 row" },
+                    [
+                      _c("label", { staticClass: "form-label" }, [
+                        _vm._v(_vm._s(_vm.$t("gender")))
+                      ]),
+                      _vm._v(" "),
+                      _c("div", [
                         _c(
-                          "base-button",
-                          { attrs: { loading: _vm.teacherForm.busy } },
-                          [_vm._v("Update")]
+                          "label",
+                          { staticClass: "form-check form-check-inline" },
+                          [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.teacherForm.gender,
+                                  expression: "teacherForm.gender"
+                                }
+                              ],
+                              staticClass: "form-check-input",
+                              attrs: { type: "radio", value: "male" },
+                              domProps: {
+                                checked: _vm._q(_vm.teacherForm.gender, "male")
+                              },
+                              on: {
+                                change: function($event) {
+                                  return _vm.$set(
+                                    _vm.teacherForm,
+                                    "gender",
+                                    "male"
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "form-check-label" }, [
+                              _vm._v(_vm._s(_vm.$t("male")))
+                            ])
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "label",
+                          { staticClass: "form-check form-check-inline" },
+                          [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.teacherForm.gender,
+                                  expression: "teacherForm.gender"
+                                }
+                              ],
+                              staticClass: "form-check-input",
+                              attrs: { type: "radio", value: "female" },
+                              domProps: {
+                                checked: _vm._q(
+                                  _vm.teacherForm.gender,
+                                  "female"
+                                )
+                              },
+                              on: {
+                                change: function($event) {
+                                  return _vm.$set(
+                                    _vm.teacherForm,
+                                    "gender",
+                                    "female"
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "form-check-label" }, [
+                              _vm._v(_vm._s(_vm.$t("female")))
+                            ])
+                          ]
                         )
-                      ],
-                      1
-                    )
-                  ])
+                      ]),
+                      _vm._v(" "),
+                      _c("has-error", {
+                        attrs: { form: _vm.teacherForm, field: "name" }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "form-footer text-center" },
+                    [
+                      _c(
+                        "base-button",
+                        { attrs: { loading: _vm.teacherForm.busy } },
+                        [
+                          _vm._v(
+                            "\n                                    " +
+                              _vm._s(_vm.$t("save")) +
+                              "\n                                "
+                          )
+                        ]
+                      )
+                    ],
+                    1
+                  )
                 ])
               ])
             ]
@@ -1250,18 +996,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col" }, [
-      _c("h2", { staticClass: "page-title" }, [_vm._v("Edit Student")]),
-      _vm._v(" "),
-      _c("h2", { staticClass: "page-pretitle" }, [_vm._v("Admin Setting")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

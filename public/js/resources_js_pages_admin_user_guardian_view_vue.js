@@ -69,103 +69,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -191,15 +94,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 4:
                 response = _context.sent;
                 _this.guardian = response.data.data;
-                _context.next = 11;
+                _context.next = 12;
                 break;
 
               case 8:
                 _context.prev = 8;
                 _context.t0 = _context["catch"](0);
+
+                _this.toastError(_context.t0.response.data.message);
+
                 console.log(_context.t0);
 
-              case 11:
+              case 12:
               case "end":
                 return _context.stop();
             }
@@ -213,9 +119,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   created: function created() {
     if (!this.$route.params.id) {
-      this.$router.push({
-        name: "404"
-      });
+      this.redirect("404");
     }
 
     this.getGuardian();
@@ -384,14 +288,22 @@ var render = function() {
   return _c("div", [
     _c("div", { staticClass: "page-header d-print-none" }, [
       _c("div", { staticClass: "row align-items-center" }, [
-        _vm._m(0),
+        _c("div", { staticClass: "col-8" }, [
+          _c("h2", { staticClass: "page-title" }, [
+            _vm._v(_vm._s(_vm.$route.meta.title))
+          ]),
+          _vm._v(" "),
+          _c("h2", { staticClass: "page-pretitle" }, [
+            _vm._v(_vm._s(_vm.$t("parent")))
+          ])
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-auto ms-auto d-print-none" }, [
           _c("div", { staticClass: "d-flex" }, [
             _c(
               "a",
               {
-                staticClass: "btn btn-danger btn-outline",
+                staticClass: "btn btn-primary",
                 attrs: { href: "#" },
                 on: {
                   click: function($event) {
@@ -401,202 +313,94 @@ var render = function() {
                 }
               },
               [
-                _c("icon-left-arrow"),
                 _vm._v(
-                  "\n              " + _vm._s(_vm.$t("Back")) + "\n          "
+                  "\n                        " +
+                    _vm._s(_vm.$t("back")) +
+                    "\n                    "
                 )
-              ],
-              1
+              ]
             )
           ])
         ])
       ])
     ]),
     _vm._v(" "),
-    _vm.guardian
-      ? _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-body border-bottom py-3" }, [
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-md-6" }, [
-                  _vm._m(1),
+    _c("div", { staticClass: "row justify-content-center" }, [
+      _c("div", { staticClass: "col-md-8 col-xl-6" }, [
+        _vm.guardian
+          ? _c("div", { staticClass: "card" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "card-body p-4 text-center py-3 table-responsive"
+                },
+                [
+                  _c("span", {
+                    staticClass: "avatar avatar-xl mb-3 avatar-rounded",
+                    style: {
+                      backgroundImage:
+                        "url(" + _vm.guardian.user.image_url + ")"
+                    }
+                  }),
                   _vm._v(" "),
-                  _c("div", { staticClass: "form-group mb-3 row" }, [
-                    _c(
-                      "label",
-                      { staticClass: "form-label col-3 col-form-label" },
-                      [_vm._v("Photo")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-8" }, [
-                      _c("img", {
-                        staticClass: "avatar avatar-xl avatar-rounded",
-                        staticStyle: { "border-radius": "10px" },
-                        attrs: {
-                          src: _vm.guardian.user.image_url,
-                          alt: "image"
-                        }
-                      })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group mb-3 row" }, [
-                    _c(
-                      "label",
-                      { staticClass: "form-label col-3 col-form-label" },
-                      [_vm._v("Name")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-8" }, [
-                      _c("input", {
-                        staticClass: "form-control",
-                        attrs: { type: "email", readonly: "", disabled: "" },
-                        domProps: { value: _vm.guardian.user.name }
-                      })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group mb-3 row" }, [
-                    _c(
-                      "label",
-                      { staticClass: "form-label col-3 col-form-label" },
-                      [_vm._v("Email")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-8" }, [
-                      _c("input", {
-                        staticClass: "form-control",
-                        attrs: { type: "email", readonly: "", disabled: "" },
-                        domProps: { value: _vm.guardian.user.email }
-                      })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group mb-3 row" }, [
-                    _c(
-                      "label",
-                      { staticClass: "form-label col-3 col-form-label" },
-                      [_vm._v("Username")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-8" }, [
-                      _c("input", {
-                        staticClass: "form-control",
-                        attrs: { type: "email", readonly: "", disabled: "" },
-                        domProps: { value: _vm.guardian.user.username }
-                      })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group mb-3 row" }, [
-                    _c(
-                      "label",
-                      { staticClass: "form-label col-3 col-form-label" },
-                      [_vm._v("Occupation")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-8" }, [
-                      _c("input", {
-                        staticClass: "form-control",
-                        attrs: { type: "email", readonly: "", disabled: "" },
-                        domProps: { value: _vm.guardian.occupation }
-                      })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group mb-3 row" }, [
-                    _c(
-                      "label",
-                      { staticClass: "form-label col-3 col-form-label" },
-                      [_vm._v("Phone")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-8" }, [
-                      _c("input", {
-                        staticClass: "form-control",
-                        attrs: { type: "email", readonly: "", disabled: "" },
-                        domProps: { value: _vm.guardian.phone }
-                      })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group mb-3 row" }, [
-                    _c(
-                      "label",
-                      { staticClass: "form-label col-3 col-form-label" },
-                      [_vm._v("National Id")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-8" }, [
-                      _c("input", {
-                        staticClass: "form-control",
-                        attrs: { type: "email", readonly: "", disabled: "" },
-                        domProps: { value: _vm.guardian.national_id }
-                      })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group mb-3 row" }, [
-                    _c(
-                      "label",
-                      { staticClass: "form-label col-3 col-form-label" },
-                      [_vm._v("Present Address")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-8" }, [
-                      _c("textarea", {
-                        staticClass: "form-control",
-                        attrs: { type: "email", readonly: "", disabled: "" },
-                        domProps: { value: _vm.guardian.present_address }
-                      })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group mb-3 row" }, [
-                    _c(
-                      "label",
-                      { staticClass: "form-label col-3 col-form-label" },
-                      [_vm._v("Permament Address")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-8" }, [
-                      _c("textarea", {
-                        staticClass: "form-control",
-                        attrs: { type: "email", readonly: "", disabled: "" },
-                        domProps: { value: _vm.guardian.permanent_address }
-                      })
+                  _c("table", { staticClass: "table table-vcenter" }, [
+                    _c("tbody", [
+                      _c("tr", [
+                        _c("th", { attrs: { width: "20%" } }, [
+                          _vm._v(_vm._s(_vm.$t("name")))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { attrs: { width: "80%" } }, [
+                          _vm._v(_vm._s(_vm.guardian.user.name))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("th", { attrs: { width: "20%" } }, [
+                          _vm._v(_vm._s(_vm.$t("email")))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { attrs: { width: "80%" } }, [
+                          _vm._v(_vm._s(_vm.guardian.user.email))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("th", { attrs: { width: "20%" } }, [
+                          _vm._v(_vm._s(_vm.$t("phone")))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { attrs: { width: "80%" } }, [
+                          _vm._v(_vm._s(_vm.guardian.phone))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("th", { attrs: { width: "20%" } }, [
+                          _vm._v(_vm._s(_vm.$t("occupation")))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { attrs: { width: "80%" } }, [
+                          _vm._v(
+                            _vm._s(
+                              _vm.guardian.occupation
+                                ? _vm.guardian.occupation
+                                : "-"
+                            )
+                          )
+                        ])
+                      ])
                     ])
                   ])
-                ])
-              ])
+                ]
+              )
             ])
-          ])
-        ])
-      : _vm._e()
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-8" }, [
-      _c("h2", { staticClass: "page-title" }, [_vm._v("View Guardian")]),
-      _vm._v(" "),
-      _c("h2", { staticClass: "page-pretitle" }, [_vm._v("Guardian")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header mb-3" }, [
-      _c("h2", { staticClass: "card-heading" }, [
-        _vm._v("Guardian Information")
+          : _vm._e()
       ])
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 

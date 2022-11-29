@@ -27,16 +27,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      notFound: '/images/not-found.svg'
+      notFound: "/images/not-found.svg"
     };
   },
   props: {
     word: {
       type: String,
-      "default": 'user',
+      "default": "user",
       required: false
     },
     route: {
@@ -163,6 +170,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -176,25 +197,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       },
       // search form
       searchForm: new Form({
-        date: ''
+        date: ""
       }),
       searchBtn: false,
       teachers: [],
+      last_days_attendaces: [],
       attendance_form: [],
-      notes_form: [],
       attendance_errors: [],
       attendance_load: false,
-      url: '/images/default.png'
+      url: "/images/default.png"
     };
   },
   watch: {
-    'searchForm.date': function searchFormDate(value) {
+    "searchForm.date": function searchFormDate(value) {
       this.searchBtn = true;
     }
   },
   methods: {
     setDate: function setDate(event) {
-      var formatTime = dayjs__WEBPACK_IMPORTED_MODULE_1___default()(event).format('YYYY-MM-DD');
+      var formatTime = dayjs__WEBPACK_IMPORTED_MODULE_1___default()(event).format("YYYY-MM-DD");
       this.searchForm.date = formatTime;
     },
     getTeachers: function getTeachers() {
@@ -209,28 +230,32 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context.prev = 0;
                 _this.teachers = [];
                 _this.attendance_form = [];
-                _this.notes_form = [];
                 _this.attendance_errors = [];
                 _this.attendance_load = false;
-                _context.next = 8;
+                _context.next = 7;
                 return axios.post("/api/attendance/get-teachers", {
-                  'attendance_date': _this.searchForm.date
+                  date: _this.searchForm.date
                 });
 
-              case 8:
+              case 7:
                 response = _context.sent;
-                _this.teachers = response.data;
+                _this.teachers = response.data.teachers;
+                _this.last_days_attendaces = response.data.lastdays_attendace;
 
                 _this.generateAttendance();
 
-                _context.next = 15;
+                _context.next = 17;
                 break;
 
               case 13:
                 _context.prev = 13;
                 _context.t0 = _context["catch"](0);
 
-              case 15:
+                _this.toastError(_context.t0.response.data.message);
+
+                console.log(_context.t0);
+
+              case 17:
               case "end":
                 return _context.stop();
             }
@@ -252,8 +277,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   return {
                     teacher_id: teacher.id,
                     status: _this2.attendance_form[index],
-                    attendance_date: _this2.searchForm.date,
-                    note: _this2.notes_form[index]
+                    date: _this2.searchForm.date
                   };
                 });
                 _context2.next = 4;
@@ -266,12 +290,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 _this2.toastSuccess(response.data.message);
 
-                _context2.next = 12;
+                _context2.next = 13;
                 break;
 
               case 8:
                 _context2.prev = 8;
                 _context2.t0 = _context2["catch"](0);
+
+                _this2.toastError(_context2.t0.response.data.message);
 
                 if (_context2.t0.response.status == 422) {
                   _this2.attendance_errors = _context2.t0.response.data.errors;
@@ -279,7 +305,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 console.log(_context2.t0);
 
-              case 12:
+              case 13:
               case "end":
                 return _context2.stop();
             }
@@ -292,10 +318,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       this.teachers.forEach(function (teacher, index) {
         _this3.attendance_form[index] = teacher.attendances.status;
-        _this3.notes_form[index] = teacher.attendances.note;
       });
       this.attendance_load = true;
     }
+  },
+  created: function created() {
+    this.hasPermisssion("teacher-attendance-list");
+    this.searchForm.date = dayjs__WEBPACK_IMPORTED_MODULE_1___default()().format("YYYY-MM-DD");
+    this.getTeachers();
   }
 });
 
@@ -474,9 +504,13 @@ var render = function() {
     _vm._v(" "),
     _c("p", { staticClass: "empty-subtitle text-muted" }, [
       _vm._v(
-        "\n        There is no " +
+        "\n        " +
+          _vm._s(_vm.$t("there_is_no")) +
+          " " +
           _vm._s(_vm.word) +
-          " found in this page.\n    "
+          " " +
+          _vm._s(_vm.$t("found_in_this_page")) +
+          ".\n    "
       )
     ]),
     _vm._v(" "),
@@ -516,16 +550,20 @@ var render = function() {
                         fill: "none"
                       }
                     }),
+                    _vm._v(" "),
                     _c("line", {
                       attrs: { x1: "12", y1: "5", x2: "12", y2: "19" }
                     }),
+                    _vm._v(" "),
                     _c("line", {
                       attrs: { x1: "5", y1: "12", x2: "19", y2: "12" }
                     })
                   ]
                 ),
                 _vm._v(
-                  "\n            Add your first " +
+                  "\n            " +
+                    _vm._s(_vm.$t("add_your_first")) +
+                    " " +
                     _vm._s(_vm.word) +
                     "\n        "
                 )
@@ -568,7 +606,9 @@ var render = function() {
             _vm._v(_vm._s(_vm.$route.meta.title))
           ]),
           _vm._v(" "),
-          _c("h2", { staticClass: "page-pretitle" }, [_vm._v("Attendance")])
+          _c("h2", { staticClass: "page-pretitle" }, [
+            _vm._v(_vm._s(_vm.$t("attendance")))
+          ])
         ])
       ])
     ]),
@@ -578,14 +618,15 @@ var render = function() {
         _c("div", { staticClass: "row justify-content-center" }, [
           _c(
             "div",
-            { staticClass: "col-3" },
+            { staticClass: "col-sm-12 col-md-3 col-lg-2 mb-3" },
             [
               _c("date-picker", {
                 attrs: {
                   disabledDates: _vm.disabledDates,
                   format: "dd MMMM, yyyy",
                   "input-class": "form-control",
-                  placeholder: "Select Date"
+                  placeholder: _vm.$t("select_date"),
+                  value: _vm.searchForm.date
                 },
                 on: {
                   input: function($event) {
@@ -602,26 +643,30 @@ var render = function() {
             1
           ),
           _vm._v(" "),
-          _c("div", { staticClass: "col-3" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-primary btn-outline",
-                attrs: { disabled: !_vm.searchBtn },
-                on: { click: _vm.getTeachers }
-              },
-              [
-                _vm._v(
-                  "\n                        Get Teacher List\n                    "
+          _vm.searchForm.date
+            ? _c("div", { staticClass: "col-sm-12 col-md-3 col-lg-2" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary btn-outline",
+                    attrs: { disabled: !_vm.searchBtn },
+                    on: { click: _vm.getTeachers }
+                  },
+                  [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(_vm.$t("get_teacher_list")) +
+                        "\n                    "
+                    )
+                  ]
                 )
-              ]
-            )
-          ])
+              ])
+            : _vm._e()
         ])
       ]),
       _vm._v(" "),
-      _vm.attendance_load
-        ? _c("div", { staticClass: "col-12" }, [
+      _vm.teachers && _vm.teachers.length
+        ? _c("div", { staticClass: "col-12 mt-3" }, [
             _c(
               "form",
               {
@@ -634,16 +679,32 @@ var render = function() {
               },
               [
                 _c("div", { staticClass: "card" }, [
-                  _vm._m(0),
+                  _c("div", { staticClass: "card-header" }, [
+                    _c("div", { staticClass: "card-title" }, [
+                      _vm._v(_vm._s(_vm.$t("attendance")))
+                    ])
+                  ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "card-body" }, [
+                  _c("div", { staticClass: "card-body table-responsive" }, [
                     _c(
                       "table",
                       {
                         staticClass: "table table-vcenter text-nowrap datatable"
                       },
                       [
-                        _vm._m(1),
+                        _c("thead", [
+                          _c("tr", [
+                            _c("th", [_vm._v(_vm._s(_vm.$t("image")))]),
+                            _vm._v(" "),
+                            _c("th", [_vm._v(_vm._s(_vm.$t("name")))]),
+                            _vm._v(" "),
+                            _c("th", [_vm._v(_vm._s(_vm.$t("attendance")))]),
+                            _vm._v(" "),
+                            _c("th", [
+                              _vm._v(_vm._s(_vm.$t("previous_7_days_status")))
+                            ])
+                          ])
+                        ]),
                         _vm._v(" "),
                         _c(
                           "tbody",
@@ -651,12 +712,8 @@ var render = function() {
                             return _c("tr", { key: teacher.id }, [
                               _c("td", [
                                 _c("img", {
-                                  staticClass: "img-fluid",
-                                  staticStyle: {
-                                    "border-radius": "10px",
-                                    "max-height": "50px",
-                                    "max-width": "50px"
-                                  },
+                                  staticClass:
+                                    "img-fluid mx-h-50 mx-w-50 rounded",
                                   attrs: {
                                     src: teacher.user.image_url,
                                     alt: "",
@@ -675,127 +732,139 @@ var render = function() {
                               ]),
                               _vm._v(" "),
                               _c("td", [
-                                _c("div", { staticClass: "mb-3" }, [
-                                  _c("div", [
-                                    _c(
-                                      "label",
-                                      {
-                                        staticClass:
-                                          "form-check form-check-inline"
-                                      },
-                                      [
-                                        _c("input", {
-                                          directives: [
-                                            {
-                                              name: "model",
-                                              rawName: "v-model",
-                                              value: _vm.attendance_form[index],
-                                              expression:
-                                                "attendance_form[index]"
-                                            }
-                                          ],
-                                          staticClass: "form-check-input",
-                                          attrs: { type: "radio", checked: "" },
-                                          domProps: {
-                                            value: true,
-                                            checked: _vm._q(
-                                              _vm.attendance_form[index],
-                                              true
-                                            )
-                                          },
-                                          on: {
-                                            change: function($event) {
-                                              return _vm.$set(
-                                                _vm.attendance_form,
-                                                index,
-                                                true
-                                              )
-                                            }
-                                          }
-                                        }),
-                                        _vm._v(" "),
-                                        _c(
-                                          "span",
-                                          { staticClass: "form-check-label" },
-                                          [_vm._v("Present")]
+                                _c(
+                                  "label",
+                                  {
+                                    staticClass: "form-check form-check-inline"
+                                  },
+                                  [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.attendance_form[index],
+                                          expression: "attendance_form[index]"
+                                        }
+                                      ],
+                                      staticClass: "form-check-input",
+                                      attrs: { type: "radio", checked: "" },
+                                      domProps: {
+                                        value: true,
+                                        checked: _vm._q(
+                                          _vm.attendance_form[index],
+                                          true
                                         )
-                                      ]
-                                    ),
+                                      },
+                                      on: {
+                                        change: function($event) {
+                                          return _vm.$set(
+                                            _vm.attendance_form,
+                                            index,
+                                            true
+                                          )
+                                        }
+                                      }
+                                    }),
                                     _vm._v(" "),
                                     _c(
-                                      "label",
-                                      {
-                                        staticClass:
-                                          "form-check form-check-inline"
-                                      },
-                                      [
-                                        _c("input", {
-                                          directives: [
-                                            {
-                                              name: "model",
-                                              rawName: "v-model",
-                                              value: _vm.attendance_form[index],
-                                              expression:
-                                                "attendance_form[index]"
-                                            }
-                                          ],
-                                          staticClass: "form-check-input",
-                                          attrs: { type: "radio" },
-                                          domProps: {
-                                            value: false,
-                                            checked: _vm._q(
-                                              _vm.attendance_form[index],
-                                              false
-                                            )
-                                          },
-                                          on: {
-                                            change: function($event) {
-                                              return _vm.$set(
-                                                _vm.attendance_form,
-                                                index,
-                                                false
-                                              )
-                                            }
-                                          }
-                                        }),
-                                        _vm._v(" "),
-                                        _c(
-                                          "span",
-                                          { staticClass: "form-check-label" },
-                                          [_vm._v("Absent")]
-                                        )
-                                      ]
+                                      "span",
+                                      { staticClass: "form-check-label" },
+                                      [_vm._v(_vm._s(_vm.$t("present")))]
                                     )
-                                  ])
-                                ])
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "label",
+                                  {
+                                    staticClass: "form-check form-check-inline"
+                                  },
+                                  [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.attendance_form[index],
+                                          expression: "attendance_form[index]"
+                                        }
+                                      ],
+                                      staticClass: "form-check-input",
+                                      attrs: { type: "radio" },
+                                      domProps: {
+                                        value: false,
+                                        checked: _vm._q(
+                                          _vm.attendance_form[index],
+                                          false
+                                        )
+                                      },
+                                      on: {
+                                        change: function($event) {
+                                          return _vm.$set(
+                                            _vm.attendance_form,
+                                            index,
+                                            false
+                                          )
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "span",
+                                      { staticClass: "form-check-label" },
+                                      [_vm._v(_vm._s(_vm.$t("absent")))]
+                                    )
+                                  ]
+                                )
                               ]),
                               _vm._v(" "),
                               _c("td", [
-                                _c("input", {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.notes_form[index],
-                                      expression: "notes_form[index]"
-                                    }
-                                  ],
-                                  staticClass: "form-control",
-                                  attrs: { type: "text" },
-                                  domProps: { value: _vm.notes_form[index] },
-                                  on: {
-                                    input: function($event) {
-                                      if ($event.target.composing) {
-                                        return
-                                      }
-                                      _vm.$set(
-                                        _vm.notes_form,
-                                        index,
-                                        $event.target.value
-                                      )
-                                    }
-                                  }
-                                })
+                                _c(
+                                  "div",
+                                  { staticClass: "d-flex items-center" },
+                                  _vm._l(_vm.last_days_attendaces[0], function(
+                                    attendance,
+                                    index
+                                  ) {
+                                    return _c(
+                                      "div",
+                                      {
+                                        key: index,
+                                        staticClass:
+                                          "\n                        d-flex\n                        flex-column\n                        align-items-center\n                        justify-content-center\n                        mx-2\n                      "
+                                      },
+                                      [
+                                        _c("span", [
+                                          _vm._v(
+                                            _vm._s(
+                                              _vm.formateDate(
+                                                attendance.date,
+                                                "DD"
+                                              )
+                                            )
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c(
+                                          "span",
+                                          { staticClass: "d-inline-block" },
+                                          [
+                                            attendance.status
+                                              ? _c("icon-check", {
+                                                  attrs: { stroke: "#2A8737" }
+                                                })
+                                              : _c("icon-cross", {
+                                                  attrs: { stroke: "#F23D4E" }
+                                                })
+                                          ],
+                                          1
+                                        )
+                                      ]
+                                    )
+                                  }),
+                                  0
+                                )
                               ])
                             ])
                           }),
@@ -805,7 +874,22 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _vm._m(2)
+                  _c("div", { staticClass: "card-footer" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary text-center",
+                        attrs: { type: "submit" }
+                      },
+                      [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(_vm.$t("save_all")) +
+                            "\n                        "
+                        )
+                      ]
+                    )
+                  ])
                 ])
               ]
             )
@@ -819,51 +903,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("div", { staticClass: "card-title" }, [
-        _vm._v(
-          "\n                            Attendance\n                       "
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", [_vm._v("Image")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Name")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Attendance")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Notes")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-footer" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-primary text-center",
-          attrs: { type: "submit" }
-        },
-        [_vm._v("Save All")]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

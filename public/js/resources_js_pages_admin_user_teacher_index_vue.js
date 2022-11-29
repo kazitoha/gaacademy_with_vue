@@ -27,16 +27,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      notFound: '/images/not-found.svg'
+      notFound: "/images/not-found.svg"
     };
   },
   props: {
     word: {
       type: String,
-      "default": 'user',
+      "default": "user",
       required: false
     },
     route: {
@@ -65,6 +72,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue_clickaway__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-clickaway */ "./node_modules/vue-clickaway/dist/vue-clickaway.common.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -170,6 +186,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -214,9 +241,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 3:
                 response = _context.sent;
 
-                _this.$emit('delete-item');
+                _this.$emit("delete-item");
 
-                _this.toastSuccess('Teacher delete successfully!');
+                _this.toastSuccess("Teacher delete successfully!");
 
                 _context.next = 15;
                 break;
@@ -263,10 +290,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _components_teacher_TeacherCard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../components/teacher/TeacherCard.vue */ "./resources/js/components/teacher/TeacherCard.vue");
-/* harmony import */ var _components_NotFound_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../components/NotFound.vue */ "./resources/js/components/NotFound.vue");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _components_teacher_TeacherCard_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../components/teacher/TeacherCard.vue */ "./resources/js/components/teacher/TeacherCard.vue");
+/* harmony import */ var _components_NotFound_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../components/NotFound.vue */ "./resources/js/components/NotFound.vue");
+/* harmony import */ var _components_modal_DeleteModal_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../components/modal/DeleteModal.vue */ "./resources/js/components/modal/DeleteModal.vue");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
@@ -307,20 +343,59 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    TeacherCard: _components_teacher_TeacherCard_vue__WEBPACK_IMPORTED_MODULE_0__.default,
-    NotFound: _components_NotFound_vue__WEBPACK_IMPORTED_MODULE_1__.default
+    TeacherCard: _components_teacher_TeacherCard_vue__WEBPACK_IMPORTED_MODULE_1__.default,
+    NotFound: _components_NotFound_vue__WEBPACK_IMPORTED_MODULE_2__.default,
+    DeleteModal: _components_modal_DeleteModal_vue__WEBPACK_IMPORTED_MODULE_3__.default
   },
   data: function data() {
     return {
-      search: ''
+      search: "",
+      selectedId: "",
+      isModalShow: false
     };
   },
-  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)({
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)({
     teachers: "teacher/teachers",
     pagination: "teacher/pagination"
   })), {}, {
@@ -329,9 +404,60 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   }),
   mounted: function mounted() {
-    this.fetchTeachers();
+    var _this = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return _this.hasPermisssion("teacher-list");
+
+            case 2:
+              _this.fetchTeachers();
+
+            case 3:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
   },
   methods: {
+    deleteConfirmation: function deleteConfirmation(id) {
+      this.isModalShow = !this.isModalShow;
+      this.selectedId = id;
+    },
+    deleteUser: function deleteUser() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios["delete"]("/api/teachers/".concat(_this2.selectedId));
+
+              case 2:
+                response = _context2.sent;
+                _this2.isModalShow = false;
+
+                _this2.$store.commit("teacher/REMOVE_TEACHER", _this2.selectedId);
+
+                _this2.toastSuccess(response.data.message);
+
+              case 6:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    },
     fetchTeachers: function fetchTeachers() {
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       this.$store.dispatch("teacher/fetchTeachers", {
@@ -364,7 +490,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.fade-enter-active,\n.fade-leave-active {\n  transition: opacity .3s\n}\n.fade-enter,\n.fade-leave-active {\n  opacity: 0\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.fade-enter-active,\n.fade-leave-active {\n    transition: opacity .3s\n}\n.fade-enter,\n.fade-leave-active {\n    opacity: 0\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -388,7 +514,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.user-card {\n  position: relative;\n}\n.dots {\n  position: absolute;\n  top: 5px;\n  right: 10px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.user-card {\n    position: relative;\n}\n.dots {\n    position: absolute;\n    top: 5px;\n    right: 10px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -895,9 +1021,13 @@ var render = function() {
     _vm._v(" "),
     _c("p", { staticClass: "empty-subtitle text-muted" }, [
       _vm._v(
-        "\n        There is no " +
+        "\n        " +
+          _vm._s(_vm.$t("there_is_no")) +
+          " " +
           _vm._s(_vm.word) +
-          " found in this page.\n    "
+          " " +
+          _vm._s(_vm.$t("found_in_this_page")) +
+          ".\n    "
       )
     ]),
     _vm._v(" "),
@@ -937,16 +1067,20 @@ var render = function() {
                         fill: "none"
                       }
                     }),
+                    _vm._v(" "),
                     _c("line", {
                       attrs: { x1: "12", y1: "5", x2: "12", y2: "19" }
                     }),
+                    _vm._v(" "),
                     _c("line", {
                       attrs: { x1: "5", y1: "12", x2: "19", y2: "12" }
                     })
                   ]
                 ),
                 _vm._v(
-                  "\n            Add your first " +
+                  "\n            " +
+                    _vm._s(_vm.$t("add_your_first")) +
+                    " " +
                     _vm._s(_vm.word) +
                     "\n        "
                 )
@@ -986,8 +1120,7 @@ var render = function() {
       ? _c(
           "div",
           {
-            staticClass: "modal modal-blur fade show",
-            staticStyle: { display: "block", background: "rgb(0 0 0 / 40%)" },
+            staticClass: "modal modal-blur fade show modal-hidee",
             attrs: {
               id: "modal-danger",
               tabindex: "-1",
@@ -1054,7 +1187,9 @@ var render = function() {
                               fill: "none"
                             }
                           }),
+                          _vm._v(" "),
                           _c("path", { attrs: { d: "M12 9v2m0 4v.01" } }),
+                          _vm._v(" "),
                           _c("path", {
                             attrs: {
                               d:
@@ -1084,9 +1219,9 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n                            " +
+                                  "\n                                    " +
                                     _vm._s(_vm.$t("cancel")) +
-                                    "\n                        "
+                                    "\n                                "
                                 )
                               ]
                             )
@@ -1102,9 +1237,9 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n                            " +
+                                  "\n                                    " +
                                     _vm._s(_vm.$t("delete")) +
-                                    "\n                        "
+                                    "\n                                "
                                 )
                               ]
                             )
@@ -1155,8 +1290,7 @@ var render = function() {
           _c("div", { staticClass: "card-body text-center" }, [
             _c("div", { staticClass: "mb-3" }, [
               _c("img", {
-                staticClass: "avatar avatar-xl avatar-rounded",
-                staticStyle: { "border-radius": "10px" },
+                staticClass: "avatar avatar-xl avatar-rounded rounded",
                 attrs: { src: _vm.teacher.user.image_url, alt: "image" }
               })
             ]),
@@ -1206,8 +1340,11 @@ var render = function() {
                           fill: "none"
                         }
                       }),
+                      _vm._v(" "),
                       _c("circle", { attrs: { cx: "5", cy: "12", r: "1" } }),
+                      _vm._v(" "),
                       _c("circle", { attrs: { cx: "12", cy: "12", r: "1" } }),
+                      _vm._v(" "),
                       _c("circle", { attrs: { cx: "19", cy: "12", r: "1" } })
                     ]
                   )
@@ -1234,7 +1371,9 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                          Edit\n                      "
+                        "\n                        " +
+                          _vm._s(_vm.$t("edit")) +
+                          "\n                    "
                       )
                     ]
                   ),
@@ -1253,7 +1392,9 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                          Delete\n                      "
+                        "\n                        " +
+                          _vm._s(_vm.$t("delete")) +
+                          "\n                    "
                       )
                     ]
                   )
@@ -1274,7 +1415,7 @@ var render = function() {
                 }
               }
             },
-            [_vm._v("View Details")]
+            [_vm._v("\n            " + _vm._s(_vm.$t("view_details")))]
           )
         ],
         1
@@ -1314,108 +1455,233 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "page-header d-print-none" }, [
-      _c("div", { staticClass: "row align-items-center" }, [
-        _c("div", { staticClass: "col" }, [
-          _c("h2", { staticClass: "page-title" }, [
-            _vm._v(_vm._s(_vm.$route.meta.title))
+  return _c(
+    "div",
+    [
+      _c("div", { staticClass: "page-header d-print-none" }, [
+        _c("div", { staticClass: "row align-items-center" }, [
+          _c("div", { staticClass: "col" }, [
+            _c("h2", { staticClass: "page-title" }, [
+              _vm._v(_vm._s(_vm.$route.meta.title))
+            ]),
+            _vm._v(" "),
+            _c("h2", { staticClass: "page-pretitle" }, [
+              _vm._v(_vm._s(_vm.$t("teacher")))
+            ])
           ]),
           _vm._v(" "),
-          _c("h2", { staticClass: "page-pretitle" }, [
-            _vm._v(_vm._s(_vm.$t("admin_setting")))
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-auto ms-auto d-print-none" }, [
-          _c(
+          _vm.checkPermission("teacher-create")
+            ? _c("div", { staticClass: "col-auto ms-auto d-print-none" }, [
+                _c(
+                  "div",
+                  { staticClass: "d-flex" },
+                  [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.search,
+                          expression: "search"
+                        }
+                      ],
+                      staticClass: "form-control d-inline-block w-9 me-3",
+                      attrs: {
+                        type: "search",
+                        placeholder: _vm.$t("search_here…")
+                      },
+                      domProps: { value: _vm.search },
+                      on: {
+                        keyup: _vm.searchTeachers,
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.search = $event.target.value
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "btn btn-primary btn-outline",
+                        attrs: { to: { name: "user-teacher-add" } }
+                      },
+                      [
+                        _c("icon-plus"),
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(_vm.$t("create")) +
+                            "\n                    "
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ])
+            : _vm._e()
+        ])
+      ]),
+      _vm._v(" "),
+      !_vm.emptyData
+        ? _c(
             "div",
-            { staticClass: "d-flex" },
+            { staticClass: "row row-cards mt-2" },
             [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.search,
-                    expression: "search"
-                  }
-                ],
-                staticClass: "form-control d-inline-block w-9 me-3",
-                attrs: { type: "search", placeholder: "Search here…" },
-                domProps: { value: _vm.search },
-                on: {
-                  keyup: _vm.searchTeachers,
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.search = $event.target.value
-                  }
-                }
-              }),
+              _vm.teachers && _vm.teachers.length
+                ? _vm._l(_vm.teachers, function(teacher, index) {
+                    return _c(
+                      "div",
+                      { key: index, staticClass: "col-md-6 col-xl-3" },
+                      [
+                        teacher.user
+                          ? _c("div", { staticClass: "card user-card" }, [
+                              _c(
+                                "div",
+                                { staticClass: "card-body text-center" },
+                                [
+                                  _c("div", { staticClass: "mb-3" }, [
+                                    _c("img", {
+                                      staticClass:
+                                        "avatar avatar-lg avatar-rounded rounded",
+                                      attrs: {
+                                        src: teacher.user.image_url,
+                                        alt: "image"
+                                      }
+                                    })
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { staticClass: "card-title mb-1" },
+                                    [
+                                      _vm._v(
+                                        "\n                            " +
+                                          _vm._s(teacher.user.name) +
+                                          "\n                            "
+                                      ),
+                                      _c("h5", [
+                                        _vm._v(_vm._s(teacher.department.name))
+                                      ])
+                                    ]
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "d-flex" },
+                                [
+                                  _vm.checkPermission("teacher-edit")
+                                    ? _c(
+                                        "router-link",
+                                        {
+                                          staticClass:
+                                            "card-btn d-inline-block",
+                                          attrs: {
+                                            to: {
+                                              name: "user-teacher-edit",
+                                              params: { id: teacher.id }
+                                            }
+                                          }
+                                        },
+                                        [_c("icon-edit")],
+                                        1
+                                      )
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _c(
+                                    "router-link",
+                                    {
+                                      staticClass: "card-btn",
+                                      attrs: {
+                                        to: {
+                                          name: "user-teacher-view",
+                                          params: { id: teacher.id }
+                                        },
+                                        href: "#"
+                                      }
+                                    },
+                                    [_c("icon-eye")],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _vm.checkPermission("teacher-delete")
+                                    ? _c(
+                                        "a",
+                                        {
+                                          staticClass:
+                                            "card-btn d-inline-block",
+                                          attrs: { href: "javascript:void(0)" },
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.deleteConfirmation(
+                                                teacher.id
+                                              )
+                                            }
+                                          }
+                                        },
+                                        [_c("icon-trash")],
+                                        1
+                                      )
+                                    : _vm._e()
+                                ],
+                                1
+                              )
+                            ])
+                          : _vm._e()
+                      ]
+                    )
+                  })
+                : _c(
+                    "div",
+                    { staticClass: "d-flex justify-content-center py-3" },
+                    [_c("NotFound", { attrs: { word: "teacher" } })],
+                    1
+                  ),
               _vm._v(" "),
-              _c(
-                "router-link",
-                {
-                  staticClass: "btn btn-primary btn-outline",
-                  attrs: { to: { name: "user-teacher-add" } }
-                },
-                [
-                  _c("icon-plus"),
-                  _vm._v(
-                    "\n            " +
-                      _vm._s(_vm.$t("Create Teacher")) +
-                      "\n          "
-                  )
-                ],
-                1
-              )
+              _c("div", { staticClass: "mt-5" }, [
+                _c(
+                  "div",
+                  { staticClass: "d-flex justify-content-center mt-4" },
+                  [
+                    _c("pagination", {
+                      attrs: { data: _vm.pagination },
+                      on: { "pagination-change-page": _vm.fetchTeachers }
+                    })
+                  ],
+                  1
+                )
+              ])
+            ],
+            2
+          )
+        : _c(
+            "div",
+            { staticClass: "d-flex justify-content-center py-3" },
+            [
+              _c("NotFound", {
+                attrs: { word: "teachers", route: "user-teacher-add" }
+              })
             ],
             1
-          )
-        ])
-      ])
-    ]),
-    _vm._v(" "),
-    !_vm.emptyData
-      ? _c(
-          "div",
-          { staticClass: "row row-cards mt-2" },
-          [
-            _vm._l(_vm.teachers, function(teacher) {
-              return _c("teacher-card", {
-                key: teacher.id,
-                attrs: { teacher: teacher },
-                on: { "delete-item": _vm.fetchTeachers }
-              })
-            }),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "d-flex justify-content-center mt-4" },
-              [
-                _c("pagination", {
-                  attrs: { data: _vm.pagination },
-                  on: { "pagination-change-page": _vm.fetchTeachers }
-                })
-              ],
-              1
-            )
-          ],
-          2
-        )
-      : _c(
-          "div",
-          { staticClass: "d-flex justify-content-center py-3" },
-          [
-            _c("NotFound", {
-              attrs: { word: "teachers", route: "user-teacher-add" }
-            })
-          ],
-          1
-        )
-  ])
+          ),
+      _vm._v(" "),
+      _c("DeleteModal", {
+        attrs: { isShow: _vm.isModalShow },
+        on: {
+          "close-modal": function($event) {
+            _vm.isModalShow = false
+          },
+          "delete-data": _vm.deleteUser
+        }
+      })
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

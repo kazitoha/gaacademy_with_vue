@@ -382,6 +382,18 @@
             </router-link>
         </li>
 
+        <li class="nav-item" setting-list>
+            <router-link v-if="checkPermission('role-list')" class="nav-link" :to="{ name: 'List' }"
+                :class="{ active: checkRoute('List') }">
+                <span class="nav-link-icon d-md-none d-lg-inline-block">
+                    <icon-lock />
+                </span>
+                <span class="nav-link-title">
+                    {{ $t("Crud Practice") }}
+                </span>
+            </router-link>
+        </li>
+
         <li class="nav-item">
             <router-link v-if="checkPermission('setting-list')" class="nav-link" :to="{ name: 'setting-admin' }" :class="{
           active: checkRoute([

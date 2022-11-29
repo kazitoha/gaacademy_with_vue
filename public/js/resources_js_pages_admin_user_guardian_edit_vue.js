@@ -13,8 +13,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_global_form_button_BaseButton_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../components/global/form/button/BaseButton.vue */ "./resources/js/components/global/form/button/BaseButton.vue");
-/* harmony import */ var _components_global_form_input_BaseTextarea_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../components/global/form/input/BaseTextarea.vue */ "./resources/js/components/global/form/input/BaseTextarea.vue");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -107,45 +105,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  components: {
-    BaseTextarea: _components_global_form_input_BaseTextarea_vue__WEBPACK_IMPORTED_MODULE_2__.default,
-    BaseButton: _components_global_form_button_BaseButton_vue__WEBPACK_IMPORTED_MODULE_1__.default
-  },
   data: function data() {
     return {
       guardianForm: new Form({
-        name: '',
-        email: '',
-        username: '',
-        phone: '',
-        occupation: '',
-        national_id: '',
-        present_address: '',
-        permanent_address: ''
+        name: "",
+        email: "",
+        password: "",
+        phone: "",
+        gender: ""
       }),
       guardian: null
     };
@@ -167,29 +135,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 3:
                 response = _context.sent;
 
-                _this.$store.commit('guardian/UPDATE_GUARDIAN', response.data.guardian);
-
                 if (response.data.success) {
-                  _this.$toast.success({
-                    title: 'Success!',
-                    message: response.data.message
-                  });
+                  _this.toastSuccess(response.data.message);
                 }
 
-                _context.next = 11;
+                _context.next = 10;
                 break;
 
-              case 8:
-                _context.prev = 8;
+              case 7:
+                _context.prev = 7;
                 _context.t0 = _context["catch"](0);
-                console.log(_context.t0);
 
-              case 11:
+                _this.toastError("Something went wrong while saving data");
+
+              case 10:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 8]]);
+        }, _callee, null, [[0, 7]]);
       }))();
     },
     getGuardian: function getGuardian() {
@@ -224,7 +188,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 9:
                 _context2.prev = 9;
                 _context2.t0 = _context2["catch"](0);
-                console.log(_context2.t0);
+
+                _this2.toastError("Something went wrong while saving data");
 
               case 12:
               case "end":
@@ -236,13 +201,30 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   mounted: function mounted() {
-    if (!this.$route.params.id) {
-      this.$router.push({
-        name: '404'
-      });
-    }
+    var _this3 = this;
 
-    this.getGuardian();
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              if (!_this3.$route.params.id) {
+                _this3.redirect("404");
+              }
+
+              _context3.next = 3;
+              return _this3.hasPermisssion("parent-edit");
+
+            case 3:
+              _this3.getGuardian();
+
+            case 4:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
+    }))();
   }
 });
 
@@ -339,36 +321,33 @@ var render = function() {
   return _c("div", [
     _c("div", { staticClass: "page-header d-print-none" }, [
       _c("div", { staticClass: "row align-items-center" }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-auto ms-auto d-print-none" }, [
-          _c(
-            "div",
-            { staticClass: "d-flex" },
-            [
-              _c(
-                "router-link",
-                {
-                  staticClass: "btn btn-danger btn-outline",
-                  attrs: { to: { name: "user-guardian" } }
-                },
-                [
-                  _c("icon-left-arrow"),
-                  _vm._v(
-                    "\n            " + _vm._s(_vm.$t("Back")) + "\n          "
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          )
+        _c("div", { staticClass: "col" }, [
+          _c("h2", { staticClass: "page-title" }, [
+            _vm._v(_vm._s(_vm.$route.meta.title))
+          ]),
+          _vm._v(" "),
+          _c("h2", { staticClass: "page-pretitle" }, [
+            _vm._v(_vm._s(_vm.$t("parent")))
+          ])
         ])
       ])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "card" }, [
       _c("div", { staticClass: "card" }, [
+        _c(
+          "div",
+          { staticClass: "card-header d-flex justify-content-between" },
+          [
+            _c("h3", { staticClass: "card-title" }, [
+              _vm._v(_vm._s(_vm.$t("edit_new_parent")))
+            ]),
+            _vm._v(" "),
+            _c("Back", { attrs: { routeName: "user-guardian" } })
+          ],
+          1
+        ),
+        _vm._v(" "),
         _c("div", { staticClass: "card-body border-bottom py-3" }, [
           _c(
             "form",
@@ -383,293 +362,303 @@ var render = function() {
             },
             [
               _c("div", { staticClass: "row justify-content-center" }, [
-                _c("div", { staticClass: "col-6" }, [
-                  _c("div", { staticClass: "form-group mb-3 row" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "form-label col-3 col-form-label",
-                        attrs: { for: "name" }
-                      },
-                      [_vm._v(_vm._s(_vm.$t("name")) + "\n                ")]
-                    ),
+                _c("div", { staticClass: "col-md-6" }, [
+                  _c("div", { staticClass: "form-group mb-3" }, [
+                    _c("label", { staticClass: "form-label" }, [
+                      _vm._v(_vm._s(_vm.$t("name")))
+                    ]),
                     _vm._v(" "),
                     _c(
                       "div",
-                      { staticClass: "col" },
                       [
-                        _c("base-input", {
-                          attrs: { form: _vm.guardianForm, field: "name" },
-                          model: {
-                            value: _vm.guardianForm.name,
-                            callback: function($$v) {
-                              _vm.$set(_vm.guardianForm, "name", $$v)
-                            },
-                            expression: "guardianForm.name"
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group mb-3 row" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "form-label col-3 col-form-label",
-                        attrs: { for: "email" }
-                      },
-                      [_vm._v(_vm._s(_vm.$t("email")))]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "col" },
-                      [
-                        _c("base-input", {
-                          attrs: { form: _vm.guardianForm, field: "email" },
-                          model: {
-                            value: _vm.guardianForm.email,
-                            callback: function($$v) {
-                              _vm.$set(_vm.guardianForm, "email", $$v)
-                            },
-                            expression: "guardianForm.email"
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group mb-3 row" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "form-label col-3 col-form-label",
-                        attrs: { for: "username" }
-                      },
-                      [
-                        _vm._v(
-                          _vm._s(_vm.$t("Username")) + "\n                "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "col" },
-                      [
-                        _c("base-input", {
-                          attrs: { form: _vm.guardianForm, field: "username" },
-                          model: {
-                            value: _vm.guardianForm.username,
-                            callback: function($$v) {
-                              _vm.$set(_vm.guardianForm, "username", $$v)
-                            },
-                            expression: "guardianForm.username"
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group mb-3 row" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "form-label col-3 col-form-label",
-                        attrs: { for: "phone" }
-                      },
-                      [_vm._v(_vm._s(_vm.$t("Phone")) + "\n                ")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "col" },
-                      [
-                        _c("base-input", {
-                          attrs: { form: _vm.guardianForm, field: "phone" },
-                          model: {
-                            value: _vm.guardianForm.phone,
-                            callback: function($$v) {
-                              _vm.$set(_vm.guardianForm, "phone", $$v)
-                            },
-                            expression: "guardianForm.phone"
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group mb-3 row" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "form-label col-3 col-form-label",
-                        attrs: { for: "occupation" }
-                      },
-                      [
-                        _vm._v(
-                          _vm._s(_vm.$t("Occupation")) + "\n                "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "col" },
-                      [
-                        _c("base-input", {
-                          attrs: {
-                            form: _vm.guardianForm,
-                            field: "occupation"
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.guardianForm.name,
+                              expression: "guardianForm.name"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          class: {
+                            "is-invalid": _vm.guardianForm.errors.has("name")
                           },
-                          model: {
-                            value: _vm.guardianForm.occupation,
-                            callback: function($$v) {
-                              _vm.$set(_vm.guardianForm, "occupation", $$v)
-                            },
-                            expression: "guardianForm.occupation"
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group mb-3 row" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "form-label col-3 col-form-label",
-                        attrs: { for: "national_id" }
-                      },
-                      [
-                        _vm._v(
-                          _vm._s(_vm.$t("National ID")) + "\n                "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "col" },
-                      [
-                        _c("base-input", {
                           attrs: {
-                            form: _vm.guardianForm,
-                            field: "national_id"
+                            type: "text",
+                            placeholder: _vm.$t("enter_name")
                           },
-                          model: {
-                            value: _vm.guardianForm.national_id,
-                            callback: function($$v) {
-                              _vm.$set(_vm.guardianForm, "national_id", $$v)
-                            },
-                            expression: "guardianForm.national_id"
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group mb-3 row" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "form-label col-3 col-form-label",
-                        attrs: { for: "present_address" }
-                      },
-                      [
-                        _vm._v(
-                          "\n                  " +
-                            _vm._s(_vm.$t("Present Address")) +
-                            "\n                "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "col" },
-                      [
-                        _c("base-textarea", {
-                          attrs: {
-                            form: _vm.guardianForm,
-                            field: "present_address"
-                          },
-                          model: {
-                            value: _vm.guardianForm.present_address,
-                            callback: function($$v) {
-                              _vm.$set(_vm.guardianForm, "present_address", $$v)
-                            },
-                            expression: "guardianForm.present_address"
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group mb-3 row" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "form-label col-3 col-form-label",
-                        attrs: { for: "permanent_address" }
-                      },
-                      [
-                        _vm._v(
-                          "\n                  " +
-                            _vm._s(_vm.$t("Permanent Address")) +
-                            "\n                "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "col" },
-                      [
-                        _c("base-textarea", {
-                          attrs: {
-                            form: _vm.guardianForm,
-                            field: "permanent_address"
-                          },
-                          model: {
-                            value: _vm.guardianForm.permanent_address,
-                            callback: function($$v) {
+                          domProps: { value: _vm.guardianForm.name },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
                               _vm.$set(
                                 _vm.guardianForm,
-                                "permanent_address",
-                                $$v
+                                "name",
+                                $event.target.value
                               )
-                            },
-                            expression: "guardianForm.permanent_address"
+                            }
                           }
+                        }),
+                        _vm._v(" "),
+                        _c("has-error", {
+                          attrs: { form: _vm.guardianForm, field: "name" }
                         })
                       ],
                       1
                     )
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "form-group mb-3 row" }, [
+                  _c("div", { staticClass: "form-group mb-3" }, [
+                    _c("label", { staticClass: "form-label" }, [
+                      _vm._v(_vm._s(_vm.$t("email")))
+                    ]),
+                    _vm._v(" "),
                     _c(
                       "div",
-                      { staticClass: "col-9 offset-3" },
                       [
-                        _c(
-                          "base-button",
-                          { attrs: { loading: _vm.guardianForm.busy } },
-                          [_vm._v("Update")]
-                        )
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.guardianForm.email,
+                              expression: "guardianForm.email"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          class: {
+                            "is-invalid": _vm.guardianForm.errors.has("email")
+                          },
+                          attrs: {
+                            type: "email",
+                            placeholder: _vm.$t("enter_email")
+                          },
+                          domProps: { value: _vm.guardianForm.email },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.guardianForm,
+                                "email",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("has-error", {
+                          attrs: { form: _vm.guardianForm, field: "email" }
+                        })
                       ],
                       1
                     )
-                  ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group mb-3" }, [
+                    _c("label", { staticClass: "form-label" }, [
+                      _vm._v(_vm._s(_vm.$t("change_password")))
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.guardianForm.password,
+                              expression: "guardianForm.password"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          class: {
+                            "is-invalid": _vm.guardianForm.errors.has(
+                              "password"
+                            )
+                          },
+                          attrs: {
+                            type: "password",
+                            placeholder: _vm.$t("enter_password")
+                          },
+                          domProps: { value: _vm.guardianForm.password },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.guardianForm,
+                                "password",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("has-error", {
+                          attrs: { form: _vm.guardianForm, field: "password" }
+                        })
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group mb-3" }, [
+                    _c("label", { staticClass: "form-label" }, [
+                      _vm._v(_vm._s(_vm.$t("phone")))
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.guardianForm.phone,
+                              expression: "guardianForm.phone"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          class: {
+                            "is-invalid": _vm.guardianForm.errors.has("phone")
+                          },
+                          attrs: {
+                            type: "text",
+                            placeholder: _vm.$t("enter_phone")
+                          },
+                          domProps: { value: _vm.guardianForm.phone },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.guardianForm,
+                                "phone",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("has-error", {
+                          attrs: { form: _vm.guardianForm, field: "phone" }
+                        })
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "form-group mb-3" },
+                    [
+                      _c("label", { staticClass: "form-label" }, [
+                        _vm._v(_vm._s(_vm.$t("gender")))
+                      ]),
+                      _vm._v(" "),
+                      _c("div", [
+                        _c(
+                          "label",
+                          { staticClass: "form-check form-check-inline" },
+                          [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.guardianForm.gender,
+                                  expression: "guardianForm.gender"
+                                }
+                              ],
+                              staticClass: "form-check-input",
+                              attrs: { type: "radio", value: "male" },
+                              domProps: {
+                                checked: _vm._q(_vm.guardianForm.gender, "male")
+                              },
+                              on: {
+                                change: function($event) {
+                                  return _vm.$set(
+                                    _vm.guardianForm,
+                                    "gender",
+                                    "male"
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "form-check-label" }, [
+                              _vm._v(_vm._s(_vm.$t("male")))
+                            ])
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "label",
+                          { staticClass: "form-check form-check-inline" },
+                          [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.guardianForm.gender,
+                                  expression: "guardianForm.gender"
+                                }
+                              ],
+                              staticClass: "form-check-input",
+                              attrs: { type: "radio", value: "female" },
+                              domProps: {
+                                checked: _vm._q(
+                                  _vm.guardianForm.gender,
+                                  "female"
+                                )
+                              },
+                              on: {
+                                change: function($event) {
+                                  return _vm.$set(
+                                    _vm.guardianForm,
+                                    "gender",
+                                    "female"
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "form-check-label" }, [
+                              _vm._v(_vm._s(_vm.$t("female")))
+                            ])
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("has-error", {
+                        attrs: { form: _vm.guardianForm, field: "name" }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "form-footer text-center" },
+                    [
+                      _c(
+                        "base-button",
+                        { attrs: { loading: _vm.guardianForm.busy } },
+                        [_vm._v(_vm._s(_vm.$t("save")))]
+                      )
+                    ],
+                    1
+                  )
                 ])
               ])
             ]
@@ -679,18 +668,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col" }, [
-      _c("h2", { staticClass: "page-title" }, [_vm._v("Edit guardianForm")]),
-      _vm._v(" "),
-      _c("h2", { staticClass: "page-pretitle" }, [_vm._v("Admin Setting")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
